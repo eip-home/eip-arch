@@ -27,6 +27,8 @@ stand_alone: yes
 smart_quotes: no
 pi: [toc, sortrefs, symrefs]
 
+### for help with the syntax, see https://github.com/cabo/kramdown-rfc
+
 author:
  -
     name: "Stefano Salsano"
