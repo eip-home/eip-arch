@@ -16,7 +16,7 @@ This is the working area for the individual Internet-Draft, "Extensible In-band 
 
 ## Contributing
 
-for help with the syntax, see https://github.com/cabo/kramdown-rfc
+For help with the syntax, see https://github.com/cabo/kramdown-rfc
 
 See the
 [guidelines for contributions](https://github.com/eip-home/eip-arch/blob/main/CONTRIBUTING.md).
