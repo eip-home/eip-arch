@@ -66,7 +66,9 @@ Table of Contents
    2.  Conventions and Definitions
    3.  Security Considerations
    4.  IANA Considerations
-   5.  Normative References
+   5.  References
+     5.1.  Normative References
+     5.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -90,7 +92,9 @@ Table of Contents
 
    This document has no IANA actions.
 
-5.  Normative References
+5.  References
+
+5.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -100,6 +104,20 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+5.2.  Informative References
+
+   [draft-eip-headers]
+              Salsano, S. and H. ElBakoury, "Extensible In-band
+              Processing (EIP) Headers Definitions", 2022, <https://eip-
+              home.github.io/eip-headers/draft-eip-headers-
+              definitions.txt>.
+
+   [draft-eip-use-cases]
+              Salsano, S. and H. ElBakoury, "Extensible In-band
+              Processing (EIP) Use Cases", 2022, <https://eip-
+              home.github.io/eip-headers/draft-eip-headers-
+              definitions.txt>.
 
 Acknowledgments
 
