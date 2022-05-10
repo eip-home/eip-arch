@@ -14,7 +14,11 @@ Expires: 11 November 2022                                     Consultant
 
 Abstract
 
-   TODO Abstract
+   Extensible In-band Processing (EIP) extends the functionality of the
+   IPv6 protocol considering the needs of future Internet services / 6G
+   networks.  This document discusses the architecture and framework of
+   EIP.  Two separate documents respectively analyze a number of use
+   cases for EIP and provide the protocol specifications of EIP.
 
 About This Document
 
@@ -74,7 +78,9 @@ Table of Contents
 
 1.  Introduction
 
-   TODO Introduction
+   The use cases for EIP are discussed in [id-eip-use-cases].  The
+   specification of the EIP header format is provided in
+   [id-eip-headers].
 
 2.  Conventions and Definitions
 
@@ -107,17 +113,16 @@ Table of Contents
 
 5.2.  Informative References
 
-   [draft-eip-headers]
+   [id-eip-headers]
               Salsano, S. and H. ElBakoury, "Extensible In-band
               Processing (EIP) Headers Definitions", 2022, <https://eip-
               home.github.io/eip-headers/draft-eip-headers-
               definitions.txt>.
 
-   [draft-eip-use-cases]
+   [id-eip-use-cases]
               Salsano, S. and H. ElBakoury, "Extensible In-band
               Processing (EIP) Use Cases", 2022, <https://eip-
-              home.github.io/eip-headers/draft-eip-headers-
-              definitions.txt>.
+              home.github.io/eip-headers/draft-eip-use-cases.txt>.
 
 Acknowledgments
 
