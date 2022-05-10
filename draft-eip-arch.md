@@ -12,9 +12,8 @@ docname: draft-eip-arch-latest
 area: AREA
 workgroup: WG Working Group
 keyword:
- - next generation
- - unicorn
- - sparkling distributed ledger
+ - IPv6
+ - Extension Headers
 venue:
   group: EIP
   type: SIG
@@ -37,6 +36,7 @@ author:
     organization: Consultant
     email: "helbakoury@gmail.com"
 
+### for help with the syntax, see https://github.com/cabo/kramdown-rfc
 
 normative:
 
