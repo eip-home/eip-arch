@@ -42,7 +42,7 @@ author:
 normative:
 
 informative:
-  draft-eip-use-cases:
+  id-eip-use-cases:
     title: "Extensible In-band Processing (EIP) Use Cases"
     author: 
      -
@@ -59,8 +59,8 @@ informative:
     seriesInfo: 
        Internet-Draft: draft-eip-use-cases
     format:
-       TXT: "https://eip-home.github.io/eip-headers/draft-eip-headers-definitions.txt"
-  draft-eip-headers:
+       TXT: "https://eip-home.github.io/eip-headers/draft-eip-use-cases.txt"
+  id-eip-headers:
     title: "Extensible In-band Processing (EIP) Headers Definitions"
     author: 
      -
@@ -82,14 +82,17 @@ informative:
 
 --- abstract
 
-TODO Abstract
-
+Extensible In-band Processing (EIP) extends the functionality of the IPv6 protocol considering
+the needs of future Internet services / 6G networks. This document discusses the architecture and
+framework of EIP. Two separate documents respectively analyze a number of use cases for EIP and provide
+the protocol specifications of EIP.
 
 --- middle
 
 # Introduction
 
-TODO Introduction
+The use cases for EIP are discussed in [id-eip-use-cases]. The specification of the EIP header format
+is provided in [id-eip-headers].
 
 
 # Conventions and Definitions
