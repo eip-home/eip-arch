@@ -4,7 +4,7 @@ abbrev: "EIP Architecture"
 category: info
 
 docname: draft-eip-arch-latest
-#submissiontype: IETF  # also: "independent", "IAB", or "IRTF"
+submissiontype: independent  # also: "independent", "IAB", or "IRTF", "IETF"
 #number:
 #date:
 #consensus: true
