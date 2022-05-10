@@ -42,6 +42,42 @@ author:
 normative:
 
 informative:
+  draft-eip-use-cases:
+    title: "Extensible In-band Processing (EIP) Use Cases"
+    author: 
+     -
+        name: "Stefano Salsano"
+        ins: "S. Salsano"
+        organization: Univ. of Rome Tor Vergata / CNIT
+        email: "stefano.salsano@uniroma2.it"
+     -
+        name: "Hesham ElBakoury"
+        ins: "H. ElBakoury"
+        organization: Consultant
+        email: "helbakoury@gmail.com"
+    date: 2022
+    seriesInfo: 
+       Internet-Draft: draft-eip-use-cases
+    format:
+       TXT: "https://eip-home.github.io/eip-headers/draft-eip-headers-definitions.txt"
+  draft-eip-headers:
+    title: "Extensible In-band Processing (EIP) Headers Definitions"
+    author: 
+     -
+        name: "Stefano Salsano"
+        ins: "S. Salsano"
+        organization: Univ. of Rome Tor Vergata / CNIT
+        email: "stefano.salsano@uniroma2.it"
+     -
+        name: "Hesham ElBakoury"
+        ins: "H. ElBakoury"
+        organization: Consultant
+        email: "helbakoury@gmail.com"
+    date: 2022
+    seriesInfo: 
+       Internet-Draft: draft-eip-headers-definitions
+    format:
+       TXT: "https://eip-home.github.io/eip-headers/draft-eip-headers-definitions.txt"
 
 
 --- abstract
