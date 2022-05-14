@@ -91,8 +91,57 @@ the protocol specifications of EIP.
 
 # Introduction
 
+Networking architectures need to evolve to support the needs of future Internet services and 6G networks.
+The networking community is considering different approaches for this evolution, we can broadly classify them in 3 different categories:
+
+1. Solutions above the layer 3. Do not touch the legacy networking layer (IP). 
+2. Clean slate "revolutionary" solutions. Throw away the legacy networking layer (IP).
+3. Evolutionary solution. Improve the IP layer (and try to preserve backward compatibility).
+
+The proposed EIP (Extensible In-band Processing) solution belongs to the third category, it extends IPv6 and the SRv6 Programming Model without requiring a clean-slate revolution. 
+
 The use cases for EIP are discussed in [id-eip-use-cases]. The specification of the EIP header format
 is provided in [id-eip-headers].
+
+In the next subsection we will briefly mentions some solutions belonging to the three categories and in particular we will show how the "evolutionary" trend has already started and is progressing at a strong pace, for example with the SRv6 "Network Programming Model" and with the "In-band Telemetry".  
+
+## Networking architecture evolution
+
+### Solutions above the layer 3
+
+### Clean slate revolution
+
+### Evolutionary solutions 
+
+
+# Basic principles for EIP
+
+TO BE extended
+
+* Both end nodes and routers can read/write EIP information
+
+* Limited domain applicability
+
+* Tunneling concept
+
+* Edge to edge, edge to server-end
+
+* EIP header
+
+
+# Benefits of a common EIP header for multiple use cases.
+
+The EIP header will carry different EIP Information Elements that are defined to support the different use cases.
+There are reasons why it is beneficial to define a common EIP header that support multiple use cases.
+
+1. The number of available Option Types in HBH header is limited, likewise the number of available TLVs in the Segment Routing Header (SRH) is limited. Defining multiple Option Types or SRH TLVs for multiple use case is not scalable and puts pressure on the allocation of such codepoints.
+
+2. The definition and standardization of specific EIP Information Elements for the different use cases is much simpler, rather than requiring the definition of a new Option Type or SRH TLVs.
+
+3. Different use cases may share the EIP Information Elements.
+
+4. Efficient and Hardware Friendly mechanisms can be defined when the different EIP Information Elements are carried inside the same EIP header.
+
 
 
 # Conventions and Definitions
