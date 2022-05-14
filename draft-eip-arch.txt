@@ -5,8 +5,8 @@
 WG Working Group                                              S. Salsano
 Internet-Draft                          Univ. of Rome Tor Vergata / CNIT
 Intended status: Informational                              H. ElBakoury
-Expires: 11 November 2022                                     Consultant
-                                                             10 May 2022
+Expires: 15 November 2022                                     Consultant
+                                                             14 May 2022
 
 
      Extensible In-band Processing (EIP) Architecture and Framework
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 November 2022.
+   This Internet-Draft will expire on 15 November 2022.
 
 Copyright Notice
 
@@ -67,22 +67,97 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-   2.  Conventions and Definitions
-   3.  Security Considerations
-   4.  IANA Considerations
-   5.  References
-     5.1.  Normative References
-     5.2.  Informative References
+     1.1.  Networking architecture evolution
+       1.1.1.  Solutions above the layer 3
+       1.1.2.  Clean slate revolution
+       1.1.3.  Evolutionary solutions
+   2.  Basic principles for EIP
+   3.  Benefits of a common EIP header for multiple use cases.
+   4.  Conventions and Definitions
+   5.  Security Considerations
+   6.  IANA Considerations
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
 1.  Introduction
 
+   Networking architectures need to evolve to support the needs of
+   future Internet services and 6G networks.  The networking community
+   is considering different approaches for this evolution, we can
+   broadly classify them in 3 different categories:
+
+   1.  Solutions above the layer 3.  Do not touch the legacy networking
+       layer (IP).
+
+   2.  Clean slate "revolutionary" solutions.  Throw away the legacy
+       networking layer (IP).
+
+   3.  Evolutionary solution.  Improve the IP layer (and try to preserve
+       backward compatibility).
+
+   The proposed EIP (Extensible In-band Processing) solution belongs to
+   the third category, it extends IPv6 and the SRv6 Programming Model
+   without requiring a clean-slate revolution.
+
    The use cases for EIP are discussed in [id-eip-use-cases].  The
    specification of the EIP header format is provided in
    [id-eip-headers].
 
-2.  Conventions and Definitions
+   In the next subsection we will briefly mentions some solutions
+   belonging to the three categories and in particular we will show how
+   the "evolutionary" trend has already started and is progressing at a
+   strong pace, for example with the SRv6 "Network Programming Model"
+   and with the "In-band Telemetry".
+
+1.1.  Networking architecture evolution
+
+1.1.1.  Solutions above the layer 3
+
+1.1.2.  Clean slate revolution
+
+1.1.3.  Evolutionary solutions
+
+2.  Basic principles for EIP
+
+   TO BE extended
+
+   *  Both end nodes and routers can read/write EIP information
+
+   *  Limited domain applicability
+
+   *  Tunneling concept
+
+   *  Edge to edge, edge to server-end
+
+   *  EIP header
+
+3.  Benefits of a common EIP header for multiple use cases.
+
+   The EIP header will carry different EIP Information Elements that are
+   defined to support the different use cases.  There are reasons why it
+   is beneficial to define a common EIP header that support multiple use
+   cases.
+
+   1.  The number of available Option Types in HBH header is limited,
+       likewise the number of available TLVs in the Segment Routing
+       Header (SRH) is limited.  Defining multiple Option Types or SRH
+       TLVs for multiple use case is not scalable and puts pressure on
+       the allocation of such codepoints.
+
+   2.  The definition and standardization of specific EIP Information
+       Elements for the different use cases is much simpler, rather than
+       requiring the definition of a new Option Type or SRH TLVs.
+
+   3.  Different use cases may share the EIP Information Elements.
+
+   4.  Efficient and Hardware Friendly mechanisms can be defined when
+       the different EIP Information Elements are carried inside the
+       same EIP header.
+
+4.  Conventions and Definitions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -90,17 +165,17 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-3.  Security Considerations
+5.  Security Considerations
 
    TODO Security
 
-4.  IANA Considerations
+6.  IANA Considerations
 
    This document has no IANA actions.
 
-5.  References
+7.  References
 
-5.1.  Normative References
+7.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -111,7 +186,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-5.2.  Informative References
+7.2.  Informative References
 
    [id-eip-headers]
               Salsano, S. and H. ElBakoury, "Extensible In-band
