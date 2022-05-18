@@ -13,12 +13,12 @@ the needs of future Internet services / 6G networks. This document discusses the
 framework of EIP. Two separate documents respectively analyze a number of use cases for EIP and provide
 the protocol specifications of EIP. 
     " name="description">
-<meta content="xml2rfc 3.12.6" name="generator">
+<meta content="xml2rfc 3.12.7" name="generator">
 <meta content="IPv6" name="keyword">
 <meta content="Extension Headers" name="keyword">
 <meta content="draft-eip-arch-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.12.6
+  xml2rfc 3.12.7
     Python 3.9.7
     appdirs 1.4.4
     ConfigArgParse 1.3
@@ -1022,7 +1022,7 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salsano &amp; ElBakoury</td>
-<td class="center">Expires 15 November 2022</td>
+<td class="center">Expires 19 November 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1035,12 +1035,12 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <dd class="internet-draft">draft-eip-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-05-14" class="published">14 May 2022</time>
+<time datetime="2022-05-18" class="published">18 May 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-11-15">15 November 2022</time></dd>
+<dd class="expires"><time datetime="2022-11-19">19 November 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1096,7 +1096,7 @@ the protocol specifications of EIP.<a href="#section-abstract-1" class="pilcrow"
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 15 November 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 November 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1185,14 +1185,14 @@ the protocol specifications of EIP.<a href="#section-abstract-1" class="pilcrow"
 <p id="section-1-1">Networking architectures need to evolve to support the needs of future Internet services and 6G networks.
 The networking community is considering different approaches for this evolution, we can broadly classify them in 3 different categories:<a href="#section-1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-1-2">
-<li id="section-1-2.1">Solutions above the layer 3. Do not touch the legacy networking layer (IP).<a href="#section-1-2.1" class="pilcrow">¶</a>
+<li id="section-1-2.1">Clean slate "revolutionary" solutions. Throw away the legacy networking layer (IP).<a href="#section-1-2.1" class="pilcrow">¶</a>
 </li>
-        <li id="section-1-2.2">Clean slate "revolutionary" solutions. Throw away the legacy networking layer (IP).<a href="#section-1-2.2" class="pilcrow">¶</a>
+        <li id="section-1-2.2">Solutions above the layer 3. Do not touch the legacy networking layer (IP).<a href="#section-1-2.2" class="pilcrow">¶</a>
 </li>
         <li id="section-1-2.3">Evolutionary solution. Improve the IP layer (and try to preserve backward compatibility).<a href="#section-1-2.3" class="pilcrow">¶</a>
 </li>
       </ol>
-<p id="section-1-3">The proposed EIP (Extensible In-band Processing) solution belongs to the third category, it extends IPv6 and the SRv6 Programming Model without requiring a clean-slate revolution.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-3">The proposed EIP (Extensible In-band Processing) solution belongs to the third category, it extends the current IPv6 architecture without requiring a clean-slate revolution.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">The use cases for EIP are discussed in <span>[<a href="#id-eip-use-cases" class="xref">id-eip-use-cases</a>]</span>. The specification of the EIP header format
 is provided in <span>[<a href="#id-eip-headers" class="xref">id-eip-headers</a>]</span>.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">In the next subsection we will briefly mentions some solutions belonging to the three categories and in particular we will show how the "evolutionary" trend has already started and is progressing at a strong pace, for example with the SRv6 "Network Programming Model" and with the "In-band Telemetry".<a href="#section-1-5" class="pilcrow">¶</a></p>
@@ -1219,7 +1219,8 @@ is provided in <span>[<a href="#id-eip-headers" class="xref">id-eip-headers</a>]
 <section id="section-1.1.3">
           <h4 id="name-evolutionary-solutions">
 <a href="#section-1.1.3" class="section-number selfRef">1.1.3. </a><a href="#name-evolutionary-solutions" class="section-name selfRef">Evolutionary solutions</a>
-        </h4>
+          </h4>
+<p id="section-1.1.3-1">and the SRv6 Programming Model<a href="#section-1.1.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1260,7 +1261,7 @@ There are reasons why it is beneficial to define a common EIP header that suppor
 </li>
         <li id="section-3-2.3">Different use cases may share the EIP Information Elements.<a href="#section-3-2.3" class="pilcrow">¶</a>
 </li>
-        <li id="section-3-2.4">Efficient and Hardware Friendly mechanisms can be defined when the different EIP Information Elements are carried inside the same EIP header.<a href="#section-3-2.4" class="pilcrow">¶</a>
+        <li id="section-3-2.4">Efficient and "Hardware Friendly" mechanisms can be defined when the different EIP Information Elements are carried inside the same EIP header.<a href="#section-3-2.4" class="pilcrow">¶</a>
 </li>
       </ol>
 </section>

@@ -5,8 +5,8 @@
 WG Working Group                                              S. Salsano
 Internet-Draft                          Univ. of Rome Tor Vergata / CNIT
 Intended status: Informational                              H. ElBakoury
-Expires: 15 November 2022                                     Consultant
-                                                             14 May 2022
+Expires: 19 November 2022                                     Consultant
+                                                             18 May 2022
 
 
      Extensible In-band Processing (EIP) Architecture and Framework
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 November 2022.
+   This Internet-Draft will expire on 19 November 2022.
 
 Copyright Notice
 
@@ -89,18 +89,18 @@ Table of Contents
    is considering different approaches for this evolution, we can
    broadly classify them in 3 different categories:
 
-   1.  Solutions above the layer 3.  Do not touch the legacy networking
-       layer (IP).
-
-   2.  Clean slate "revolutionary" solutions.  Throw away the legacy
+   1.  Clean slate "revolutionary" solutions.  Throw away the legacy
        networking layer (IP).
+
+   2.  Solutions above the layer 3.  Do not touch the legacy networking
+       layer (IP).
 
    3.  Evolutionary solution.  Improve the IP layer (and try to preserve
        backward compatibility).
 
    The proposed EIP (Extensible In-band Processing) solution belongs to
-   the third category, it extends IPv6 and the SRv6 Programming Model
-   without requiring a clean-slate revolution.
+   the third category, it extends the current IPv6 architecture without
+   requiring a clean-slate revolution.
 
    The use cases for EIP are discussed in [id-eip-use-cases].  The
    specification of the EIP header format is provided in
@@ -119,6 +119,8 @@ Table of Contents
 1.1.2.  Clean slate revolution
 
 1.1.3.  Evolutionary solutions
+
+   and the SRv6 Programming Model
 
 2.  Basic principles for EIP
 
@@ -153,7 +155,7 @@ Table of Contents
 
    3.  Different use cases may share the EIP Information Elements.
 
-   4.  Efficient and Hardware Friendly mechanisms can be defined when
+   4.  Efficient and "Hardware Friendly" mechanisms can be defined when
        the different EIP Information Elements are carried inside the
        same EIP header.
 
