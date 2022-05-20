@@ -99,7 +99,7 @@ the protocol specifications of EIP.
 
 ### Clean slate revolution
 
-### Evolutionary solutions 
+### Evolutionary solutions
 
 and the SRv6 Programming Model
 
