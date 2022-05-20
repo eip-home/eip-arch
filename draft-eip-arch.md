@@ -91,7 +91,22 @@ the protocol specifications of EIP.
 
 # Introduction
 
- Introduction
+Networking architectures need to evolve to support the needs of future Internet services and 6G networks.
+The networking research and standardization communities are considering different approaches for this evolution, we can broadly classify them in 3 different categories:
+
+1. Clean slate and "revolutionary" solutions. Throw away the legacy networking layer (IP).
+2. Solutions above the layer 3. Do not touch the legacy networking layer (IP).
+3. Evolutionary solution. Improve the IP layer (and try to preserve backward compatibility).
+
+The proposed EIP (Extensible In-band Processing) solution belongs to the third category, it extends the current IPv6 architecture without requiring a clean-slate revolution. 
+
+The use cases for EIP are discussed in [id-eip-use-cases]. The specification of the EIP header format
+is provided in [id-eip-headers].
+
+In the next subsection we will briefly mentions some solutions belonging
+to the three categories and in particular we will show how the "evolutionary"
+trend has already started and is progressing at a strong pace, for example
+with the SRv6 "Network Programming Model" and with the "In-band Telemetry".
 
 ## Networking architecture evolution
 
@@ -104,6 +119,27 @@ the protocol specifications of EIP.
 and the SRv6 Programming Model
 
 # Basic principles for EIP
+
+
+The design the IP networking layer has been strongly influenced by the so called
+"end-to-end" concept, which prescribed putting "complex" functions in the IP hosts
+and "simple" functions in network forwarding devices (IP routers). Network operators
+have been used additional layers (e.g. ATM and then MPLS) to put the "complex"
+functions that are needed to run operators networks (backbones and access networks).
+We can also mention that in the real world, the end-to-end concept has been often
+disregarded with the introduction of middleboxes devices like NATs, TCP accelerators,
+but this has been seen as an unavoidable "mistake" and a problem. 
+
+Recently we observe a clear trend in extending the functionality of the IP networking
+layer, going beyond the plain packet forwarding. An example of this trend is the rise
+of the SRv6 "network programming" model. With the SRv6 network programming models,
+the routers can implement "complex" functionalities and they can be controlled
+by a "network program" that is embedded in IPv6 packet headers. The operators can
+find all the needed functionality in the IPv6/SRv6 dataplane with no need of middleboxes
+nor of a separate MPLS layer. Another example is the INT (IN band Telemetry)
+solution for monitoring. 
+
+We believe that this trend is fundamental for the future proof evolution of networking architectures and it should be pursued further. We envisage a feature-rich, extensible and programmable IPv6 networking layer, in which the intelligence is distributed across end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient way. 
 
 
 * Both end nodes and routers can read/write EIP information
