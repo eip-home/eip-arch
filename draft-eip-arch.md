@@ -44,7 +44,7 @@ normative:
 informative:
   id-eip-use-cases:
     title: "Extensible In-band Processing (EIP) Use Cases"
-    author: 
+    author:
      -
         name: "Stefano Salsano"
         ins: "S. Salsano"
@@ -56,13 +56,13 @@ informative:
         organization: Consultant
         email: "helbakoury@gmail.com"
     date: 2022
-    seriesInfo: 
+    seriesInfo:
        Internet-Draft: draft-eip-use-cases
     format:
        TXT: "https://eip-home.github.io/eip-headers/draft-eip-use-cases.txt"
   id-eip-headers:
     title: "Extensible In-band Processing (EIP) Headers Definitions"
-    author: 
+    author:
      -
         name: "Stefano Salsano"
         ins: "S. Salsano"
@@ -74,7 +74,7 @@ informative:
         organization: Consultant
         email: "helbakoury@gmail.com"
     date: 2022
-    seriesInfo: 
+    seriesInfo:
        Internet-Draft: draft-eip-headers-definitions
     format:
        TXT: "https://eip-home.github.io/eip-headers/draft-eip-headers-definitions.txt"
@@ -91,7 +91,7 @@ the protocol specifications of EIP.
 
 # Introduction
 
- 
+ Introduction
 
 ## Networking architecture evolution
 
