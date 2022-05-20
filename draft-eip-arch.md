@@ -139,7 +139,7 @@ find all the needed functionality in the IPv6/SRv6 dataplane with no need of mid
 nor of a separate MPLS layer. Another example is the INT (IN band Telemetry)
 solution for monitoring.
 
-The EIP solution is aligned with this trend, which will ensure a future proof evolution of networking architectures. We envisage a feature-rich, extensible and programmable IPv6 networking layer, in which the intelligence is distributed across end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient way. 
+The EIP solution is aligned with this trend, which will ensure a future proof evolution of networking architectures. We envisage a feature-rich, extensible and programmable IPv6 networking layer, in which the intelligence is distributed across end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient way.
 
 The EIP solution foresees the introduction of an EIP header in the IPv6 packet header. The proposed EIP header is extensible and meant to support a number of use cases. In general, the content of this new header can be read and written by end hosts and by transit routers. Depending of the specific use-case, only specific nodes will be interested in reading or writing the EIP header. The use of the EIP header will be confined to a single domain or to a set of cooperating domains, so there is no need of a global, Internet-wide support of the new header for its introduction. Moreover, there could be cases in which legacy nodes can simply ignore the EIP header and provide transit to packets containing this header.
 
@@ -163,12 +163,11 @@ There are reasons why it is beneficial to define a common EIP header that suppor
 
 1. The number of available Option Types in HBH header is limited, likewise the number of available TLVs in the Segment Routing Header (SRH) is limited. Defining multiple Option Types or SRH TLVs for multiple use case is not scalable and puts pressure on the allocation of such codepoints.
 
-2. The definition and standardization of specific EIP Information Elements for the different use cases is much simpler, rather than requiring the definition of a new Option Type or SRH TLVs.
+2. The definition and standardization of specific EIP Information Elements for the different use cases will be simplified, compared to the need of requiring the definition of a new Option Type or SRH TLVs.
 
-3. Different use cases may share the EIP Information Elements.
+3. Different use cases may share a subset of common EIP Information Elements.
 
-4. Efficient and "Hardware Friendly" mechanisms can be defined when the different EIP Information Elements are carried inside the same EIP header.
-
+4. Efficient mechanism for the processing of the EIP header (both in software and in hardware) can be defined when the different EIP Information Elements are carried inside the same EIP header.
 
 
 # Conventions and Definitions
