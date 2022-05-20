@@ -91,19 +91,7 @@ the protocol specifications of EIP.
 
 # Introduction
 
-Networking architectures need to evolve to support the needs of future Internet services and 6G networks.
-The networking research and standardization communities are considering different approaches for this evolution, we can broadly classify them in 3 different categories:
-
-1. Clean slate and "revolutionary" solutions. Throw away the legacy networking layer (IP).
-2. Solutions above the layer 3. Do not touch the legacy networking layer (IP). 
-3. Evolutionary solution. Improve the IP layer (and try to preserve backward compatibility).
-
-The proposed EIP (Extensible In-band Processing) solution belongs to the third category, it extends the current IPv6 architecture without requiring a clean-slate revolution. 
-
-The use cases for EIP are discussed in [id-eip-use-cases]. The specification of the EIP header format
-is provided in [id-eip-headers].
-
-In the next subsection we will briefly mentions some solutions belonging to the three categories and in particular we will show how the "evolutionary" trend has already started and is progressing at a strong pace, for example with the SRv6 "Network Programming Model" and with the "In-band Telemetry".  
+ 
 
 ## Networking architecture evolution
 
