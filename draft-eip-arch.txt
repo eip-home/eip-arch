@@ -5,8 +5,8 @@
 WG Working Group                                              S. Salsano
 Internet-Draft                          Univ. of Rome Tor Vergata / CNIT
 Intended status: Informational                              H. ElBakoury
-Expires: 19 November 2022                                     Consultant
-                                                             18 May 2022
+Expires: 21 November 2022                                     Consultant
+                                                             20 May 2022
 
 
      Extensible In-band Processing (EIP) Architecture and Framework
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 November 2022.
+   This Internet-Draft will expire on 21 November 2022.
 
 Copyright Notice
 
@@ -62,7 +62,10 @@ Copyright Notice
    Provisions Relating to IETF Documents (https://trustee.ietf.org/
    license-info) in effect on the date of publication of this document.
    Please review these documents carefully, as they describe your rights
-   and restrictions with respect to this document.
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
 
 Table of Contents
 
@@ -84,33 +87,7 @@ Table of Contents
 
 1.  Introduction
 
-   Networking architectures need to evolve to support the needs of
-   future Internet services and 6G networks.  The networking community
-   is considering different approaches for this evolution, we can
-   broadly classify them in 3 different categories:
-
-   1.  Clean slate "revolutionary" solutions.  Throw away the legacy
-       networking layer (IP).
-
-   2.  Solutions above the layer 3.  Do not touch the legacy networking
-       layer (IP).
-
-   3.  Evolutionary solution.  Improve the IP layer (and try to preserve
-       backward compatibility).
-
-   The proposed EIP (Extensible In-band Processing) solution belongs to
-   the third category, it extends the current IPv6 architecture without
-   requiring a clean-slate revolution.
-
-   The use cases for EIP are discussed in [id-eip-use-cases].  The
-   specification of the EIP header format is provided in
-   [id-eip-headers].
-
-   In the next subsection we will briefly mentions some solutions
-   belonging to the three categories and in particular we will show how
-   the "evolutionary" trend has already started and is progressing at a
-   strong pace, for example with the SRv6 "Network Programming Model"
-   and with the "In-band Telemetry".
+   Introduction
 
 1.1.  Networking architecture evolution
 
@@ -123,8 +100,6 @@ Table of Contents
    and the SRv6 Programming Model
 
 2.  Basic principles for EIP
-
-   TO BE extended
 
    *  Both end nodes and routers can read/write EIP information
 
