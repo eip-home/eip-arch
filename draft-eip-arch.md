@@ -98,7 +98,7 @@ The networking research and standardization communities are considering differen
 2. Solutions above the layer 3. Do not touch the legacy networking layer (IP).
 3. Evolutionary solution. Improve the IP layer (and try to preserve backward compatibility).
 
-The proposed EIP (Extensible In-band Processing) solution belongs to the third category, it extends the current IPv6 architecture without requiring a clean-slate revolution. 
+The proposed EIP (Extensible In-band Processing) solution belongs to the third category, it extends the current IPv6 architecture without requiring a clean-slate revolution.
 
 The use cases for EIP are discussed in [id-eip-use-cases]. The specification of the EIP header format
 is provided in [id-eip-headers].
@@ -128,7 +128,7 @@ have been used additional layers (e.g. ATM and then MPLS) to put the "complex"
 functions that are needed to run operators networks (backbones and access networks).
 We can also mention that in the real world, the end-to-end concept has been often
 disregarded with the introduction of middleboxes devices like NATs, TCP accelerators,
-but this has been seen as an unavoidable "mistake" and a problem. 
+but this has been seen as an unavoidable "mistake" and a problem.
 
 Recently we observe a clear trend in extending the functionality of the IP networking
 layer, going beyond the plain packet forwarding. An example of this trend is the rise
@@ -137,9 +137,9 @@ the routers can implement "complex" functionalities and they can be controlled
 by a "network program" that is embedded in IPv6 packet headers. The operators can
 find all the needed functionality in the IPv6/SRv6 dataplane with no need of middleboxes
 nor of a separate MPLS layer. Another example is the INT (IN band Telemetry)
-solution for monitoring. 
+solution for monitoring.
 
-We believe that this trend is fundamental for the future proof evolution of networking architectures and it should be pursued further. We envisage a feature-rich, extensible and programmable IPv6 networking layer, in which the intelligence is distributed across end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient way. 
+We believe that this trend is fundamental for the future proof evolution of networking architectures and it should be pursued further. We envisage a feature-rich, extensible and programmable IPv6 networking layer, in which the intelligence is distributed across end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient way.
 
 
 * Both end nodes and routers can read/write EIP information
