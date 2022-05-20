@@ -1185,7 +1185,23 @@ the protocol specifications of EIP.<a href="#section-abstract-1" class="pilcrow"
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Introduction<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">Networking architectures need to evolve to support the needs of future Internet services and 6G networks.
+The networking research and standardization communities are considering different approaches for this evolution, we can broadly classify them in 3 different categories:<a href="#section-1-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-1-2">
+<li id="section-1-2.1">Clean slate and "revolutionary" solutions. Throw away the legacy networking layer (IP).<a href="#section-1-2.1" class="pilcrow">¶</a>
+</li>
+        <li id="section-1-2.2">Solutions above the layer 3. Do not touch the legacy networking layer (IP).<a href="#section-1-2.2" class="pilcrow">¶</a>
+</li>
+        <li id="section-1-2.3">Evolutionary solution. Improve the IP layer (and try to preserve backward compatibility).<a href="#section-1-2.3" class="pilcrow">¶</a>
+</li>
+      </ol>
+<p id="section-1-3">The proposed EIP (Extensible In-band Processing) solution belongs to the third category, it extends the current IPv6 architecture without requiring a clean-slate revolution.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">The use cases for EIP are discussed in <span>[<a href="#id-eip-use-cases" class="xref">id-eip-use-cases</a>]</span>. The specification of the EIP header format
+is provided in <span>[<a href="#id-eip-headers" class="xref">id-eip-headers</a>]</span>.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">In the next subsection we will briefly mentions some solutions belonging
+to the three categories and in particular we will show how the "evolutionary"
+trend has already started and is progressing at a strong pace, for example
+with the SRv6 "Network Programming Model" and with the "In-band Telemetry".<a href="#section-1-5" class="pilcrow">¶</a></p>
 <div id="networking-architecture-evolution">
 <section id="section-1.1">
         <h3 id="name-networking-architecture-evo">
@@ -1222,16 +1238,33 @@ the protocol specifications of EIP.<a href="#section-abstract-1" class="pilcrow"
       <h2 id="name-basic-principles-for-eip">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-basic-principles-for-eip" class="section-name selfRef">Basic principles for EIP</a>
       </h2>
+<p id="section-2-1">The design the IP networking layer has been strongly influenced by the so called
+"end-to-end" concept, which prescribed putting "complex" functions in the IP hosts
+and "simple" functions in network forwarding devices (IP routers). Network operators
+have been used additional layers (e.g. ATM and then MPLS) to put the "complex"
+functions that are needed to run operators networks (backbones and access networks).
+We can also mention that in the real world, the end-to-end concept has been often
+disregarded with the introduction of middleboxes devices like NATs, TCP accelerators,
+but this has been seen as an unavoidable "mistake" and a problem.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">Recently we observe a clear trend in extending the functionality of the IP networking
+layer, going beyond the plain packet forwarding. An example of this trend is the rise
+of the SRv6 "network programming" model. With the SRv6 network programming models,
+the routers can implement "complex" functionalities and they can be controlled
+by a "network program" that is embedded in IPv6 packet headers. The operators can
+find all the needed functionality in the IPv6/SRv6 dataplane with no need of middleboxes
+nor of a separate MPLS layer. Another example is the INT (IN band Telemetry)
+solution for monitoring.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">We believe that this trend is fundamental for the future proof evolution of networking architectures and it should be pursued further. We envisage a feature-rich, extensible and programmable IPv6 networking layer, in which the intelligence is distributed across end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient way.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2-1.1">Both end nodes and routers can read/write EIP information<a href="#section-2-1.1" class="pilcrow">¶</a>
+<li class="normal" id="section-2-4.1">Both end nodes and routers can read/write EIP information<a href="#section-2-4.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-2-1.2">Limited domain applicability<a href="#section-2-1.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-4.2">Limited domain applicability<a href="#section-2-4.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-2-1.3">Tunneling concept<a href="#section-2-1.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-4.3">Tunneling concept<a href="#section-2-4.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-2-1.4">Edge to edge, edge to server-end<a href="#section-2-1.4" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-4.4">Edge to edge, edge to server-end<a href="#section-2-4.4" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-2-1.5">EIP header<a href="#section-2-1.5" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-4.5">EIP header<a href="#section-2-4.5" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
