@@ -117,11 +117,6 @@ and the SRv6 Programming Model
 
 # Basic principles for EIP
 
-The design the IP networking layer has been strongly influenced by the so called "end-to-end" concept, which prescribed putting "complex" functions in the IP hosts and "simple" functions in network forwarding devices (IP routers). Network operators have been used additional layers (e.g. ATM and then MPLS) to put the "complex" functions that are needed to run operators networks (backbones and access networks). We can also mention that in the real world, the end-to-end concept has been often disregarded with the introduction of middleboxes devices like NATs, TCP accelerators, but this has been seen as an unavoidable "mistake" and a problem. 
-
-Recently we observe a clear trend in extending the functionality of the IP networking layer, going beyond the plain packet forwarding. An example of this trend is the rise of the SRv6 "network programming" model. With the SRv6 network programming models, the routers can implement "complex" functionalities and they can be controlled by a "network program" that is embedded in IPv6 packet headers. The operators can find all the needed functionality in the IPv6/SRv6 dataplane with no need of middleboxes nor of a separate MPLS layer. Another example is the INT (IN band Telemetry) solution for monitoring. 
-
-We believe that this trend is fundamental for the future proof evolution of networking architectures and it should be pursued further. We envisage a feature-rich, extensible and programmable IPv6 networking layer, in which the intelligence is distributed across end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient way. 
 
 * Both end nodes and routers can read/write EIP information
 
