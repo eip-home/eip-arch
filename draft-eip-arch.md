@@ -32,7 +32,6 @@ pi: [toc, sortrefs, symrefs]
 author:
  -
     name: "Stefano Salsano"
-    ins: "S. Salsano"
     organization: "Univ. of Rome Tor Vergata / CNIT"
     email: "stefano.salsano@uniroma2.it"
  -
@@ -41,7 +40,6 @@ author:
     email: "helbakoury@gmail.com"
 -
     name: "Diego R. Lopez"
-    ins: "D. Lopez"
     organization: "Telefonica, I+D"
     email: "diego.r.lopez@telefonica.com"
 
