@@ -33,7 +33,7 @@ author:
  -
     name: "Stefano Salsano"
     ins: "S. Salsano"
-    organization: Univ. of Rome Tor Vergata / CNIT
+    organization: "Univ. of Rome Tor Vergata / CNIT"
     email: "stefano.salsano@uniroma2.it"
  -
     name: "Hesham ElBakoury"
@@ -42,7 +42,7 @@ author:
 -
     name: "Diego R. Lopez"
     ins: "D. Lopez"
-    organization: Telefonica, I+D
+    organization: "Telefonica, I+D"
     email: "diego.r.lopez@telefonica.com"
 
 normative:
