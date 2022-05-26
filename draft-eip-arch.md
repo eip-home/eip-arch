@@ -38,6 +38,12 @@ author:
     name: "Hesham ElBakoury"
     organization: Consultant
     email: "helbakoury@gmail.com"
+ -
+    name: "Diego R. Lopez"
+    ins: "D. Lopez"
+    organization: "Telefonica, I+D"
+    email: "diego.r.lopez@telefonica.com"
+
 
 normative:
 
