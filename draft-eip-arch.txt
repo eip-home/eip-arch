@@ -5,8 +5,8 @@
 WG Working Group                                              S. Salsano
 Internet-Draft                          Univ. of Rome Tor Vergata / CNIT
 Intended status: Informational                              H. ElBakoury
-Expires: 21 November 2022                                     Consultant
-                                                             20 May 2022
+Expires: 27 November 2022                                     Consultant
+                                                             26 May 2022
 
 
      Extensible In-band Processing (EIP) Architecture and Framework
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 November 2022.
+   This Internet-Draft will expire on 27 November 2022.
 
 Copyright Notice
 
