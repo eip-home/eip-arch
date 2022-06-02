@@ -111,7 +111,7 @@ The proposed EIP (Extensible In-band Processing) solution belongs to the third c
 The use cases for EIP are discussed in [id-eip-use-cases]. The specification of the EIP header format
 is provided in [id-eip-headers].
 
-In the next subsection we will shortly review some solutions that have introduced or are proposing extensions to the layer 3. 
+In the next subsection we will shortly review some solutions that have introduced or are proposing extensions to the layer 3.
 
 ## Evolutionary solutions
 
