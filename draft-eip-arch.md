@@ -49,7 +49,9 @@ normative:
 informative:
   RFC8754:
   RFC8986:
+  RFC8799:
   I-D.ietf-ippm-ioam-data:
+  I-D.ietf-ippm-ioam-ipv6-options:
   id-eip-use-cases:
     title: "Extensible In-band Processing (EIP) Use Cases"
     author:
@@ -126,11 +128,9 @@ The proposed EIP (Extensible In-band Processing) solution belongs to the third c
 The use cases for EIP are discussed in [id-eip-use-cases]. The specification of the EIP header format
 is provided in [id-eip-headers].
 
-In the next subsection we will shortly review some solutions that have introduced or are proposing extensions to the layer 3.
-
 # Basic principles for EIP
 
-Recently we observe a clear in extending the functionality of the IPv6 networking
+Recently we observe a trend in extending the functionality of the IPv6 networking
 layer, going beyond the plain packet forwarding. An example of this trend is the rise
 of the SRv6 "network programming" model. With the SRv6 network programming models,
 the routers can implement "complex" functionalities and they can be controlled
@@ -139,21 +139,14 @@ find all the needed functionality in the IPv6/SRv6 dataplane with no need of mid
 nor of a separate MPLS layer. Another example is the INT (IN band Telemetry)
 solution for monitoring. These (and other) examples are further discussed in section {{review}}.
 
-The EIP solution is aligned with this trend, which will ensure a future proof evolution of networking architectures. We envisage a feature-rich, extensible and programmable IPv6 networking layer, in which the intelligence is distributed across end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient way.
+The EIP solution is aligned with this trend, which will ensure a future proof evolution of networking architectures. We envisage a feature-rich, extensible and programmable IPv6 networking layer, in which complex dataplane functions can be executed by end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient way.
 
 The EIP solution foresees the introduction of an EIP header in the IPv6 packet header. The proposed EIP header is extensible and meant to support a number of use cases. In general, the content of this new header can be read and written by end hosts and by transit routers. Depending of the specific use-case, only specific nodes will be interested in reading or writing the EIP header. The use of the EIP header will be confined to a single domain or to a set of cooperating domains, so there is no need of a global, Internet-wide support of the new header for its introduction. Moreover, there could be cases in which legacy nodes can simply ignore the EIP header and provide transit to packets containing this header.
 
 An important usage scenario considers a provider network, in particular the network portion from an ingress edge node to an egress edge node. In this scenario, the ingress edge node can encapsulate the user packet coming from an access network into an outer packet. The outer packet is carried inside the provider network until an egress edge node, which will decapsulate the inner packet and deliver it to the destination access network or to another transit network, depending on the specific topology and service. When the IPv6/SRv6 dataplane is used in the provider network, this means that the ingress edge node will be the source of an outer IPv6 packet in which it is possible to add the EIP header. The outer IPv6 packet, containing the EIP header will be processed inside the "limited domain" of the provider network, so that the operator can make sure that all the transit routers either are EIP aware or at least they can forward packets containing the EIP header.
 
-* Both end nodes and routers can read/write EIP information
-
-* Limited domain applicability
-
-* Tunneling concept
-
-* Edge to edge, edge to server-end
-
-* EIP header
+Work in progress - TODO: import the additional considerations from section 2 of the paper 
+https://github.com/eip-home/eip/blob/main/tech-docs/eip-paper.pdf
 
 
 # Benefits of a common EIP header for multiple use cases.
@@ -175,7 +168,7 @@ There are reasons why it is beneficial to define a common EIP header that suppor
 In the last few years, we have witnessed important innovations in IPv6 networking, centered around the emergence of Segment Routing for IPv6 (SRv6) {{RFC8754}} and of the SRv6 "Network Programming model" {{RFC8986}}. With SRv6 it is possible to insert a *Network program*, i.e. a sequence of instructions (called *segments*), in a header of the IPv6 protocol, called Segment Routing Header (SRH).
 
 Another recent activity that proposed to extend the networking layer to support more complex functions, concerns the network monitoring. The concept of INT “In-band Network Telemetry” has been proposed since 2015 {{onf-int}} in the context of the definition of use cases for P4 based data plane programmability. The latest version of INT specifications dates November 2020 {{int-spec}}. {{int-spec}} specifies the format of headers that carry monitoring instructions and monitoring information along with data plane packets. The specific location for INT Headers is intentionally not specified: an INT Header can be inserted as an option or payload of any encapsulation type.
-Within the IETF community, the In-band Telemetry concept has been adopted by the IPPM working group, renaming it “In-situ Operations, Administration, and Maintenance” (IOAM). The internet draft {{I-D.ietf-ippm-ioam-data}} is about to become an IETF RFC. Note that IOAM is focused on “limited domains” as defined in \cite{lim-domains}. The in-situ OAM data fields can be encapsulated in a variety of protocols, including IPv6. The specification details for carrying IOAM data inside IPv6 headers are provided in draft \cite{ioam-ipv6}\extended{, which is also close to becoming an RFC}. \extended{In particular, IOAM data fields can be encapsulated in IPv6 using either Hop-by-Hop Options header or Destination options header.}
+Within the IETF community, the In-band Telemetry concept has been adopted by the IPPM working group, renaming it “In-situ Operations, Administration, and Maintenance” (IOAM). The internet draft {{I-D.ietf-ippm-ioam-data}} is about to become an IETF RFC. Note that IOAM is focused on “limited domains” as defined in {{RFC8799}}. The in-situ OAM data fields can be encapsulated in a variety of protocols, including IPv6. The specification details for carrying IOAM data inside IPv6 headers are provided in draft {{I-D.ietf-ippm-ioam-ipv6-options}}, which is also close to becoming an RFC. In particular, IOAM data fields can be encapsulated in IPv6 using either Hop-by-Hop Options header or Destination options header.
 
 
 
