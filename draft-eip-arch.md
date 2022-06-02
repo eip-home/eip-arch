@@ -94,7 +94,6 @@ informative:
     format:
        PDF: "https://opennetworking.org/news-and-events/blog/improving-network-monitoring-and-management-with-programmable-data-planes/"
     date: 2015
-    
 
 --- abstract
 
