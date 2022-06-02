@@ -48,6 +48,8 @@ author:
 normative:
 
 informative:
+  RFC8754:
+  RFC8986:
   id-eip-use-cases:
     title: "Extensible In-band Processing (EIP) Use Cases"
     author:
@@ -109,32 +111,13 @@ The proposed EIP (Extensible In-band Processing) solution belongs to the third c
 The use cases for EIP are discussed in [id-eip-use-cases]. The specification of the EIP header format
 is provided in [id-eip-headers].
 
-In the next subsection we will briefly mentions some solutions belonging
-to the three categories and in particular we will show how the "evolutionary"
-trend has already started and is progressing at a strong pace, for example
-with the SRv6 "Network Programming Model" and with the "In-band Telemetry".
+In the next subsection we will shortly review some solutions that have introduced or are proposing extensions to the layer 3. 
 
-## Networking architecture evolution
+## Evolutionary solutions
 
-### Solutions above the layer 3
-
-### Clean slate revolution
-
-### Evolutionary solutions
-
-and the SRv6 Programming Model
+In the last few years, we have witnessed important innovations in IP networking, centered around the emergence of Segment Routing for IPv6 (SRv6) {{RFC8754}} and of the SRv6 "Network Programming model" {{RFC8986}}. With SRv6 it is possible to insert a *Network program*, i.e. a sequence of instructions (called *segments*)
 
 # Basic principles for EIP
-
-The design the IP networking layer has been strongly influenced by the so called
-"end-to-end" concept, which prescribed putting "complex" functions in the IP hosts
-and "simple" functions in network forwarding devices (IP routers). To overcome this
-limitation, Network operators
-needed to use additional layers (e.g. ATM and then MPLS) in addition to the IP layer to put the "complex"
-functions and features that are needed to run operators networks (backbones and access networks).
-We can also mention that in reality, the end-to-end concept has been often
-disregarded with the introduction of middleboxes devices like NATs, TCP accelerators,
-but this has been seen as an unavoidable "mistake" and a problem.
 
 Recently we observe a clear trend in extending the functionality of the IP networking
 layer, going beyond the plain packet forwarding. An example of this trend is the rise
