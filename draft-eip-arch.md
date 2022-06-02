@@ -145,7 +145,7 @@ The EIP solution foresees the introduction of an EIP header in the IPv6 packet h
 
 An important usage scenario considers a provider network, in particular the network portion from an ingress edge node to an egress edge node. In this scenario, the ingress edge node can encapsulate the user packet coming from an access network into an outer packet. The outer packet is carried inside the provider network until an egress edge node, which will decapsulate the inner packet and deliver it to the destination access network or to another transit network, depending on the specific topology and service. When the IPv6/SRv6 dataplane is used in the provider network, this means that the ingress edge node will be the source of an outer IPv6 packet in which it is possible to add the EIP header. The outer IPv6 packet, containing the EIP header will be processed inside the "limited domain" of the provider network, so that the operator can make sure that all the transit routers either are EIP aware or at least they can forward packets containing the EIP header.
 
-Work in progress - TODO: import the additional considerations from section 2 of the paper 
+Work in progress - TODO: import the additional considerations from section 2 of the paper
 https://github.com/eip-home/eip/blob/main/tech-docs/eip-paper.pdf
 
 
@@ -170,6 +170,8 @@ In the last few years, we have witnessed important innovations in IPv6 networkin
 Another recent activity that proposed to extend the networking layer to support more complex functions, concerns the network monitoring. The concept of INT “In-band Network Telemetry” has been proposed since 2015 {{onf-int}} in the context of the definition of use cases for P4 based data plane programmability. The latest version of INT specifications dates November 2020 {{int-spec}}. {{int-spec}} specifies the format of headers that carry monitoring instructions and monitoring information along with data plane packets. The specific location for INT Headers is intentionally not specified: an INT Header can be inserted as an option or payload of any encapsulation type.
 Within the IETF community, the In-band Telemetry concept has been adopted by the IPPM working group, renaming it “In-situ Operations, Administration, and Maintenance” (IOAM). The internet draft {{I-D.ietf-ippm-ioam-data}} is about to become an IETF RFC. Note that IOAM is focused on “limited domains” as defined in {{RFC8799}}. The in-situ OAM data fields can be encapsulated in a variety of protocols, including IPv6. The specification details for carrying IOAM data inside IPv6 headers are provided in draft {{I-D.ietf-ippm-ioam-ipv6-options}}, which is also close to becoming an RFC. In particular, IOAM data fields can be encapsulated in IPv6 using either Hop-by-Hop Options header or Destination options header.
 
+Work in progress - TODO: import the other  from section 4.3 of the paper
+https://github.com/eip-home/eip/blob/main/tech-docs/eip-paper.pdf
 
 
 # Conventions and Definitions
