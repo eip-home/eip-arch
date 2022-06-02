@@ -51,6 +51,7 @@ informative:
   RFC8986:
   RFC8799:
   RFC8250:
+  RFC8321:
   I-D.ietf-ippm-ioam-data:
   I-D.ietf-ippm-ioam-ipv6-options:
   I-D.draft-ietf-6man-ipv6-alt-mark:
@@ -146,7 +147,7 @@ The EIP solution is aligned with this trend, which will ensure a future proof ev
 
 The EIP solution foresees the introduction of an EIP header in the IPv6 packet header. The proposed EIP header is extensible and it is meant to support a number of different use cases. In general, both end-hosts and transit routers can read and write the content of this header. Depending of the specific use-case, only specific nodes will be capable and interested in reading or writing the EIP header. The use of the EIP header will be confined to a single domain or to a set of cooperating domains, so there is no need of a global, Internet-wide support of the new header for its introduction. Moreover, there could be usage scenarios in which legacy nodes can simply ignore the EIP header and provide transit to packets containing the EIP header.
 
-An important usage scenario considers the transport over a provider network. In this scenario, we consider the network portiong from the provider ingress edge node to the provider egress edge node. The ingress edge node can encapsulate the user packet coming from an access network into an outer packet. The outer packet travels in the provider network until the egress edge node, which will decapsulate the inner packet and deliver it to the destination access network or to another transit network, depending on the specific topology and service. Assuming that the IPv6/SRv6 dataplane is used in the provider network, the ingress edge node will be the source of an outer IPv6 packet in which it is possible to add the EIP header. The outer IPv6 packet (containing the EIP header) will be processed inside the “limited domain” (see {{RFC8799}}) of the provider network, so that the operator can make sure that all the transit routers either are EIP aware or at least they can forward packets containing the EIP header. In this usage scenario, the EIP framework operates “edge-to-edge” and the end-user packets are “tunneled” over the EIP domain.
+An important usage scenario considers the transport over a provider network. In this scenario, we consider the network portion from the provider ingress edge node to the provider egress edge node. The ingress edge node can encapsulate the user packet coming from an access network into an outer packet. The outer packet travels in the provider network until the egress edge node, which will decapsulate the inner packet and deliver it to the destination access network or to another transit network, depending on the specific topology and service. Assuming that the IPv6/SRv6 dataplane is used in the provider network, the ingress edge node will be the source of an outer IPv6 packet in which it is possible to add the EIP header. The outer IPv6 packet (containing the EIP header) will be processed inside the “limited domain” (see {{RFC8799}}) of the provider network, so that the operator can make sure that all the transit routers either are EIP aware or at least they can forward packets containing the EIP header. In this usage scenario, the EIP framework operates “edge-to-edge” and the end-user packets are “tunneled” over the EIP domain.
 
 The architectural framework for EIP is depicted in Figure {{fig:eip-framework}}. An EIP domain is made up by EIP aware routers and can also include legacy routers. At the border of the domain, EIP edge nodes are used to interact with legacy End Hosts / Servers and with other domains. It is also possible that an End Host / Server is EIP aware, in this case the EIP framework could operate “edge-to-end” or “end-to-end”. 
 
@@ -196,7 +197,7 @@ Another recent activity that proposed to extend the networking layer to support 
 
 Another example of extensions to IPv6 for network monitoring is specified in {{RFC8250}}, which defines an IPv6 Destination Options header called Performance and Diagnostic Metrics (PDM). The PDM option header provides sequence numbers and timing information as a basis for measurements.
 
-The “Alternate Marking Method” is a recently proposed performance measurement approach described in {{RFC }}. The draft {{I-D.draft-ietf-6man-ipv6-alt-mark}} (also close to becoming an RFC) defines a new Hop-by-Hop Option to support this approach.
+The “Alternate Marking Method” is a recently proposed performance measurement approach described in {{RFC8321}}. The draft {{I-D.draft-ietf-6man-ipv6-alt-mark}} (also close to becoming an RFC) defines a new Hop-by-Hop Option to support this approach.
 
 “Path Tracing” {{I-D.draft-filsfils-spring-path-tracing}} proposes an efficient solution for recording the route taken by a packet (including timestamps and load information taken at each hop along the route). This solution needs a new Hop-by-Hop Option to be defined.
 
