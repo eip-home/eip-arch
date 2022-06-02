@@ -4,7 +4,7 @@ abbrev: "EIP Architecture"
 category: info
 
 docname: draft-eip-arch-latest
-#submissiontype: independent  # also: "independent", "IAB", or "IRTF", "IETF"
+#submissiontype: independent # also: "independent", "IAB", or "IRTF", "IETF"
 ipr: trust200902
 #number:
 #date:
@@ -141,7 +141,7 @@ the routers can implement "complex" functionalities and they can be controlled
 by a "network program" that is embedded in IPv6 packet headers. The operators can
 find all the needed functionality in the IPv6/SRv6 dataplane with no need of middleboxes
 nor of a separate MPLS layer. Another example is the INT (IN band Telemetry)
-solution for monitoring. These (and other) examples are further discussed in section {{review}}.
+solution for monitoring. These (and other) examples are further discussed in {{review}}.
 
 The EIP solution is aligned with this trend, which will ensure a future proof evolution of networking architectures. We envisage a feature-rich, extensible and programmable IPv6 networking layer, in which complex dataplane functions can be executed by end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient way.
 
@@ -149,12 +149,10 @@ The EIP solution foresees the introduction of an EIP header in the IPv6 packet h
 
 An important usage scenario considers the transport over a provider network. In this scenario, we consider the network portion from the provider ingress edge node to the provider egress edge node. The ingress edge node can encapsulate the user packet coming from an access network into an outer packet. The outer packet travels in the provider network until the egress edge node, which will decapsulate the inner packet and deliver it to the destination access network or to another transit network, depending on the specific topology and service. Assuming that the IPv6/SRv6 dataplane is used in the provider network, the ingress edge node will be the source of an outer IPv6 packet in which it is possible to add the EIP header. The outer IPv6 packet (containing the EIP header) will be processed inside the “limited domain” (see {{RFC8799}}) of the provider network, so that the operator can make sure that all the transit routers either are EIP aware or at least they can forward packets containing the EIP header. In this usage scenario, the EIP framework operates “edge-to-edge” and the end-user packets are “tunneled” over the EIP domain.
 
-The architectural framework for EIP is depicted in Figure {{fig:eip-framework}}. An EIP domain is made up by EIP aware routers and can also include legacy routers. At the border of the domain, EIP edge nodes are used to interact with legacy End Hosts / Servers and with other domains. It is also possible that an End Host / Server is EIP aware, in this case the EIP framework could operate “edge-to-end” or “end-to-end”.
+The architectural framework for EIP is depicted in {{fig:eip-framework}}. An EIP domain is made up by EIP aware routers and can also include legacy routers. At the border of the domain, EIP edge nodes are used to interact with legacy End Hosts / Servers and with other domains. It is also possible that an End Host / Server is EIP aware, in this case the EIP framework could operate “edge-to-end” or “end-to-end”.
 
 ~~~
  +-------------------------------------------------------------------+
- |                                                                   |
- |                                                                   |
  |                                                                   |
  |                                                                   |
  |                                                                   |
@@ -166,13 +164,12 @@ The architectural framework for EIP is depicted in Figure {{fig:eip-framework}}.
  |                                                                   |
  |                                                                   |
  |                                                                   |
+ |                                                                   |
  +-------------------------------------------------------------------+
 ~~~
 {: #fig:eip-framework title="EIP framwork"}
 
-Figure {{fig:eip-framework}} also depicts the potential interaction with a cooperating EIP aware domain. In particular, it shows how an EIP edge node of a domain can be connected with an EIP edge node of another domain.
-
-
+{{fig:eip-framework}} also depicts the potential interaction with a cooperating EIP aware domain. In particular, it shows how an EIP edge node of a domain can be connected with an EIP edge node of another domain.
 
 
 # Benefits of a common EIP header for multiple use cases.
@@ -214,7 +211,11 @@ TODO Security
 
 # IANA Considerations
 
-This document has no IANA actions.
+The definition of the EIP header as an Option for IPv6 Hop-by-hop Extension header requires the allocation of a codepoint from the "Destination Options and Hop-by-Hop Options" registry in the "Internet Protocol Version 6 (IPv6) Parameters" (https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtm).
+
+The definition of the EIP header as a TLV in the Segment Routing Header requires the allocation of a codepoint from the "Segment Routing Header TLVs" registry in the "Internet Protocol Version 6 (IPv6) Parameters" (https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtm).
+
+The definition of EIP Information Elements in the EIP header will require the definition of a IANA registry.
 
 
 --- back
