@@ -121,7 +121,7 @@ Table of Contents
    dataplane with no need of middleboxes nor of a separate MPLS layer.
    Another example is the INT (IN band Telemetry) solution for
    monitoring.  These (and other) examples are further discussed in
-   section Section 4.
+   Section 4.
 
    The EIP solution is aligned with this trend, which will ensure a
    future proof evolution of networking architectures.  We envisage a
@@ -161,16 +161,14 @@ Table of Contents
    "edge-to-edge" and the end-user packets are "tunneled" over the EIP
    domain.
 
-   The architectural framework for EIP is depicted in Figure Figure 1.
-   An EIP domain is made up by EIP aware routers and can also include
-   legacy routers.  At the border of the domain, EIP edge nodes are used
-   to interact with legacy End Hosts / Servers and with other domains.
-   It is also possible that an End Host / Server is EIP aware, in this
-   case the EIP framework could operate "edge-to-end" or "end-to-end".
+   The architectural framework for EIP is depicted in Figure 1.  An EIP
+   domain is made up by EIP aware routers and can also include legacy
+   routers.  At the border of the domain, EIP edge nodes are used to
+   interact with legacy End Hosts / Servers and with other domains.  It
+   is also possible that an End Host / Server is EIP aware, in this case
+   the EIP framework could operate "edge-to-end" or "end-to-end".
 
    +-------------------------------------------------------------------+
-   |                                                                   |
-   |                                                                   |
    |                                                                   |
    |                                                                   |
    |                                                                   |
@@ -182,14 +180,14 @@ Table of Contents
    |                                                                   |
    |                                                                   |
    |                                                                   |
+   |                                                                   |
    +-------------------------------------------------------------------+
 
                           Figure 1: EIP framwork
 
-   Figure Figure 1 also depicts the potential interaction with a
-   cooperating EIP aware domain.  In particular, it shows how an EIP
-   edge node of a domain can be connected with an EIP edge node of
-   another domain.
+   Figure 1 also depicts the potential interaction with a cooperating
+   EIP aware domain.  In particular, it shows how an EIP edge node of a
+   domain can be connected with an EIP edge node of another domain.
 
 3.  Benefits of a common EIP header for multiple use cases.
 
@@ -278,7 +276,21 @@ Table of Contents
 
 7.  IANA Considerations
 
-   This document has no IANA actions.
+   The definition of the EIP header as an Option for IPv6 Hop-by-hop
+   Extension header requires the allocation of a codepoint from the
+   "Destination Options and Hop-by-Hop Options" registry in the
+   "Internet Protocol Version 6 (IPv6) Parameters"
+   (https://www.iana.org/assignments/ipv6-parameters/
+   ipv6-parameters.xhtm).
+
+   The definition of the EIP header as a TLV in the Segment Routing
+   Header requires the allocation of a codepoint from the "Segment
+   Routing Header TLVs" registry in the "Internet Protocol Version 6
+   (IPv6) Parameters" (https://www.iana.org/assignments/ipv6-parameters/
+   ipv6-parameters.xhtm).
+
+   The definition of EIP Information Elements in the EIP header will
+   require the definition of a IANA registry.
 
 8.  References
 
