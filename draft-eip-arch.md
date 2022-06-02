@@ -149,7 +149,7 @@ The EIP solution foresees the introduction of an EIP header in the IPv6 packet h
 
 An important usage scenario considers the transport over a provider network. In this scenario, we consider the network portion from the provider ingress edge node to the provider egress edge node. The ingress edge node can encapsulate the user packet coming from an access network into an outer packet. The outer packet travels in the provider network until the egress edge node, which will decapsulate the inner packet and deliver it to the destination access network or to another transit network, depending on the specific topology and service. Assuming that the IPv6/SRv6 dataplane is used in the provider network, the ingress edge node will be the source of an outer IPv6 packet in which it is possible to add the EIP header. The outer IPv6 packet (containing the EIP header) will be processed inside the “limited domain” (see {{RFC8799}}) of the provider network, so that the operator can make sure that all the transit routers either are EIP aware or at least they can forward packets containing the EIP header. In this usage scenario, the EIP framework operates “edge-to-edge” and the end-user packets are “tunneled” over the EIP domain.
 
-The architectural framework for EIP is depicted in Figure {{fig:eip-framework}}. An EIP domain is made up by EIP aware routers and can also include legacy routers. At the border of the domain, EIP edge nodes are used to interact with legacy End Hosts / Servers and with other domains. It is also possible that an End Host / Server is EIP aware, in this case the EIP framework could operate “edge-to-end” or “end-to-end”. 
+The architectural framework for EIP is depicted in Figure {{fig:eip-framework}}. An EIP domain is made up by EIP aware routers and can also include legacy routers. At the border of the domain, EIP edge nodes are used to interact with legacy End Hosts / Servers and with other domains. It is also possible that an End Host / Server is EIP aware, in this case the EIP framework could operate “edge-to-end” or “end-to-end”.
 
 ~~~
  +-------------------------------------------------------------------+
@@ -170,7 +170,7 @@ The architectural framework for EIP is depicted in Figure {{fig:eip-framework}}.
 ~~~
 {: #fig:eip-framework title="EIP framwork"}
 
-Figure {{fig:eip-framework}} also depicts the potential interaction with a cooperating EIP aware domain. In particular, it shows how an EIP edge node of a domain can be connected with an EIP edge node of another domain. 
+Figure {{fig:eip-framework}} also depicts the potential interaction with a cooperating EIP aware domain. In particular, it shows how an EIP edge node of a domain can be connected with an EIP edge node of another domain.
 
 
 
