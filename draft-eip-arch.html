@@ -14,27 +14,27 @@ the needs of future Internet services / 6G networks. This document discusses the
 framework of EIP. Two separate documents respectively analyze a number of use cases for EIP and provide
 the protocol specifications of EIP. 
     " name="description">
-<meta content="xml2rfc 3.12.7" name="generator">
+<meta content="xml2rfc 3.12.8" name="generator">
 <meta content="IPv6" name="keyword">
 <meta content="Extension Headers" name="keyword">
 <meta content="draft-eip-arch-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.12.7
-    Python 3.9.7
+  xml2rfc 3.12.8
+    Python 3.10.4
     appdirs 1.4.4
-    ConfigArgParse 1.3
+    ConfigArgParse 1.5.3
     google-i18n-address 2.5.1
     html5lib 1.1
     intervaltree 3.1.0
     Jinja2 2.11.3
     kitchen 1.2.6
-    lxml 4.6.5
+    lxml 4.8.0
     MarkupSafe 2.0.1
     pycountry 20.7.3
-    pyflakes 2.3.1
-    PyYAML 5.4.1
-    requests 2.26.0
-    setuptools 52.0.0
+    pyflakes 2.4.0
+    PyYAML 6.0
+    requests 2.27.1
+    setuptools 59.4.0
     six 1.16.0
 -->
 <link href="draft-eip-arch.xml" rel="alternate" type="application/rfc+xml">
@@ -159,6 +159,14 @@ the protocol specifications of EIP.
   font-weight: 700;
   font-display: swap;
   src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -342,7 +350,7 @@ ol, ul {
   padding: 0;
   margin: 0 0 0.5em 2em;
 }
-ol ol, ul ul, ol ul, ul ol {
+:is(ol, ul) :is(ol, ul) {
   margin-left: 1em;
 }
 li {
@@ -357,8 +365,7 @@ ul.empty, .ulEmpty {
 ul.empty li, .ulEmpty li {
   margin-top: 0.5em;
 }
-ul.compact, .ulCompact,
-ol.compact, .olCompact {
+:is(ul, ol).compact, .ulCompact, .olCompact {
   line-height: 100%;
   margin: 0 0 0 2em;
 }
@@ -374,7 +381,7 @@ dl > dd {
   margin-bottom: .8em;
   min-height: 1.3em;
 }
-dl.compact > dd, .dlCompact > dd {
+:is(dl.compact, .dlCompact) > dd {
   margin-bottom: 0em;
 }
 dl > dd > dl {
@@ -416,6 +423,9 @@ tt, code {
      remove leading to avoid altering the final height of lines */
   line-height: 0;
 }
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
 pre {
   border: 1px solid var(--line-color);
   font-size: 13.5px;
@@ -440,6 +450,19 @@ figcaption, caption {
   text-align: left;
 }
 @media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
   pre, svg {
     display: inline-block;
     overflow-x: auto;
@@ -455,7 +478,7 @@ figcaption, caption {
     display: block;
     width: calc(100% - 25px);
   }
-  pre + .pilcrow, svg + .pilcrow {
+  :is(pre, svg) + .pilcrow {
     display: inline-block;
     vertical-align: text-bottom;
     padding-bottom: 8px;
@@ -504,17 +527,11 @@ th, td {
 th {
   background-color: var(--line-color);
 }
-tr:nth-child(2n) > td {
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
   background-color: var(--background-color);
 }
-tr:nth-child(2n+1) > td {
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
   background-color: var(--highlight-color);
-}
-thead+tbody > tr:nth-child(2n) > td {
-  background-color: var(--highlight-color);
-}
-thead+tbody > tr:nth-child(2n+1) > td {
-  background-color: var(--background-color);
 }
 table caption {
   margin: 0;
@@ -554,8 +571,9 @@ hr {
 }
 .bcp14 {
   font-variant: small-caps;
+  font-weight: 600;
+  font-size: 14.5px;
 }
-
 .role {
   font-variant: all-small-caps;
 }
@@ -794,7 +812,7 @@ hr.addr {
     margin: 0 0 0 4px;
     font-size: var(--small-font-size);
   }
-  #toc ul p, #toc ul li {
+  #toc ul :is(p, li) {
     margin: 2px 0;
     line-height: 22px;
   }
@@ -904,13 +922,13 @@ dl.dlNewline > dt {
 }
 
 /* Provide styling for table cell text alignment */
-table .text-left, table .text-left {
+table .text-left {
   text-align: left;
 }
-table .text-center, table .text-center {
+table .text-center {
   text-align: center;
 }
-table .text-right, table .text-right {
+table .text-right {
   text-align: right;
 }
 
@@ -977,12 +995,6 @@ address div.right {
   }
 
 }
-/* Tweak the bcp14 keyword presentation */
-.bcp14 {
-  font-variant: small-caps;
-  font-weight: bold;
-  font-size: 0.9em;
-}
 
 /* Dark mode. */
 @media (prefers-color-scheme: dark) {
@@ -997,19 +1009,20 @@ address div.right {
   --pilcrow-strong: #666;
   scrollbar-color: #777 #333;
 }
-/* Trick: a prefix match works because only black and white are allowed */
-svg [stroke="black"], svg [stroke^="#000"] {
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
   stroke: var(--text-color);
 }
-svg [stroke="white"], svg [stroke^="#fff"] {
+svg :is([stroke="white"], [stroke^="#fff"]) {
   stroke: var(--background-color);
 }
-svg [fill="black"], svg [fill^="#000"], svg :not([fill]) {
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
   fill: var(--text-color);
 }
-svg [stroke="fill"], svg [fill^="#fff"] {
+svg :is([stroke="fill"], [fill^="#fff"]) {
   fill: var(--background-color);
-}
 }
 </style>
 
@@ -1019,11 +1032,11 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">EIP Architecture</td>
-<td class="right">May 2022</td>
+<td class="right">June 2022</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salsano, et al.</td>
-<td class="center">Expires 27 November 2022</td>
+<td class="center">Expires 4 December 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1036,12 +1049,12 @@ svg [stroke="fill"], svg [fill^="#fff"] {
 <dd class="internet-draft">draft-eip-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-05-26" class="published">26 May 2022</time>
+<time datetime="2022-06-02" class="published">2 June 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-11-27">27 November 2022</time></dd>
+<dd class="expires"><time datetime="2022-12-04">4 December 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1101,7 +1114,7 @@ the protocol specifications of EIP.<a href="#section-abstract-1" class="pilcrow"
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 November 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 December 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1131,26 +1144,15 @@ the protocol specifications of EIP.<a href="#section-abstract-1" class="pilcrow"
         </h2>
 <nav class="toc"><ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a></p>
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1"><a href="#section-1.1" class="xref">1.1</a>.  <a href="#name-networking-architecture-evo" class="xref">Networking architecture evolution</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1.2.1">
-                    <p id="section-toc.1-1.1.2.1.2.1.1" class="keepWithNext"><a href="#section-1.1.1" class="xref">1.1.1</a>.  <a href="#name-solutions-above-the-layer-3" class="xref">Solutions above the layer 3</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1.2.2">
-                    <p id="section-toc.1-1.1.2.1.2.2.1" class="keepWithNext"><a href="#section-1.1.2" class="xref">1.1.2</a>.  <a href="#name-clean-slate-revolution" class="xref">Clean slate revolution</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1.2.3">
-                    <p id="section-toc.1-1.1.2.1.2.3.1" class="keepWithNext"><a href="#section-1.1.3" class="xref">1.1.3</a>.  <a href="#name-evolutionary-solutions" class="xref">Evolutionary solutions</a></p>
-</li>
-                </ul>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="xref">1.1</a>.  <a href="#name-evolutionary-solutions" class="xref">Evolutionary solutions</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-basic-principles-for-eip" class="xref">Basic principles for EIP</a></p>
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-basic-principles-for-eip" class="xref">Basic principles for EIP</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-benefits-of-a-common-eip-he" class="xref">Benefits of a common EIP header for multiple use cases.</a></p>
@@ -1203,37 +1205,13 @@ The networking research and standardization communities are considering differen
 <p id="section-1-3">The proposed EIP (Extensible In-band Processing) solution belongs to the third category, it extends the current IPv6 architecture without requiring a clean-slate revolution.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">The use cases for EIP are discussed in <span>[<a href="#id-eip-use-cases" class="xref">id-eip-use-cases</a>]</span>. The specification of the EIP header format
 is provided in <span>[<a href="#id-eip-headers" class="xref">id-eip-headers</a>]</span>.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">In the next subsection we will briefly mentions some solutions belonging
-to the three categories and in particular we will show how the "evolutionary"
-trend has already started and is progressing at a strong pace, for example
-with the SRv6 "Network Programming Model" and with the "In-band Telemetry".<a href="#section-1-5" class="pilcrow">¶</a></p>
-<div id="networking-architecture-evolution">
-<section id="section-1.1">
-        <h3 id="name-networking-architecture-evo">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-networking-architecture-evo" class="section-name selfRef">Networking architecture evolution</a>
-        </h3>
-<div id="solutions-above-the-layer-3">
-<section id="section-1.1.1">
-          <h4 id="name-solutions-above-the-layer-3">
-<a href="#section-1.1.1" class="section-number selfRef">1.1.1. </a><a href="#name-solutions-above-the-layer-3" class="section-name selfRef">Solutions above the layer 3</a>
-        </h4>
-</section>
-</div>
-<div id="clean-slate-revolution">
-<section id="section-1.1.2">
-          <h4 id="name-clean-slate-revolution">
-<a href="#section-1.1.2" class="section-number selfRef">1.1.2. </a><a href="#name-clean-slate-revolution" class="section-name selfRef">Clean slate revolution</a>
-        </h4>
-</section>
-</div>
+<p id="section-1-5">In the next subsection we will shortly review some solutions that have introduced or are proposing extensions to the layer 3.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <div id="evolutionary-solutions">
-<section id="section-1.1.3">
-          <h4 id="name-evolutionary-solutions">
-<a href="#section-1.1.3" class="section-number selfRef">1.1.3. </a><a href="#name-evolutionary-solutions" class="section-name selfRef">Evolutionary solutions</a>
-          </h4>
-<p id="section-1.1.3-1">and the SRv6 Programming Model<a href="#section-1.1.3-1" class="pilcrow">¶</a></p>
-</section>
-</div>
+<section id="section-1.1">
+        <h3 id="name-evolutionary-solutions">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-evolutionary-solutions" class="section-name selfRef">Evolutionary solutions</a>
+        </h3>
+<p id="section-1.1-1">In the last few years, we have witnessed important innovations in IP networking, centered around the emergence of Segment Routing for IPv6 (SRv6) <span>[<a href="#RFC8754" class="xref">RFC8754</a>]</span> and of the SRv6 "Network Programming model" <span>[<a href="#RFC8986" class="xref">RFC8986</a>]</span>. With SRv6 it is possible to insert a <em>Network program</em>, i.e. a sequence of instructions (called <em>segments</em>)<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1243,36 +1221,27 @@ with the SRv6 "Network Programming Model" and with the "In-band Telemetry".<a hr
       <h2 id="name-basic-principles-for-eip">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-basic-principles-for-eip" class="section-name selfRef">Basic principles for EIP</a>
       </h2>
-<p id="section-2-1">The design the IP networking layer has been strongly influenced by the so called
-"end-to-end" concept, which prescribed putting "complex" functions in the IP hosts
-and "simple" functions in network forwarding devices (IP routers). To overcome this
-limitation, Network operators
-needed to use additional layers (e.g. ATM and then MPLS) in addition to the IP layer to put the "complex"
-functions and features that are needed to run operators networks (backbones and access networks).
-We can also mention that in reality, the end-to-end concept has been often
-disregarded with the introduction of middleboxes devices like NATs, TCP accelerators,
-but this has been seen as an unavoidable "mistake" and a problem.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">Recently we observe a clear trend in extending the functionality of the IP networking
+<p id="section-2-1">Recently we observe a clear trend in extending the functionality of the IP networking
 layer, going beyond the plain packet forwarding. An example of this trend is the rise
 of the SRv6 "network programming" model. With the SRv6 network programming models,
 the routers can implement "complex" functionalities and they can be controlled
 by a "network program" that is embedded in IPv6 packet headers. The operators can
 find all the needed functionality in the IPv6/SRv6 dataplane with no need of middleboxes
 nor of a separate MPLS layer. Another example is the INT (IN band Telemetry)
-solution for monitoring.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">The EIP solution is aligned with this trend, which will ensure a future proof evolution of networking architectures. We envisage a feature-rich, extensible and programmable IPv6 networking layer, in which the intelligence is distributed across end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient way.<a href="#section-2-3" class="pilcrow">¶</a></p>
-<p id="section-2-4">The EIP solution foresees the introduction of an EIP header in the IPv6 packet header. The proposed EIP header is extensible and meant to support a number of use cases. In general, the content of this new header can be read and written by end hosts and by transit routers. Depending of the specific use-case, only specific nodes will be interested in reading or writing the EIP header. The use of the EIP header will be confined to a single domain or to a set of cooperating domains, so there is no need of a global, Internet-wide support of the new header for its introduction. Moreover, there could be cases in which legacy nodes can simply ignore the EIP header and provide transit to packets containing this header.<a href="#section-2-4" class="pilcrow">¶</a></p>
-<p id="section-2-5">An important usage scenario considers a provider network, in particular the network portion from an ingress edge node to an egress edge node. In this scenario, the ingress edge node can encapsulate the user packet coming from an access network into an outer packet. The outer packet is carried inside the provider network until an egress edge node, which will decapsulate the inner packet and deliver it to the destination access network or to another transit network, depending on the specific topology and service. When the IPv6/SRv6 dataplane is used in the provider network, this means that the ingress edge node will be the source of an outer IPv6 packet in which it is possible to add the EIP header. The outer IPv6 packet, containing the EIP header will be processed inside the "limited domain" of the provider network, so that the operator can make sure that all the transit routers either are EIP aware or at least they can forward packets containing the EIP header.<a href="#section-2-5" class="pilcrow">¶</a></p>
+solution for monitoring.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">The EIP solution is aligned with this trend, which will ensure a future proof evolution of networking architectures. We envisage a feature-rich, extensible and programmable IPv6 networking layer, in which the intelligence is distributed across end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient way.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">The EIP solution foresees the introduction of an EIP header in the IPv6 packet header. The proposed EIP header is extensible and meant to support a number of use cases. In general, the content of this new header can be read and written by end hosts and by transit routers. Depending of the specific use-case, only specific nodes will be interested in reading or writing the EIP header. The use of the EIP header will be confined to a single domain or to a set of cooperating domains, so there is no need of a global, Internet-wide support of the new header for its introduction. Moreover, there could be cases in which legacy nodes can simply ignore the EIP header and provide transit to packets containing this header.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-4">An important usage scenario considers a provider network, in particular the network portion from an ingress edge node to an egress edge node. In this scenario, the ingress edge node can encapsulate the user packet coming from an access network into an outer packet. The outer packet is carried inside the provider network until an egress edge node, which will decapsulate the inner packet and deliver it to the destination access network or to another transit network, depending on the specific topology and service. When the IPv6/SRv6 dataplane is used in the provider network, this means that the ingress edge node will be the source of an outer IPv6 packet in which it is possible to add the EIP header. The outer IPv6 packet, containing the EIP header will be processed inside the "limited domain" of the provider network, so that the operator can make sure that all the transit routers either are EIP aware or at least they can forward packets containing the EIP header.<a href="#section-2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-2-6.1">Both end nodes and routers can read/write EIP information<a href="#section-2-6.1" class="pilcrow">¶</a>
+<li class="normal" id="section-2-5.1">Both end nodes and routers can read/write EIP information<a href="#section-2-5.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-2-6.2">Limited domain applicability<a href="#section-2-6.2" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-5.2">Limited domain applicability<a href="#section-2-5.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-2-6.3">Tunneling concept<a href="#section-2-6.3" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-5.3">Tunneling concept<a href="#section-2-5.3" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-2-6.4">Edge to edge, edge to server-end<a href="#section-2-6.4" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-5.4">Edge to edge, edge to server-end<a href="#section-2-5.4" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-2-6.5">EIP header<a href="#section-2-6.5" class="pilcrow">¶</a>
+        <li class="normal" id="section-2-5.5">EIP header<a href="#section-2-5.5" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
@@ -1352,8 +1321,16 @@ appear in all capitals, as shown here.<a href="#section-4-1" class="pilcrow">¶<
 <span class="refAuthor">Salsano, S.</span> and <span class="refAuthor">H. ElBakoury</span>, <span class="refTitle">"Extensible In-band Processing (EIP) Headers Definitions"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://eip-home.github.io/eip-headers/draft-eip-headers-definitions.txt">https://eip-home.github.io/eip-headers/draft-eip-headers-definitions.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="id-eip-use-cases">[id-eip-use-cases]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Salsano, S.</span> and <span class="refAuthor">H. ElBakoury</span>, <span class="refTitle">"Extensible In-band Processing (EIP) Use Cases"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://eip-home.github.io/eip-headers/draft-eip-use-cases.txt">https://eip-home.github.io/eip-headers/draft-eip-use-cases.txt</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8754">[RFC8754]</dt>
+        <dd>
+<span class="refAuthor">Filsfils, C., Ed.</span>, <span class="refAuthor">Dukes, D., Ed.</span>, <span class="refAuthor">Previdi, S.</span>, <span class="refAuthor">Leddy, J.</span>, <span class="refAuthor">Matsushima, S.</span>, and <span class="refAuthor">D. Voyer</span>, <span class="refTitle">"IPv6 Segment Routing Header (SRH)"</span>, <span class="seriesInfo">RFC 8754</span>, <span class="seriesInfo">DOI 10.17487/RFC8754</span>, <time datetime="2020-03" class="refDate">March 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8754">https://www.rfc-editor.org/rfc/rfc8754</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8986">[RFC8986]</dt>
+      <dd>
+<span class="refAuthor">Filsfils, C., Ed.</span>, <span class="refAuthor">Camarillo, P., Ed.</span>, <span class="refAuthor">Leddy, J.</span>, <span class="refAuthor">Voyer, D.</span>, <span class="refAuthor">Matsushima, S.</span>, and <span class="refAuthor">Z. Li</span>, <span class="refTitle">"Segment Routing over IPv6 (SRv6) Network Programming"</span>, <span class="seriesInfo">RFC 8986</span>, <span class="seriesInfo">DOI 10.17487/RFC8986</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8986">https://www.rfc-editor.org/rfc/rfc8986</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
