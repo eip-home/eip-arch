@@ -86,7 +86,15 @@ informative:
        Internet-Draft: draft-eip-headers-definitions
     format:
        TXT: "https://eip-home.github.io/eip-headers/draft-eip-headers-definitions.txt"
-
+  onf-int:
+    title: "Improving Network Monitoring and Management with Programmable Data Planes"
+    author:
+     -
+        name: "P4.org"
+    format:
+       PDF: "https://opennetworking.org/news-and-events/blog/improving-network-monitoring-and-management-with-programmable-data-planes/"
+    date: 2015
+    
 
 --- abstract
 
@@ -115,7 +123,10 @@ In the next subsection we will shortly review some solutions that have introduce
 
 ## Evolutionary solutions
 
-In the last few years, we have witnessed important innovations in IP networking, centered around the emergence of Segment Routing for IPv6 (SRv6) {{RFC8754}} and of the SRv6 "Network Programming model" {{RFC8986}}. With SRv6 it is possible to insert a *Network program*, i.e. a sequence of instructions (called *segments*)
+In the last few years, we have witnessed important innovations in IP networking, centered around the emergence of Segment Routing for IPv6 (SRv6) {{RFC8754}} and of the SRv6 "Network Programming model" {{RFC8986}}. With SRv6 it is possible to insert a *Network program*, i.e. a sequence of instructions (called *segments*), in a header of the IPv6 protocol, called Segment Routing Header (SRH).
+
+Another recent activity on the extension of the networking layer to support more complex functions, concerns the extensions related to network monitoring. The concept of INT “In-band Network Telemetry” has been proposed since 2015 {{onf-int}} in the context of the definition of use cases for P4 based data plane programmability. The latest version of INT specifications dates November 2020 \cite{INT}. INT specifies the format of headers that carry monitoring instructions and monitoring information along with data plane packets. \extended{The specific location for INT Headers is intentionally not specified: an INT Header can be inserted as an option or payload of any encapsulation type.}
+Within the IETF community, the In-band Telemetry concept has been adopted by the IPPM working group, renaming it “In-situ Operations, Administration, and Maintenance” (IOAM). The internet draft \cite{ioam-data} is about to become an IETF RFC. Note that IOAM is focused on “limited domains” as defined in \cite{lim-domains}. The in-situ OAM data fields can be encapsulated in a variety of protocols, including IPv6. The specification details for carrying IOAM data inside IPv6 headers are provided in draft \cite{ioam-ipv6}\extended{, which is also close to becoming an RFC}. \extended{In particular, IOAM data fields can be encapsulated in IPv6 using either Hop-by-Hop Options header or Destination options header.}
 
 # Basic principles for EIP
 
