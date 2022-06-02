@@ -109,12 +109,9 @@ Table of Contents
    specification of the EIP header format is provided in
    [id-eip-headers].
 
-   In the next subsection we will shortly review some solutions that
-   have introduced or are proposing extensions to the layer 3.
-
 2.  Basic principles for EIP
 
-   Recently we observe a clear in extending the functionality of the
+   Recently we observe a trend in extending the functionality of the
    IPv6 networking layer, going beyond the plain packet forwarding.  An
    example of this trend is the rise of the SRv6 "network programming"
    model.  With the SRv6 network programming models, the routers can
@@ -129,9 +126,9 @@ Table of Contents
    The EIP solution is aligned with this trend, which will ensure a
    future proof evolution of networking architectures.  We envisage a
    feature-rich, extensible and programmable IPv6 networking layer, in
-   which the intelligence is distributed across end-hosts, routers,
-   virtual functions, servers in datacenters so that services can be
-   implemented in the smartest and more efficient way.
+   which complex dataplane functions can be executed by end-hosts,
+   routers, virtual functions, servers in datacenters so that services
+   can be implemented in the smartest and more efficient way.
 
    The EIP solution foresees the introduction of an EIP header in the
    IPv6 packet header.  The proposed EIP header is extensible and meant
@@ -161,15 +158,9 @@ Table of Contents
    that all the transit routers either are EIP aware or at least they
    can forward packets containing the EIP header.
 
-   *  Both end nodes and routers can read/write EIP information
-
-   *  Limited domain applicability
-
-   *  Tunneling concept
-
-   *  Edge to edge, edge to server-end
-
-   *  EIP header
+   Work in progress - TODO: import the additional considerations from
+   section 2 of the paper https://github.com/eip-home/eip/blob/main/
+   tech-docs/eip-paper.pdf
 
 3.  Benefits of a common EIP header for multiple use cases.
 
@@ -219,14 +210,17 @@ Table of Contents
    been adopted by the IPPM working group, renaming it "In-situ
    Operations, Administration, and Maintenance" (IOAM).  The internet
    draft [I-D.ietf-ippm-ioam-data] is about to become an IETF RFC.  Note
-   that IOAM is focused on "limited domains" as defined in \cite{lim-
-   domains}. The in-situ OAM data fields can be encapsulated in a
-   variety of protocols, including IPv6.  The specification details for
-   carrying IOAM data inside IPv6 headers are provided in draft
-   \cite{ioam-ipv6}\extended{, which is also close to becoming an RFC}.
-   \extended{In particular, IOAM data fields can be encapsulated in IPv6
-   using either Hop-by-Hop Options header or Destination options
-   header.}
+   that IOAM is focused on "limited domains" as defined in [RFC8799].
+   The in-situ OAM data fields can be encapsulated in a variety of
+   protocols, including IPv6.  The specification details for carrying
+   IOAM data inside IPv6 headers are provided in draft
+   [I-D.ietf-ippm-ioam-ipv6-options], which is also close to becoming an
+   RFC.  In particular, IOAM data fields can be encapsulated in IPv6
+   using either Hop-by-Hop Options header or Destination options header.
+
+   Work in progress - TODO: import the other from section 4.3 of the
+   paper https://github.com/eip-home/eip/blob/main/tech-docs/eip-
+   paper.pdf
 
 5.  Conventions and Definitions
 
@@ -267,6 +261,13 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-ippm-
               ioam-data-17>.
 
+   [I-D.ietf-ippm-ioam-ipv6-options]
+              Bhandari, S. and F. Brockners, "In-situ OAM IPv6 Options",
+              Work in Progress, Internet-Draft, draft-ietf-ippm-ioam-
+              ipv6-options-07, 6 February 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-ippm-
+              ioam-ipv6-options-07>.
+
    [id-eip-headers]
               Salsano, S. and H. ElBakoury, "Extensible In-band
               Processing (EIP) Headers Definitions", 2022, <https://eip-
@@ -292,6 +293,10 @@ Table of Contents
               Matsushima, S., and D. Voyer, "IPv6 Segment Routing Header
               (SRH)", RFC 8754, DOI 10.17487/RFC8754, March 2020,
               <https://www.rfc-editor.org/rfc/rfc8754>.
+
+   [RFC8799]  Carpenter, B. and B. Liu, "Limited Domains and Internet
+              Protocols", RFC 8799, DOI 10.17487/RFC8799, July 2020,
+              <https://www.rfc-editor.org/rfc/rfc8799>.
 
    [RFC8986]  Filsfils, C., Ed., Camarillo, P., Ed., Leddy, J., Voyer,
               D., Matsushima, S., and Z. Li, "Segment Routing over IPv6
