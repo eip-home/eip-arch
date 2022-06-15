@@ -3,7 +3,7 @@ title: "Extensible In-band Processing (EIP) Architecture and Framework"
 abbrev: "EIP Architecture"
 category: info
 
-docname: draft-eip-arch-00
+docname: draft-eip-arch-latest
 submissiontype: independent # also: "independent", "IAB", or "IRTF", "IETF"
 ipr: trust200902
 #number: 0
