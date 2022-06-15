@@ -52,10 +52,12 @@ informative:
   RFC8799:
   RFC8250:
   RFC8321:
+  RFC8558:
   I-D.ietf-ippm-ioam-data:
   I-D.ietf-ippm-ioam-ipv6-options:
   I-D.draft-ietf-6man-ipv6-alt-mark:
   I-D.draft-filsfils-spring-path-tracing:
+  I-D.draft-ietf-6man-mtu-option:
   id-eip-use-cases:
     title: "Extensible In-band Processing (EIP) Use Cases"
     author:
@@ -196,6 +198,24 @@ The “Alternate Marking Method” is a recently proposed performance measuremen
 
 “Path Tracing” {{I-D.draft-filsfils-spring-path-tracing}} proposes an efficient solution for recording the route taken by a packet (including timestamps and load information taken at each hop along the route). This solution needs a new Hop-by-Hop Option to be defined.
 
+{{RFC8558}} analyses the evolution of transport protocols. It recommends that explicit signals should be used when the endpoints desire that network elements along the path become aware of events related to trasport protocol. Among the solutions, {{RFC8558}} considers the use of explicit signals at the network layer, and in particular it mentions that IPv6 hop-by-hop headers might suit this purpose.
+
+The Internet Draft {{I-D.draft-ietf-6man-mtu-option}} specifies a new IPv6 Hop-by-Hop option that is used to record the minimum Path MTU between a source and a destination. This draft is close to become an RFC.
+
+## Consideration on Hop-by-hop Options allocation
+
+We have listed several proposals or already standardized solutions that use the IPv6 Hop-by-Hop Options. These Options are represented with a 8 bits code. The first two bits represent the action to be taken if the Options is unknown to a node that receives it, the third bit is used to specify if the content of the Options can be changed in flight. In particular the Option Types that start with 001 should be ignored if unknown and can be changed in flight, which is the most common combination. The current IANA allocation for Option Types starting with 001 is
+   (see https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml)
+
+~~~
+   32 possible Option Types starting with 001
+   2 allocated by RFCs
+   2 temporary allocated by Internet Drafts
+   1 allocated for RFC3692-style Experiment
+   27 not allocated
+~~~
+
+We observe that there is a potential scarcity of the code points, as there are many scenarios that could require the definition of a new Hop-by-hop option. We also observe that having only 1 code point allocated for experiments is a very restrictive limitation.
 
 # Conventions and Definitions
 
