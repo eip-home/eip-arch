@@ -167,7 +167,7 @@ The architectural framework for EIP is depicted in {{fig:eip-framework}}. We ref
 ~~~
 {: #fig:eip-framework title="EIP framwork"}
 
-As shown in {{fig:eip-framework}}, an EIP domain can communicate with other domains, which can be legacy domains or EIP capable domains. 
+As shown in {{fig:eip-framework}}, an EIP domain can communicate with other domains, which can be legacy domains or EIP capable domains.
 
 
 # Benefits of a common EIP header for multiple use cases.
