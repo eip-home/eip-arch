@@ -64,10 +64,7 @@ Copyright Notice
    Provisions Relating to IETF Documents (https://trustee.ietf.org/
    license-info) in effect on the date of publication of this document.
    Please review these documents carefully, as they describe your rights
-   and restrictions with respect to this document.  Code Components
-   extracted from this document must include Revised BSD License text as
-   described in Section 4.e of the Trust Legal Provisions and are
-   provided without warranty as described in the Revised BSD License.
+   and restrictions with respect to this document.
 
 Table of Contents
 
@@ -392,7 +389,7 @@ Table of Contents
    [id-eip-use-cases]
               Salsano, S. and H. ElBakoury, "Extensible In-band
               Processing (EIP) Use Cases", 2022, <https://eip-
-              home.github.io/eip-headers/draft-eip-use-cases.txt>.
+              home.github.io/use-cases/draft-eip-use-cases.txt>.
 
    [int-spec] Group, T. P. A. W., "In-band Network Telemetry (INT)
               Dataplane Specification, version 2.1", n.d.,
