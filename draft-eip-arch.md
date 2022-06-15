@@ -3,10 +3,10 @@ title: "Extensible In-band Processing (EIP) Architecture and Framework"
 abbrev: "EIP Architecture"
 category: info
 
-docname: draft-eip-arch-latest
-#submissiontype: independent # also: "independent", "IAB", or "IRTF", "IETF"
+docname: draft-eip-arch-00
+submissiontype: independent # also: "independent", "IAB", or "IRTF", "IETF"
 ipr: trust200902
-#number:
+#number: 0
 #date:
 #consensus: true
 #v: 3
@@ -75,7 +75,7 @@ informative:
     seriesInfo:
        Internet-Draft: draft-eip-use-cases
     format:
-       TXT: "https://eip-home.github.io/eip-headers/draft-eip-use-cases.txt"
+       TXT: "https://eip-home.github.io/use-cases/draft-eip-use-cases.txt"
   id-eip-headers:
     title: "Extensible In-band Processing (EIP) Headers Definitions"
     author:
