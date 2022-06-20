@@ -1036,7 +1036,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salsano, et al.</td>
-<td class="center">Expires 17 December 2022</td>
+<td class="center">Expires 22 December 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1049,12 +1049,12 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-eip-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-06-15" class="published">15 June 2022</time>
+<time datetime="2022-06-20" class="published">20 June 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-12-17">17 December 2022</time></dd>
+<dd class="expires"><time datetime="2022-12-22">22 December 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1114,7 +1114,7 @@ the protocol specifications of EIP.<a href="#section-abstract-1" class="pilcrow"
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 December 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 December 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1215,7 +1215,7 @@ The networking research and standardization communities have considered differen
 of the SRv6 "network programming" model. With the SRv6 network programming model,
 the routers can implement "complex" functionalities and they can be controlled
 by a "network program" that is embedded in IPv6 packet headers. Another example is the INT (IN band Telemetry) solution for monitoring. These (and other) examples are further discussed in <a href="#review" class="xref">Section 4</a>.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">The EIP solution is aligned with this trend, which will ensure a future proof evolution of networking architectures. EIP supports a feature-rich and extensible IPv6 networking layer, in which complex dataplane functions can be executed by end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient way.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-2">The EIP solution is aligned with this trend, which will ensure a future proof evolution of networking architectures. EIP supports a feature-rich and extensible IPv6 networking layer, in which complex dataplane functions can be executed by end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient  way.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">The EIP solution foresees the introduction of an EIP header in the IPv6 packet header. The proposed EIP header is extensible and it is meant to support a number of different use cases. In general, both end-hosts and transit routers can read and write the content of this header. Depending of the specific use-case, only specific nodes will be capable and interested in reading or writing the EIP header. The use of the EIP header can be confined to a single domain or to a set of cooperating domains, so there is no need of a global, Internet-wide support of the new header for its introduction. Moreover, there can be usage scenarios in which legacy nodes can simply ignore the EIP header and provide transit to packets containing the EIP header.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">An important usage scenario considers the transport of user packets over a provider network. In this scenario, we consider the network portion from the provider ingress edge node to the provider egress edge node. The ingress edge node can encapsulate the user packet coming from an access network into an outer packet. The outer packet travels in the provider network until the egress edge node, which will decapsulate the inner packet and deliver it to the destination access network or to another transit network, depending on the specific topology and service. Assuming that the IPv6/SRv6 dataplane is used in the provider network, the ingress edge node will be the source of an outer IPv6 packet in which it is possible to add the EIP header. The outer IPv6 packet (containing the EIP header) will be processed inside the "limited domain" (see <span>[<a href="#RFC8799" class="xref">RFC8799</a>]</span>) of the provider network, so that the operator can make sure that all the transit routers either are EIP aware or at least they can forward packets containing the EIP header. In this usage scenario, the EIP framework operates "edge-to-edge" and the end-user packets are "tunneled" over the EIP domain.<a href="#section-2-4" class="pilcrow">¶</a></p>
 <p id="section-2-5">The architectural framework for EIP is depicted in <a href="#fig_eip-framework" class="xref">Figure 1</a>. We refer to nodes that are not EIP capable as legacy nodes. An EIP domain is made up by EIP aware routers (EIP R) and can also include legacy routers (LEG R). At the border of the EIP domain, EIP edge nodes (EIP ER) are used to interact with legacy End Hosts / Servers (LEG H) and with other domains. It is also possible that an End Host / Server is EIP aware (EIP H), in this case the EIP framework could operate "edge-to-end" or "end-to-end".<a href="#section-2-5" class="pilcrow">¶</a></p>
@@ -1371,7 +1371,7 @@ appear in all capitals, as shown here.<a href="#section-5-1" class="pilcrow">¶<
 <dd class="break"></dd>
 <dt id="I-D.ietf-ippm-ioam-ipv6-options">[I-D.ietf-ippm-ioam-ipv6-options]</dt>
         <dd>
-<span class="refAuthor">Bhandari, S.</span> and <span class="refAuthor">F. Brockners</span>, <span class="refTitle">"In-situ OAM IPv6 Options"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ippm-ioam-ipv6-options-07</span>, <time datetime="2022-02-06" class="refDate">6 February 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ippm-ioam-ipv6-options-07">https://datatracker.ietf.org/doc/html/draft-ietf-ippm-ioam-ipv6-options-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Bhandari, S.</span> and <span class="refAuthor">F. Brockners</span>, <span class="refTitle">"In-situ OAM IPv6 Options"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ippm-ioam-ipv6-options-08</span>, <time datetime="2022-06-16" class="refDate">16 June 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ippm-ioam-ipv6-options-08">https://datatracker.ietf.org/doc/html/draft-ietf-ippm-ioam-ipv6-options-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="id-eip-headers">[id-eip-headers]</dt>
         <dd>
