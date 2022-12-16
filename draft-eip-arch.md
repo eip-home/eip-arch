@@ -58,6 +58,7 @@ informative:
   I-D.draft-ietf-6man-ipv6-alt-mark:
   I-D.draft-filsfils-spring-path-tracing:
   I-D.draft-ietf-6man-mtu-option:
+  I-D.draft-ietf-6man-enhanced-vpn-vtn-id:
   id-eip-use-cases:
     title: "Extensible In-band Processing (EIP) Use Cases"
     author:
@@ -201,6 +202,8 @@ The “Alternate Marking Method” is a recently proposed performance measuremen
 {{RFC8558}} analyses the evolution of transport protocols. It recommends that explicit signals should be used when the endpoints desire that network elements along the path become aware of events related to trasport protocol. Among the solutions, {{RFC8558}} considers the use of explicit signals at the network layer, and in particular it mentions that IPv6 hop-by-hop headers might suit this purpose.
 
 The Internet Draft {{I-D.draft-ietf-6man-mtu-option}} specifies a new IPv6 Hop-by-Hop option that is used to record the minimum Path MTU between a source and a destination. This draft is close to become an RFC.
+
+The Internet Draft {{I-D.draft-ietf-6man-enhanced-vpn-vtn-id}} proposes a new Hop-by-Hop option of IPv6 extension header to carry the Virtual Transport Network (VTN) identifier, which could be used to identify the set of network resources allocated to a VTN and the rules for packet processing.  The procedure of processing the VTN option is also specified.
 
 ## Consideration on Hop-by-hop Options allocation
 
