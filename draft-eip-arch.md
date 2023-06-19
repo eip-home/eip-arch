@@ -21,7 +21,7 @@ venue:
   mail: eip@cnit.it
   arch: http://postino.cnit.it/cgi-bin/mailman/private/eip/
   github: eip-home/eip-arch
-  latest: https://eip-home.github.io/eip-headers/draft-eip-arch.html
+  latest: https://eip-home.github.io/eip-arch/draft-eip-arch.html
 
 stand_alone: yes
 smart_quotes: no
