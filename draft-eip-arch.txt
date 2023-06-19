@@ -5,10 +5,10 @@
 WG Working Group                                              S. Salsano
 Internet-Draft                          Univ. of Rome Tor Vergata / CNIT
 Intended status: Informational                              H. ElBakoury
-Expires: 19 June 2023                                         Consultant
+Expires: 21 December 2023                                     Consultant
                                                                 D. Lopez
                                                          Telefonica, I+D
-                                                        16 December 2022
+                                                            19 June 2023
 
 
      Extensible In-band Processing (EIP) Architecture and Framework
@@ -27,9 +27,9 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at https://eip-
-   home.github.io/eip-headers/draft-eip-arch.html.  Status information
-   for this document may be found at https://datatracker.ietf.org/doc/
-   draft-eip-arch/.
+   home.github.io/eip-arch/draft-eip-arch.html.  Status information for
+   this document may be found at https://datatracker.ietf.org/doc/draft-
+   eip-arch/.
 
    Discussion of this document takes place on the EIP SIG mailing list
    (mailto:eip@cnit.it), which is archived at http://postino.cnit.it/
@@ -53,11 +53,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 June 2023.
+   This Internet-Draft will expire on 21 December 2023.
 
 Copyright Notice
 
-   Copyright (c) 2022 IETF Trust and the persons identified as the
+   Copyright (c) 2023 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -149,11 +149,11 @@ Table of Contents
    is used in the provider network, the ingress edge node will be the
    source of an outer IPv6 packet in which it is possible to add the EIP
    header.  The outer IPv6 packet (containing the EIP header) will be
-   processed inside the "limited domain" (see [RFC8799]) of the provider
+   processed inside the “limited domain” (see [RFC8799]) of the provider
    network, so that the operator can make sure that all the transit
    routers either are EIP aware or at least they can forward packets
    containing the EIP header.  In this usage scenario, the EIP framework
-   operates "edge-to-edge" and the end-user packets are "tunneled" over
+   operates “edge-to-edge” and the end-user packets are “tunneled” over
    the EIP domain.
 
    The architectural framework for EIP is depicted in Figure 1.  We
@@ -163,7 +163,7 @@ Table of Contents
    nodes (EIP ER) are used to interact with legacy End Hosts / Servers
    (LEG H) and with other domains.  It is also possible that an End Host
    / Server is EIP aware (EIP H), in this case the EIP framework could
-   operate "edge-to-end" or "end-to-end".
+   operate “edge-to-end” or “end-to-end”.
 
                                                           LEG domain
                                                         +------------+
@@ -223,7 +223,7 @@ Table of Contents
 
    Another recent activity that proposed to extend the networking layer
    to support more complex functions, concerns the network monitoring.
-   The concept of INT "In-band Network Telemetry" has been proposed
+   The concept of INT “In-band Network Telemetry” has been proposed
    since 2015 [onf-int] in the context of the definition of use cases
    for P4 based data plane programmability.  The latest version of INT
    specifications dates November 2020 [int-spec]. [int-spec] specifies
@@ -232,10 +232,10 @@ Table of Contents
    location for INT Headers is intentionally not specified: an INT
    Header can be inserted as an option or payload of any encapsulation
    type.  The In-band Telemetry concept has been adopted by the IPPM
-   IETF Working Group, renaming it "In-situ Operations, Administration,
-   and Maintenance" (IOAM).  The internet draft
+   IETF Working Group, renaming it “In-situ Operations, Administration,
+   and Maintenance” (IOAM).  The internet draft
    [I-D.ietf-ippm-ioam-data] is about to become an IETF RFC.  Note that
-   IOAM is focused on "limited domains" as defined in [RFC8799].  The
+   IOAM is focused on “limited domains” as defined in [RFC8799].  The
    in-situ OAM data fields can be encapsulated in a variety of
    protocols, including IPv6.  The specification details for carrying
    IOAM data inside IPv6 headers are provided in draft
@@ -249,12 +249,12 @@ Table of Contents
    option header provides sequence numbers and timing information as a
    basis for measurements.
 
-   The "Alternate Marking Method" is a recently proposed performance
+   The “Alternate Marking Method” is a recently proposed performance
    measurement approach described in [RFC8321].  The draft
    [I-D.draft-ietf-6man-ipv6-alt-mark] (also close to becoming an RFC)
    defines a new Hop-by-Hop Option to support this approach.
 
-   "Path Tracing" [I-D.draft-filsfils-spring-path-tracing] proposes an
+   “Path Tracing” [I-D.draft-filsfils-spring-path-tracing] proposes an
    efficient solution for recording the route taken by a packet
    (including timestamps and load information taken at each hop along
    the route).  This solution needs a new Hop-by-Hop Option to be
@@ -354,21 +354,21 @@ Table of Contents
               Graf, T., Su, Y., Matsushima, S., Valentine, M., and A.
               Dhamija, "Path Tracing in SRv6 networks", Work in
               Progress, Internet-Draft, draft-filsfils-spring-path-
-              tracing-02, 16 August 2022,
+              tracing-03, 13 February 2023,
               <https://datatracker.ietf.org/doc/html/draft-filsfils-
-              spring-path-tracing-02>.
+              spring-path-tracing-03>.
 
    [I-D.draft-ietf-6man-enhanced-vpn-vtn-id]
               Dong, J., Li, Z., Xie, C., Ma, C., and G. S. Mishra,
               "Carrying Virtual Transport Network (VTN) Information in
               IPv6 Extension Header", Work in Progress, Internet-Draft,
-              draft-ietf-6man-enhanced-vpn-vtn-id-02, 24 October 2022,
+              draft-ietf-6man-enhanced-vpn-vtn-id-04, 17 May 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-6man-
-              enhanced-vpn-vtn-id-02>.
+              enhanced-vpn-vtn-id-04>.
 
    [I-D.draft-ietf-6man-ipv6-alt-mark]
               Fioccola, G., Zhou, T., Cociglio, M., Qin, F., and R.
-              Pang, "IPv6 Application of the Alternate Marking Method",
+              Pang, "IPv6 Application of the Alternate-Marking Method",
               Work in Progress, Internet-Draft, draft-ietf-6man-ipv6-
               alt-mark-17, 27 September 2022,
               <https://datatracker.ietf.org/doc/html/draft-ietf-6man-
@@ -392,9 +392,9 @@ Table of Contents
    [I-D.ietf-ippm-ioam-ipv6-options]
               Bhandari, S. and F. Brockners, "In-situ OAM IPv6 Options",
               Work in Progress, Internet-Draft, draft-ietf-ippm-ioam-
-              ipv6-options-09, 11 October 2022,
+              ipv6-options-12, 7 May 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ippm-
-              ioam-ipv6-options-09>.
+              ioam-ipv6-options-12>.
 
    [id-eip-headers]
               Salsano, S. and H. ElBakoury, "Extensible In-band
