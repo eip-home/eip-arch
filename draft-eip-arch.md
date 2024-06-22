@@ -203,7 +203,7 @@ The "Alternate Marking Method" is a recently proposed performance measurement ap
 
 {{RFC8558}} analyses the evolution of transport protocols. It recommends that explicit signals should be used when the endpoints desire that network elements along the path become aware of events related to trasport protocol. Among the solutions, {{RFC8558}} considers the use of explicit signals at the network layer, and in particular it mentions that IPv6 hop-by-hop headers might suit this purpose.
 
-{{RFC9268}} specifies a new IPv6 Hop-by-Hop option that is used to record the minimum Path MTU between a source and a destination. 
+{{RFC9268}} specifies a new IPv6 Hop-by-Hop option that is used to record the minimum Path MTU between a source and a destination.
 
 The Internet Draft {{I-D.draft-ietf-6man-enhanced-vpn-vtn-id}} proposes a new Hop-by-Hop option of IPv6 extension header to carry the Network Resource Partition (NRP) information, which could be used to identify the NRP-specific processing to be performed on the packets by each network node along a network path in the NRP.
 
