@@ -5,10 +5,10 @@
 WG Working Group                                              S. Salsano
 Internet-Draft                          Univ. of Rome Tor Vergata / CNIT
 Intended status: Informational                              H. ElBakoury
-Expires: 21 December 2023                                     Consultant
+Expires: 24 December 2024                                     Consultant
                                                                 D. Lopez
                                                          Telefonica, I+D
-                                                            19 June 2023
+                                                            22 June 2024
 
 
      Extensible In-band Processing (EIP) Architecture and Framework
@@ -53,11 +53,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 December 2023.
+   This Internet-Draft will expire on 24 December 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -233,15 +233,13 @@ Table of Contents
    Header can be inserted as an option or payload of any encapsulation
    type.  The In-band Telemetry concept has been adopted by the IPPM
    IETF Working Group, renaming it "In-situ Operations, Administration,
-   and Maintenance" (IOAM).  The internet draft
-   [I-D.ietf-ippm-ioam-data] is about to become an IETF RFC.  Note that
-   IOAM is focused on "limited domains" as defined in [RFC8799].  The
-   in-situ OAM data fields can be encapsulated in a variety of
-   protocols, including IPv6.  The specification details for carrying
-   IOAM data inside IPv6 headers are provided in draft
-   [I-D.ietf-ippm-ioam-ipv6-options], which is also close to becoming an
-   RFC.  In particular, IOAM data fields can be encapsulated in IPv6
-   using either Hop-by-Hop Options header or Destination options header.
+   and Maintenance" (IOAM).  [RFC9197] discusses the data fields and
+   associated data types for IOAM.  The in-situ OAM data fields can be
+   encapsulated in a variety of protocols, including IPv6.  The
+   specification details for carrying IOAM data inside IPv6 headers are
+   provided in [RFC9486].  In particular, IOAM data fields can be
+   encapsulated in IPv6 using either Hop-by-Hop Options header or
+   Destination options header.
 
    Another example of extensions to IPv6 for network monitoring is
    specified in [RFC8250], which defines an IPv6 Destination Options
@@ -250,11 +248,10 @@ Table of Contents
    basis for measurements.
 
    The "Alternate Marking Method" is a recently proposed performance
-   measurement approach described in [RFC8321].  The draft
-   [I-D.draft-ietf-6man-ipv6-alt-mark] (also close to becoming an RFC)
-   defines a new Hop-by-Hop Option to support this approach.
+   measurement approach described in [RFC8321].  [RFC9343] defines a new
+   Hop-by-Hop Option to support this approach.
 
-   "Path Tracing" [I-D.draft-filsfils-spring-path-tracing] proposes an
+   "Path Tracing" [I-D.draft-filsfils-ippm-path-tracing] proposes an
    efficient solution for recording the route taken by a packet
    (including timestamps and load information taken at each hop along
    the route).  This solution needs a new Hop-by-Hop Option to be
@@ -268,17 +265,24 @@ Table of Contents
    particular it mentions that IPv6 hop-by-hop headers might suit this
    purpose.
 
-   The Internet Draft [I-D.draft-ietf-6man-mtu-option] specifies a new
-   IPv6 Hop-by-Hop option that is used to record the minimum Path MTU
-   between a source and a destination.  This draft is close to become an
-   RFC.
+   [RFC9268] specifies a new IPv6 Hop-by-Hop option that is used to
+   record the minimum Path MTU between a source and a destination.
 
    The Internet Draft [I-D.draft-ietf-6man-enhanced-vpn-vtn-id] proposes
-   a new Hop-by-Hop option of IPv6 extension header to carry the Virtual
-   Transport Network (VTN) identifier, which could be used to identify
-   the set of network resources allocated to a VTN and the rules for
-   packet processing.  The procedure of processing the VTN option is
-   also specified.
+   a new Hop-by-Hop option of IPv6 extension header to carry the Network
+   Resource Partition (NRP) information, which could be used to identify
+   the NRP-specific processing to be performed on the packets by each
+   network node along a network path in the NRP.
+
+   The Internet-Draft [I-D.draft-guan-6man-ipv6-id-authentication]
+   proposes an IPv6 based address label terminal identity authentication
+   mechanism, which uses a new Hop-by-Hop option.
+
+   The Internet-Draft [I-D.draft-herbert-fast] describes the Firewalls
+   and Service Tickets (FAST) protocol.  This is a generic and
+   extensible protocol for hosts to signal network nodes to request
+   services or to gain admission into a network.  Tickets are sent in
+   IPv6 Hop-by-Hop options.
 
 4.1.  Consideration on Hop-by-hop Options allocation
 
@@ -294,8 +298,8 @@ Table of Contents
    parameters/ipv6-parameters.xhtml)
 
       32 possible Option Types starting with 001
-      2 allocated by RFCs
-      2 temporary allocated by Internet Drafts
+      4 allocated by RFCs
+      - temporary allocated by Internet Drafts
       1 allocated for RFC3692-style Experiment
       27 not allocated
 
@@ -323,13 +327,13 @@ Table of Contents
    "Destination Options and Hop-by-Hop Options" registry in the
    "Internet Protocol Version 6 (IPv6) Parameters"
    (https://www.iana.org/assignments/ipv6-parameters/
-   ipv6-parameters.xhtm).
+   ipv6-parameters.xhtml).
 
    The definition of the EIP header as a TLV in the Segment Routing
    Header requires the allocation of a codepoint from the "Segment
    Routing Header TLVs" registry in the "Internet Protocol Version 6
    (IPv6) Parameters" (https://www.iana.org/assignments/ipv6-parameters/
-   ipv6-parameters.xhtm).
+   ipv6-parameters.xhtml).
 
    The definition of EIP Information Elements in the EIP header will
    require the definition of a IANA registry.
@@ -349,52 +353,36 @@ Table of Contents
 
 8.2.  Informative References
 
-   [I-D.draft-filsfils-spring-path-tracing]
+   [I-D.draft-filsfils-ippm-path-tracing]
               Filsfils, C., Abdelsalam, A., Camarillo, P., Yufit, M.,
-              Graf, T., Su, Y., Matsushima, S., Valentine, M., and A.
+              Graf, T., Su, Y., Matsushima, S., Valentine, M., and
               Dhamija, "Path Tracing in SRv6 networks", Work in
-              Progress, Internet-Draft, draft-filsfils-spring-path-
-              tracing-03, 13 February 2023,
+              Progress, Internet-Draft, draft-filsfils-ippm-path-
+              tracing-01, 2 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-filsfils-
-              spring-path-tracing-03>.
+              ippm-path-tracing-01>.
+
+   [I-D.draft-guan-6man-ipv6-id-authentication]
+              Guan, J., Yao, S., Liu, K., Hu, X., and J. Liu, "Terminal
+              Identity Authentication Based on Address Label", Work in
+              Progress, Internet-Draft, draft-guan-6man-ipv6-id-
+              authentication-00, 26 February 2024,
+              <https://datatracker.ietf.org/doc/html/draft-guan-6man-
+              ipv6-id-authentication-00>.
+
+   [I-D.draft-herbert-fast]
+              Herbert, T., "Firewall and Service Tickets", Work in
+              Progress, Internet-Draft, draft-herbert-fast-07, 7 October
+              2023, <https://datatracker.ietf.org/doc/html/draft-
+              herbert-fast-07>.
 
    [I-D.draft-ietf-6man-enhanced-vpn-vtn-id]
               Dong, J., Li, Z., Xie, C., Ma, C., and G. S. Mishra,
-              "Carrying Virtual Transport Network (VTN) Information in
+              "Carrying Network Resource Partition (NRP) Information in
               IPv6 Extension Header", Work in Progress, Internet-Draft,
-              draft-ietf-6man-enhanced-vpn-vtn-id-04, 17 May 2023,
+              draft-ietf-6man-enhanced-vpn-vtn-id-06, 20 February 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-6man-
-              enhanced-vpn-vtn-id-04>.
-
-   [I-D.draft-ietf-6man-ipv6-alt-mark]
-              Fioccola, G., Zhou, T., Cociglio, M., Qin, F., and R.
-              Pang, "IPv6 Application of the Alternate-Marking Method",
-              Work in Progress, Internet-Draft, draft-ietf-6man-ipv6-
-              alt-mark-17, 27 September 2022,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-6man-
-              ipv6-alt-mark-17>.
-
-   [I-D.draft-ietf-6man-mtu-option]
-              Hinden, R. M. and G. Fairhurst, "IPv6 Minimum Path MTU
-              Hop-by-Hop Option", Work in Progress, Internet-Draft,
-              draft-ietf-6man-mtu-option-15, 10 May 2022,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-6man-
-              mtu-option-15>.
-
-   [I-D.ietf-ippm-ioam-data]
-              Brockners, F., Bhandari, S., and T. Mizrahi, "Data Fields
-              for In Situ Operations, Administration, and Maintenance
-              (IOAM)", Work in Progress, Internet-Draft, draft-ietf-
-              ippm-ioam-data-17, 13 December 2021,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-ippm-
-              ioam-data-17>.
-
-   [I-D.ietf-ippm-ioam-ipv6-options]
-              Bhandari, S. and F. Brockners, "In-situ OAM IPv6 Options",
-              Work in Progress, Internet-Draft, draft-ietf-ippm-ioam-
-              ipv6-options-12, 7 May 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-ippm-
-              ioam-ipv6-options-12>.
+              enhanced-vpn-vtn-id-06>.
 
    [id-eip-headers]
               Salsano, S. and H. ElBakoury, "Extensible In-band
@@ -446,6 +434,25 @@ Table of Contents
               (SRv6) Network Programming", RFC 8986,
               DOI 10.17487/RFC8986, February 2021,
               <https://www.rfc-editor.org/rfc/rfc8986>.
+
+   [RFC9197]  Brockners, F., Ed., Bhandari, S., Ed., and T. Mizrahi,
+              Ed., "Data Fields for In Situ Operations, Administration,
+              and Maintenance (IOAM)", RFC 9197, DOI 10.17487/RFC9197,
+              May 2022, <https://www.rfc-editor.org/rfc/rfc9197>.
+
+   [RFC9268]  Hinden, R. and G. Fairhurst, "IPv6 Minimum Path MTU Hop-
+              by-Hop Option", RFC 9268, DOI 10.17487/RFC9268, August
+              2022, <https://www.rfc-editor.org/rfc/rfc9268>.
+
+   [RFC9343]  Fioccola, G., Zhou, T., Cociglio, M., Qin, F., and R.
+              Pang, "IPv6 Application of the Alternate-Marking Method",
+              RFC 9343, DOI 10.17487/RFC9343, December 2022,
+              <https://www.rfc-editor.org/rfc/rfc9343>.
+
+   [RFC9486]  Bhandari, S., Ed. and F. Brockners, Ed., "IPv6 Options for
+              In Situ Operations, Administration, and Maintenance
+              (IOAM)", RFC 9486, DOI 10.17487/RFC9486, September 2023,
+              <https://www.rfc-editor.org/rfc/rfc9486>.
 
 Acknowledgments
 
