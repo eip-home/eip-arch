@@ -53,12 +53,13 @@ informative:
   RFC8250:
   RFC8321:
   RFC8558:
-  I-D.ietf-ippm-ioam-data:
-  I-D.ietf-ippm-ioam-ipv6-options:
-  I-D.draft-ietf-6man-ipv6-alt-mark:
-  I-D.draft-filsfils-spring-path-tracing:
-  I-D.draft-ietf-6man-mtu-option:
+  RFC9197:
+  RFC9343:
+  RFC9486:
+  I-D.draft-filsfils-ippm-path-tracing:
   I-D.draft-ietf-6man-enhanced-vpn-vtn-id:
+  I-D.draft-guan-6man-ipv6-id-authentication:
+  I-D.draft-herbert-fast:
   id-eip-use-cases:
     title: "Extensible In-band Processing (EIP) Use Cases"
     author:
@@ -191,19 +192,23 @@ There are reasons why it is beneficial to define a common EIP header that suppor
 
 In the last few years, we have witnessed important innovations in IPv6 networking, centered around the emergence of Segment Routing for IPv6 (SRv6) {{RFC8754}} and of the SRv6 "Network Programming model" {{RFC8986}}. With SRv6 it is possible to insert a *Network program*, i.e. a sequence of instructions (called *segments*), in a header of the IPv6 protocol, called Segment Routing Header (SRH).
 
-Another recent activity that proposed to extend the networking layer to support more complex functions, concerns the network monitoring. The concept of INT "In-band Network Telemetry" has been proposed since 2015 {{onf-int}} in the context of the definition of use cases for P4 based data plane programmability. The latest version of INT specifications dates November 2020 {{int-spec}}. {{int-spec}} specifies the format of headers that carry monitoring instructions and monitoring information along with data plane packets. The specific location for INT Headers is intentionally not specified: an INT Header can be inserted as an option or payload of any encapsulation type. The In-band Telemetry concept has been adopted by the IPPM IETF Working Group, renaming it "In-situ Operations, Administration, and Maintenance" (IOAM). The internet draft {{I-D.ietf-ippm-ioam-data}} is about to become an IETF RFC. Note that IOAM is focused on "limited domains" as defined in {{RFC8799}}. The in-situ OAM data fields can be encapsulated in a variety of protocols, including IPv6. The specification details for carrying IOAM data inside IPv6 headers are provided in draft {{I-D.ietf-ippm-ioam-ipv6-options}}, which is also close to becoming an RFC. In particular, IOAM data fields can be encapsulated in IPv6 using either Hop-by-Hop Options header or Destination options header.
+Another recent activity that proposed to extend the networking layer to support more complex functions, concerns the network monitoring. The concept of INT "In-band Network Telemetry" has been proposed since 2015 {{onf-int}} in the context of the definition of use cases for P4 based data plane programmability. The latest version of INT specifications dates November 2020 {{int-spec}}. {{int-spec}} specifies the format of headers that carry monitoring instructions and monitoring information along with data plane packets. The specific location for INT Headers is intentionally not specified: an INT Header can be inserted as an option or payload of any encapsulation type. The In-band Telemetry concept has been adopted by the IPPM IETF Working Group, renaming it "In-situ Operations, Administration, and Maintenance" (IOAM). {{RFC9197}} discusses the data fields and associated data types for IOAM. The in-situ OAM data fields can be encapsulated in a variety of protocols, including IPv6. The specification details for carrying IOAM data inside IPv6 headers are provided in {{RFC9486}}. In particular, IOAM data fields can be encapsulated in IPv6 using either Hop-by-Hop Options header or Destination options header.
 
 Another example of extensions to IPv6 for network monitoring is specified in {{RFC8250}}, which defines an IPv6 Destination Options header called Performance and Diagnostic Metrics (PDM). The PDM option header provides sequence numbers and timing information as a basis for measurements.
 
-The "Alternate Marking Method" is a recently proposed performance measurement approach described in {{RFC8321}}. The draft {{I-D.draft-ietf-6man-ipv6-alt-mark}} (also close to becoming an RFC) defines a new Hop-by-Hop Option to support this approach.
+The "Alternate Marking Method" is a recently proposed performance measurement approach described in {{RFC8321}}. {{RFC9343}} defines a new Hop-by-Hop Option to support this approach.
 
-"Path Tracing" {{I-D.draft-filsfils-spring-path-tracing}} proposes an efficient solution for recording the route taken by a packet (including timestamps and load information taken at each hop along the route). This solution needs a new Hop-by-Hop Option to be defined.
+"Path Tracing" {{I-D.draft-filsfils-ippm-path-tracing}} proposes an efficient solution for recording the route taken by a packet (including timestamps and load information taken at each hop along the route). This solution needs a new Hop-by-Hop Option to be defined.
 
 {{RFC8558}} analyses the evolution of transport protocols. It recommends that explicit signals should be used when the endpoints desire that network elements along the path become aware of events related to trasport protocol. Among the solutions, {{RFC8558}} considers the use of explicit signals at the network layer, and in particular it mentions that IPv6 hop-by-hop headers might suit this purpose.
 
-The Internet Draft {{I-D.draft-ietf-6man-mtu-option}} specifies a new IPv6 Hop-by-Hop option that is used to record the minimum Path MTU between a source and a destination. This draft is close to become an RFC.
+{{RFC9268}} specifies a new IPv6 Hop-by-Hop option that is used to record the minimum Path MTU between a source and a destination. 
 
-The Internet Draft {{I-D.draft-ietf-6man-enhanced-vpn-vtn-id}} proposes a new Hop-by-Hop option of IPv6 extension header to carry the Virtual Transport Network (VTN) identifier, which could be used to identify the set of network resources allocated to a VTN and the rules for packet processing.  The procedure of processing the VTN option is also specified.
+The Internet Draft {{I-D.draft-ietf-6man-enhanced-vpn-vtn-id}} proposes a new Hop-by-Hop option of IPv6 extension header to carry the Network Resource Partition (NRP) information, which could be used to identify the NRP-specific processing to be performed on the packets by each network node along a network path in the NRP.
+
+The Internet-Draft {{I-D.draft-guan-6man-ipv6-id-authentication}} proposes an IPv6 based address label terminal identity authentication mechanism, which uses a new Hop-by-Hop option.
+
+The Internet-Draft {{I-D.draft-herbert-fast}} describes the Firewalls and Service Tickets (FAST) protocol.  This is a generic and extensible protocol for hosts to signal network nodes to request services or to gain admission into a network. Tickets are sent in IPv6 Hop-by-Hop options.
 
 ## Consideration on Hop-by-hop Options allocation
 
@@ -212,8 +217,8 @@ We have listed several proposals or already standardized solutions that use the 
 
 ~~~
    32 possible Option Types starting with 001
-   2 allocated by RFCs
-   2 temporary allocated by Internet Drafts
+   4 allocated by RFCs
+   - temporary allocated by Internet Drafts
    1 allocated for RFC3692-style Experiment
    27 not allocated
 ~~~
@@ -232,9 +237,9 @@ TODO Security
 
 # IANA Considerations
 
-The definition of the EIP header as an Option for IPv6 Hop-by-hop Extension header requires the allocation of a codepoint from the "Destination Options and Hop-by-Hop Options" registry in the "Internet Protocol Version 6 (IPv6) Parameters" (https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtm).
+The definition of the EIP header as an Option for IPv6 Hop-by-hop Extension header requires the allocation of a codepoint from the "Destination Options and Hop-by-Hop Options" registry in the "Internet Protocol Version 6 (IPv6) Parameters" (https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml).
 
-The definition of the EIP header as a TLV in the Segment Routing Header requires the allocation of a codepoint from the "Segment Routing Header TLVs" registry in the "Internet Protocol Version 6 (IPv6) Parameters" (https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtm).
+The definition of the EIP header as a TLV in the Segment Routing Header requires the allocation of a codepoint from the "Segment Routing Header TLVs" registry in the "Internet Protocol Version 6 (IPv6) Parameters" (https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml).
 
 The definition of EIP Information Elements in the EIP header will require the definition of a IANA registry.
 
