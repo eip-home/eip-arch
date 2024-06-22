@@ -54,6 +54,7 @@ informative:
   RFC8321:
   RFC8558:
   RFC9197:
+  RFC9268:
   RFC9343:
   RFC9486:
   I-D.draft-filsfils-ippm-path-tracing:
