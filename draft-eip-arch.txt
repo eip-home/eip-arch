@@ -5,10 +5,10 @@
 WG Working Group                                              S. Salsano
 Internet-Draft                          Univ. of Rome Tor Vergata / CNIT
 Intended status: Informational                              H. ElBakoury
-Expires: 24 December 2024                                     Consultant
+Expires: 21 March 2025                                        Consultant
                                                                 D. Lopez
                                                          Telefonica, I+D
-                                                            22 June 2024
+                                                       17 September 2024
 
 
      Extensible In-band Processing (EIP) Architecture and Framework
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 December 2024.
+   This Internet-Draft will expire on 21 March 2025.
 
 Copyright Notice
 
@@ -366,9 +366,9 @@ Table of Contents
               Guan, J., Yao, S., Liu, K., Hu, X., and J. Liu, "Terminal
               Identity Authentication Based on Address Label", Work in
               Progress, Internet-Draft, draft-guan-6man-ipv6-id-
-              authentication-00, 26 February 2024,
+              authentication-01, 22 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-guan-6man-
-              ipv6-id-authentication-00>.
+              ipv6-id-authentication-01>.
 
    [I-D.draft-herbert-fast]
               Herbert, T., "Firewall and Service Tickets", Work in
@@ -380,9 +380,9 @@ Table of Contents
               Dong, J., Li, Z., Xie, C., Ma, C., and G. S. Mishra,
               "Carrying Network Resource Partition (NRP) Information in
               IPv6 Extension Header", Work in Progress, Internet-Draft,
-              draft-ietf-6man-enhanced-vpn-vtn-id-06, 20 February 2024,
+              draft-ietf-6man-enhanced-vpn-vtn-id-07, 8 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-6man-
-              enhanced-vpn-vtn-id-06>.
+              enhanced-vpn-vtn-id-07>.
 
    [id-eip-headers]
               Salsano, S. and H. ElBakoury, "Extensible In-band
