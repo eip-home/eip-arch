@@ -5,10 +5,10 @@
 WG Working Group                                              S. Salsano
 Internet-Draft                          Univ. of Rome Tor Vergata / CNIT
 Intended status: Informational                              H. ElBakoury
-Expires: 21 March 2025                                        Consultant
+Expires: 8 July 2025                                          Consultant
                                                                 D. Lopez
                                                          Telefonica, I+D
-                                                       17 September 2024
+                                                          4 January 2025
 
 
      Extensible In-band Processing (EIP) Architecture and Framework
@@ -53,11 +53,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 March 2025.
+   This Internet-Draft will expire on 8 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -274,15 +274,40 @@ Table of Contents
    the NRP-specific processing to be performed on the packets by each
    network node along a network path in the NRP.
 
+   The Internet Draft [I-D.draft-ietf-6man-vpn-dest-opt-01] proposes an
+   experiment in which VPN service information for both layer 2 and
+   layer 3 VPNs is encoded in a new IPv6 Destination Option.  The new
+   IPv6 Destination Option is called the VPN Service Option.
+
    The Internet-Draft [I-D.draft-guan-6man-ipv6-id-authentication]
    proposes an IPv6 based address label terminal identity authentication
-   mechanism, which uses a new Hop-by-Hop option.
+   mechanism, which uses a new Hop-by-Hop option, called Address Label
+   Extension (ALE).
 
-   The Internet-Draft [I-D.draft-herbert-fast] describes the Firewalls
-   and Service Tickets (FAST) protocol.  This is a generic and
-   extensible protocol for hosts to signal network nodes to request
-   services or to gain admission into a network.  Tickets are sent in
-   IPv6 Hop-by-Hop options.
+   The Internet-Draft [I-D.draft-herbert-fast] (currenlty expired)
+   proposed the Firewalls and Service Tickets (FAST) protocol.  This is
+   a generic and extensible protocol for hosts to signal network nodes
+   to request services or to gain admission into a network.  Tickets are
+   sent in IPv6 Hop-by-Hop options.
+
+   The Internet-Draft [I-D.draft-eckert-6man-qos-exthdr-discuss]
+   (currenlty expired) provided considerations for common QoS IPv6
+   extension header, in the context of the functionality under
+   definition in the Deterministic Networking (detnet) IETF Working
+   Group [detnet-wg].
+
+   The Internet-Draft [I-D.draft-li-6man-topology-id] (currenlty
+   expired) proposed a new Hop-by-Hop option of IPv6 extension header to
+   carry the topology identifier, which is used to identify the
+   forwarding table instance created by the Multi Topology Routing or
+   Flexible Algorithm.
+
+   The Internet-Draft [I-D.draft-iurman-6man-carry-identifier]
+   (currenlty expired) discussed the need of having a generic approach
+   for carrying identifiers in IPv6 Destination Options and Hop-by-Hop
+   Options.  The EIP proposal can be seen as a superset and a further
+   generalization of the proposal of
+   [I-D.draft-iurman-6man-carry-identifier].
 
 4.1.  Consideration on Hop-by-hop Options allocation
 
@@ -298,9 +323,7 @@ Table of Contents
    parameters/ipv6-parameters.xhtml)
 
       32 possible Option Types starting with 001
-      4 allocated by RFCs
-      - temporary allocated by Internet Drafts
-      1 allocated for RFC3692-style Experiment
+      5 allocated by RFCs
       27 not allocated
 
    We observe that there is a potential scarcity of the code points, as
@@ -353,14 +376,27 @@ Table of Contents
 
 8.2.  Informative References
 
+   [detnet-wg]
+              IETF, "Deterministic Networking (DetNet) IETF Working
+              Group", 2025,
+              <https://datatracker.ietf.org/wg/detnet/about/>.
+
+   [I-D.draft-eckert-6man-qos-exthdr-discuss]
+              Eckert, T. T., Joung, J., Peng, S., and X. Geng,
+              "Considerations for common QoS IPv6 extension header(s)",
+              Work in Progress, Internet-Draft, draft-eckert-6man-qos-
+              exthdr-discuss-00, 4 March 2024,
+              <https://datatracker.ietf.org/doc/html/draft-eckert-6man-
+              qos-exthdr-discuss-00>.
+
    [I-D.draft-filsfils-ippm-path-tracing]
               Filsfils, C., Abdelsalam, A., Camarillo, P., Yufit, M.,
               Graf, T., Su, Y., Matsushima, S., Valentine, M., and
               Dhamija, "Path Tracing in SRv6 networks", Work in
               Progress, Internet-Draft, draft-filsfils-ippm-path-
-              tracing-01, 2 June 2024,
+              tracing-02, 25 November 2024,
               <https://datatracker.ietf.org/doc/html/draft-filsfils-
-              ippm-path-tracing-01>.
+              ippm-path-tracing-02>.
 
    [I-D.draft-guan-6man-ipv6-id-authentication]
               Guan, J., Yao, S., Liu, K., Hu, X., and J. Liu, "Terminal
@@ -378,11 +414,32 @@ Table of Contents
 
    [I-D.draft-ietf-6man-enhanced-vpn-vtn-id]
               Dong, J., Li, Z., Xie, C., Ma, C., and G. S. Mishra,
-              "Carrying Network Resource Partition (NRP) Information in
+              "Carrying Network Resource (NR) related Information in
               IPv6 Extension Header", Work in Progress, Internet-Draft,
-              draft-ietf-6man-enhanced-vpn-vtn-id-07, 8 July 2024,
+              draft-ietf-6man-enhanced-vpn-vtn-id-09, 3 November 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-6man-
-              enhanced-vpn-vtn-id-07>.
+              enhanced-vpn-vtn-id-09>.
+
+   [I-D.draft-ietf-6man-vpn-dest-opt-01]
+              Bonica, R., Li, X., Farrel, A., Kamite, Y., and L. Jalil,
+              "The IPv6 VPN Service Destination Option", Work in
+              Progress, Internet-Draft, draft-ietf-6man-vpn-dest-opt-01,
+              8 November 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-6man-vpn-dest-opt-01>.
+
+   [I-D.draft-iurman-6man-carry-identifier]
+              Iurman, J., "Carrying an Identifier in IPv6 packets", Work
+              in Progress, Internet-Draft, draft-iurman-6man-carry-
+              identifier-00, 8 February 2023,
+              <https://datatracker.ietf.org/doc/html/draft-iurman-6man-
+              carry-identifier-00>.
+
+   [I-D.draft-li-6man-topology-id]
+              Li, Z., Hu, Z., and J. Dong, "Topology Identifier in IPv6
+              Extension Header", Work in Progress, Internet-Draft,
+              draft-li-6man-topology-id-00, 20 March 2022,
+              <https://datatracker.ietf.org/doc/html/draft-li-6man-
+              topology-id-00>.
 
    [id-eip-headers]
               Salsano, S. and H. ElBakoury, "Extensible In-band
