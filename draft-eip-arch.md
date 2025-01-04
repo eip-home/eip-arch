@@ -126,7 +126,7 @@ informative:
     date: 2025
     format:
       HTML: "https://datatracker.ietf.org/wg/detnet/about/"
-      
+
 --- abstract
 
 Extensible In-band Processing (EIP) extends the functionality of the IPv6 protocol considering
