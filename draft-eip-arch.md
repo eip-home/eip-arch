@@ -226,9 +226,9 @@ The Internet-Draft {{I-D.draft-guan-6man-ipv6-id-authentication}} proposes an IP
 
 The Internet-Draft {{I-D.draft-herbert-fast}} (currenlty expired) proposed the Firewalls and Service Tickets (FAST) protocol. This is a generic and extensible protocol for hosts to signal network nodes to request services or to gain admission into a network. Tickets are sent in IPv6 Hop-by-Hop options.
 
-The Internet-Draft {{I-D.draft-eckert-6man-qos-exthdr-discuss}} (currenlty expired) provided considerations for common QoS IPv6 extension header, in the context of the functionality under definition in the Deterministic Networking (detnet) IETF Working Group {{detnet-wg}}. 
+The Internet-Draft {{I-D.draft-eckert-6man-qos-exthdr-discuss}} (currenlty expired) provided considerations for common QoS IPv6 extension header, in the context of the functionality under definition in the Deterministic Networking (detnet) IETF Working Group {{detnet-wg}}.
 
-The Internet-Draft {{I-D.draft-li-6man-topology-id}} (currenlty expired) proposed a new Hop-by-Hop option of IPv6 extension header to carry the topology identifier, which is used to identify the forwarding table instance created by the Multi Topology Routing or Flexible Algorithm. 
+The Internet-Draft {{I-D.draft-li-6man-topology-id}} (currenlty expired) proposed a new Hop-by-Hop option of IPv6 extension header to carry the topology identifier, which is used to identify the forwarding table instance created by the Multi Topology Routing or Flexible Algorithm.
 
 The Internet-Draft {{I-D.draft-iurman-6man-carry-identifier}} (currenlty expired) discussed the need of having a generic approach for carrying identifiers in IPv6 Destination Options and Hop-by-Hop Options. The EIP proposal can be seen as a superset and a further generalization of the proposal of {{I-D.draft-iurman-6man-carry-identifier}}.
 
