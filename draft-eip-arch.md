@@ -60,7 +60,11 @@ informative:
   I-D.draft-filsfils-ippm-path-tracing:
   I-D.draft-ietf-6man-enhanced-vpn-vtn-id:
   I-D.draft-guan-6man-ipv6-id-authentication:
+  I-D.draft-ietf-6man-vpn-dest-opt-01:
   I-D.draft-herbert-fast:
+  I-D.draft-eckert-6man-qos-exthdr-discuss:
+  I-D.draft-li-6man-topology-id:
+  I-D.draft-iurman-6man-carry-identifier:
   id-eip-use-cases:
     title: "Extensible In-band Processing (EIP) Use Cases"
     author:
@@ -113,7 +117,16 @@ informative:
     format:
       PDF: "https://p4.org/p4-spec/docs/INT\_v2\_1.pdf"
       date: 2022
-
+  detnet-wg:
+    title: "Deterministic Networking (DetNet) IETF Working Group"
+    author:
+      - name: "IETF"
+        ins: "IETF"
+        organization: "Internet Engineering Task Force"
+    date: 2025
+    format:
+      HTML: "https://datatracker.ietf.org/wg/detnet/about/"
+      
 --- abstract
 
 Extensible In-band Processing (EIP) extends the functionality of the IPv6 protocol considering
@@ -207,9 +220,17 @@ The "Alternate Marking Method" is a recently proposed performance measurement ap
 
 The Internet Draft {{I-D.draft-ietf-6man-enhanced-vpn-vtn-id}} proposes a new Hop-by-Hop option of IPv6 extension header to carry the Network Resource Partition (NRP) information, which could be used to identify the NRP-specific processing to be performed on the packets by each network node along a network path in the NRP.
 
-The Internet-Draft {{I-D.draft-guan-6man-ipv6-id-authentication}} proposes an IPv6 based address label terminal identity authentication mechanism, which uses a new Hop-by-Hop option.
+The Internet Draft {{I-D.draft-ietf-6man-vpn-dest-opt-01}} proposes an experiment in which VPN service information for both layer 2 and layer 3 VPNs is encoded in a new IPv6 Destination Option. The new IPv6 Destination Option is called the VPN Service Option.
 
-The Internet-Draft {{I-D.draft-herbert-fast}} describes the Firewalls and Service Tickets (FAST) protocol.  This is a generic and extensible protocol for hosts to signal network nodes to request services or to gain admission into a network. Tickets are sent in IPv6 Hop-by-Hop options.
+The Internet-Draft {{I-D.draft-guan-6man-ipv6-id-authentication}} proposes an IPv6 based address label terminal identity authentication mechanism, which uses a new Hop-by-Hop option, called Address Label Extension (ALE).
+
+The Internet-Draft {{I-D.draft-herbert-fast}} (currenlty expired) proposed the Firewalls and Service Tickets (FAST) protocol. This is a generic and extensible protocol for hosts to signal network nodes to request services or to gain admission into a network. Tickets are sent in IPv6 Hop-by-Hop options.
+
+The Internet-Draft {{I-D.draft-eckert-6man-qos-exthdr-discuss}} (currenlty expired) provided considerations for common QoS IPv6 extension header, in the context of the functionality under definition in the Deterministic Networking (detnet) IETF Working Group {{detnet-wg}}. 
+
+The Internet-Draft {{I-D.draft-li-6man-topology-id}} (currenlty expired) proposed a new Hop-by-Hop option of IPv6 extension header to carry the topology identifier, which is used to identify the forwarding table instance created by the Multi Topology Routing or Flexible Algorithm. 
+
+The Internet-Draft {{I-D.draft-iurman-6man-carry-identifier}} (currenlty expired) discussed the need of having a generic approach for carrying identifiers in IPv6 Destination Options and Hop-by-Hop Options. The EIP proposal can be seen as a superset and a further generalization of the proposal of {{I-D.draft-iurman-6man-carry-identifier}}.
 
 ## Consideration on Hop-by-hop Options allocation
 
@@ -218,9 +239,7 @@ We have listed several proposals or already standardized solutions that use the 
 
 ~~~
    32 possible Option Types starting with 001
-   4 allocated by RFCs
-   - temporary allocated by Internet Drafts
-   1 allocated for RFC3692-style Experiment
+   5 allocated by RFCs
    27 not allocated
 ~~~
 
