@@ -129,6 +129,14 @@ informative:
     date: 2025
     format:
       HTML: "https://datatracker.ietf.org/wg/detnet/about/"
+  ietf-fantel:
+    title: "Fast Notification for Traffic Engineering and Load Balancing (FANTEL) BoF"
+    author:
+      - name: "IETF"
+    date: 2025
+    format:
+      HTML: "https://datatracker.ietf.org/meeting/123/materials/bofdraft-fantel-00"
+
 
 --- abstract
 
@@ -238,6 +246,8 @@ The Internet-Draft {{I-D.draft-iurman-6man-carry-identifier}} (currently expired
 ## Additional relevant activities
 
 The IETF has shown interest in carrying application or service-level metadata in IPv6. The Application-aware Networking (APN) BoF discussed embedding such metadata, leading to proposals like APN6. The recently chartered CATS (Compute-Aware Traffic Steering) WG explores approaches where traffic is steered based on in-packet compute-related information. The GREEN WG (Getting Ready for Energy-Efficient Networking), formed in 2024, investigates telemetry for carbon-aware routing. The COIN IRTF RG has discussed in-network processing requirements that also point to in-band metadata handling.
+
+The FANTEL BoF (IETF 123, Madrid, 2025) discussed the Fast Notification for Traffic Engineering and Load Balancing framework {{ietf-fantel}}. FANTEL proposes in-band mechanisms to signal network conditions such as congestion or link degradation using IPv6 packets. These notifications are inserted by routers to support real-time traffic steering decisions. The goals of FANTEL align with the EIP approach, which provides an extensible container for in-band metadata through EIP Information Elements. The EIP header could encapsulate FANTEL notifications without requiring additional Hop-by-Hop Option codepoints, supporting both domain-specific and broader deployments.
 
 Outside the IETF, the P4.org community continues its efforts on programmable dataplanes and has proposed updated INT mechanisms. Recent research includes the use of in-band headers for on-path inference and service-specific packet handling, showing increasing interest in general, extensible frameworks like EIP.
 
