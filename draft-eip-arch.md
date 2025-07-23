@@ -171,6 +171,8 @@ The EIP solution is aligned with this trend, which will ensure a future proof ev
 
 The EIP solution foresees the introduction of an EIP header in the IPv6 packet header. The proposed EIP header is extensible and it is meant to support a number of different use cases. In general, both end-hosts and transit routers can read and write the content of this header. Depending of the specific use-case, only specific nodes will be capable and interested in reading or writing the EIP header. The use of the EIP header can be confined to a single domain or to a set of cooperating domains, so there is no need of a global, Internet-wide support of the new header for its introduction. Moreover, there can be usage scenarios in which legacy nodes can simply ignore the EIP header and provide transit to packets containing the EIP header.
 
+The EIP header could be carried in different ways inside the IPv6 Header: 1) EIP Option for Hop-by-Hop Extension Header; 2) EIP TLV for Segment Routing Header; 3) EIP as a new IOAM-Data-Field-Type within the IOAM framework (discussed in {{integration-eip-ioam}}).
+
 An important usage scenario considers the transport of user packets over a provider network. In this scenario, we consider the network portion from the provider ingress edge node to the provider egress edge node. The ingress edge node can encapsulate the user packet coming from an access network into an outer packet. The outer packet travels in the provider network until the egress edge node, which will decapsulate the inner packet and deliver it to the destination access network or to another transit network, depending on the specific topology and service. Assuming that the IPv6/SRv6 dataplane is used in the provider network, the ingress edge node will be the source of an outer IPv6 packet in which it is possible to add the EIP header. The outer IPv6 packet (containing the EIP header) will be processed inside the "limited domain" (see {{RFC8799}}) of the provider network, so that the operator can make sure that all the transit routers either are EIP aware or at least they can forward packets containing the EIP header. In this usage scenario, the EIP framework operates "edge-to-edge" and the end-user packets are "tunneled" over the EIP domain.
 
 The architectural framework for EIP is depicted in {{fig:eip-framework}}. We refer to nodes that are not EIP capable as legacy nodes. An EIP domain is made up by EIP aware routers (EIP R) and can also include legacy routers (LEG R). At the border of the EIP domain, EIP edge nodes (EIP ER) are used to interact with legacy End Hosts / Servers (LEG H) and with other domains. It is also possible that an End Host / Server is EIP aware (EIP H), in this case the EIP framework could operate "edge-to-end" or "end-to-end".
@@ -202,18 +204,34 @@ As shown in {{fig:eip-framework}}, an EIP domain can communicate with other doma
 # Benefits of a common EIP header for multiple use cases.
 
 The EIP header will carry different EIP Information Elements that are defined to support the different use cases.
-There are reasons why it is beneficial to define a common EIP header that supports multiple use cases.
+There are reasons why it is beneficial to define a single common EIP header that supports multiple use cases using the EIP Information Elements.
 
-1. The number of available Option Types in HBH header is limited, likewise the number of available TLVs in the Segment Routing Header (SRH) is limited. Defining multiple Option Types or SRH TLVs for multiple use case is not scalable and puts pressure on the allocation of such codepoints. This aspect is further discussed in {{review}}.
+1. The number of available Option Types in HBH header is limited (see {{considerations-hopbyhop}}). Likewise the number of available TLVs in the Segment Routing Header (SRH) and the number of IOAM-Data-Field-Type are limited. Defining multiple Option Types (or SRH TLVs or IOAM-Data-Field-Type) for multiple use case is not scalable and puts pressure on the allocation of such codepoints. 
 
-2. The definition and standardization of specific EIP Information Elements for the different use cases will be simplified, compared to the need of requiring the definition of a new Option Type or SRH TLVs.
+2. The definition and standardization of specific EIP Information Elements for the different use cases will be simplified, compared to the need of requiring the definition of a new Option Type or SRH TLVs or IOAM-Data-Field-Type.
 
 3. Different use cases may share a subset of common EIP Information Elements.
 
 4. Efficient mechanism for the processing of the EIP header (both in software and in hardware) can be defined when the different EIP Information Elements are carried inside the same EIP header.
 
+{: #considerations-hopbyhop}
+## Considerations on Hop-by-hop Options allocation
+
+Several proposals and already standardized solutions use the IPv6 Hop-by-Hop Options, as discussed below in {{review}}. The Hop-by-Hop Options are represented with a 8 bits code. The first two bits represent the action to be taken if the Options is unknown to a node that receives it, the third bit is used to specify if the content of the Options can be changed in flight. In particular the Option Types that start with 001 should be ignored if unknown and can be changed in flight, which is the most common combination. The current IANA allocation for Option Types starting with 001 is
+(see [https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml](https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml))
+
+```
+   32 possible Option Types starting with 001
+   5 allocated by RFCs (including IOAM and AltMark)
+   27 not allocated
+```
+
+We observe that there is a potential scarcity of the code points, as there are many scenarios that could require the definition of a new Hop-by-Hop option. We also observe that having only 1 code point allocated for experiments is a very restrictive limitation.
+
 {: #review}
-## Review of standardized and proposed evolutions of IPv6
+# Review of recent activities that propose to extend the IP networking layer
+
+## Standardized and proposed evolutions of IPv6
 
 In the last few years, we have witnessed important innovations in IPv6 networking, centered around the emergence of Segment Routing for IPv6 (SRv6) {{RFC8754}} and of the SRv6 "Network Programming model" {{RFC8986}}. With SRv6 it is possible to insert a *Network program*, i.e. a sequence of instructions (called *segments*), in a header of the IPv6 protocol, called Segment Routing Header (SRH). Recent updates (see {{RFC9800}}) introduced compression mechanisms for segment lists, improving scalability for long segment chains.
 
@@ -251,19 +269,21 @@ The FANTEL BoF (IETF 123, Madrid, 2025) discussed the Fast Notification for Traf
 
 Outside the IETF, the P4.org community continues its efforts on programmable dataplanes and has proposed updated INT mechanisms. Recent research includes the use of in-band headers for on-path inference and service-specific packet handling, showing increasing interest in general, extensible frameworks like EIP.
 
+{: #integration-eip-ioam}
+# Integration of EIP into the IOAM Framework
 
-## Consideration on Hop-by-hop Options allocation
+The IOAM (In-situ Operations, Administration, and Maintenance) framework {{RFC9197}} defines a set of data fields and associated semantics for recording telemetry and operational information within packets as they traverse a network. The IOAM data can be encapsulated in IPv6 via Hop-by-Hop or Destination Options headers, as specified in {{RFC9486}}, and can be processed by IOAM-capable nodes along the path.
 
-We have listed several proposals or already standardized solutions that use the IPv6 Hop-by-Hop Options. These Options are represented with a 8 bits code. The first two bits represent the action to be taken if the Options is unknown to a node that receives it, the third bit is used to specify if the content of the Options can be changed in flight. In particular the Option Types that start with 001 should be ignored if unknown and can be changed in flight, which is the most common combination. The current IANA allocation for Option Types starting with 001 is
-(see [https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml](https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml))
+While the EIP architecture has primarily been conceived as a standalone extensible header format, an additional integration possibility is to define EIP as a new IOAM-Data-Field-Type within the IOAM framework. In this scenario, EIP would become one of the possible information elements that can be included in IOAM data fields, extending the telemetry model to support richer and more general-purpose in-band processing capabilities.
 
-```
-   32 possible Option Types starting with 001
-   5 allocated by RFCs (including IOAM and AltMark)
-   27 not allocated
-```
+This approach offers the following advantages:
 
-We observe that there is a potential scarcity of the code points, as there are many scenarios that could require the definition of a new Hop-by-Hop option. We also observe that having only 1 code point allocated for experiments is a very restrictive limitation.
+1. It enables the reuse of the existing IOAM encapsulation and processing pipeline.
+2. It allows EIP-aware nodes to operate within IOAM-enabled networks without introducing separate Hop-by-Hop options.
+3. It leverages the existing IOAM data export and analytics tooling to interpret EIP-related metadata.
+
+Integrating EIP as a new IOAM data type would require defining a specific EIP Data-Field-Type value in the IOAM registry {{IANA-ioam-types}} and specifying how EIP Information Elements are encoded and parsed within the IOAM format. This integration path is not mutually exclusive with the standalone deployment of EIP as an independent IPv6 extension header but rather represents an additional deployment possibility for network operators already adopting the IOAM framework.
+
 
 # Conventions and Definitions
 
