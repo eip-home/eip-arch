@@ -118,7 +118,7 @@ informative:
      - name: "The P4.org Applications Working Group"
     title: "In-band Network Telemetry (INT) Dataplane Specification, version 2.1"
     format:
-      PDF: "https://p4.org/p4-spec/docs/INT_v2_1.pdf"
+      PDF: "https://p4.org/p4-spec/docs/INT\_v2\_1.pdf"
     date: 2022
   detnet-wg:
     title: "Deterministic Networking (DetNet) IETF Working Group"
@@ -274,14 +274,19 @@ We observe that there is a potential scarcity of the code points, as there are m
 
 TODO Security
 
-
 # IANA Considerations
 
-The definition of the EIP header as an Option for IPv6 Hop-by-hop Extension header requires the allocation of a codepoint from the "Destination Options and Hop-by-Hop Options" registry in the "Internet Protocol Version 6 (IPv6) Parameters" (https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml).
+The definition of the EIP header as an Option for the IPv6 Hop-by-Hop Extension header requires the allocation of a codepoint from the "Destination Options and Hop-by-Hop Options" registry in the "Internet Protocol Version 6 (IPv6) Parameters":
+https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml
 
-The definition of the EIP header as a TLV in the Segment Routing Header requires the allocation of a codepoint from the "Segment Routing Header TLVs" registry in the "Internet Protocol Version 6 (IPv6) Parameters" (https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml).
+The definition of the EIP header as a TLV in the Segment Routing Header requires the allocation of a codepoint from the "Segment Routing Header TLVs" registry in the "Internet Protocol Version 6 (IPv6) Parameters":
+https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml
 
-The definition of EIP Information Elements in the EIP header will require the definition of a IANA registry.
+The definition of EIP Information Elements in the EIP header will require the creation of a new IANA registry to manage EIP Information Element type values.
+
+In the case that EIP is integrated into the IOAM framework as a new Data-Field-Type, an additional allocation will be required from the "IOAM Data Field Types" registry:
+https://www.iana.org/assignments/ioam/ioam.xhtml#data-field-types
+
 
 
 --- back
