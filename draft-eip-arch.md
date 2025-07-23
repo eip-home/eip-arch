@@ -57,6 +57,8 @@ informative:
   RFC9268:
   RFC9343:
   RFC9486:
+  RFC9326:
+  RFC9800:
   I-D.draft-filsfils-ippm-path-tracing:
   I-D.draft-ietf-6man-enhanced-vpn-vtn-id:
   I-D.draft-guan-6man-ipv6-id-authentication:
@@ -65,19 +67,24 @@ informative:
   I-D.draft-eckert-6man-qos-exthdr-discuss:
   I-D.draft-li-6man-topology-id:
   I-D.draft-iurman-6man-carry-identifier:
+  I-D.draft-ietf-ippm-transit-measurement-option:
+  IANA-ipv6-parameters:
+    title: "Internet Protocol Version 6 (IPv6) Parameters"
+    author:
+      - name: "IANA"
+    format:
+      HTML: "https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml"
   id-eip-use-cases:
     title: "Extensible In-band Processing (EIP) Use Cases"
     author:
-     -
-        name: "Stefano Salsano"
-        ins: "S. Salsano"
-        organization: Univ. of Rome Tor Vergata / CNIT
-        email: "stefano.salsano@uniroma2.it"
-     -
-        name: "Hesham ElBakoury"
-        ins: "H. ElBakoury"
-        organization: Consultant
-        email: "helbakoury@gmail.com"
+     - name: "Stefano Salsano"
+       ins: "S. Salsano"
+       organization: Univ. of Rome Tor Vergata / CNIT
+       email: "stefano.salsano@uniroma2.it"
+     - name: "Hesham ElBakoury"
+       ins: "H. ElBakoury"
+       organization: Consultant
+       email: "helbakoury@gmail.com"
     date: 2022
     seriesInfo:
        Internet-Draft: draft-eip-use-cases
@@ -86,16 +93,14 @@ informative:
   id-eip-headers:
     title: "Extensible In-band Processing (EIP) Headers Definitions"
     author:
-     -
-        name: "Stefano Salsano"
-        ins: "S. Salsano"
-        organization: Univ. of Rome Tor Vergata / CNIT
-        email: "stefano.salsano@uniroma2.it"
-     -
-        name: "Hesham ElBakoury"
-        ins: "H. ElBakoury"
-        organization: Consultant
-        email: "helbakoury@gmail.com"
+     - name: "Stefano Salsano"
+       ins: "S. Salsano"
+       organization: Univ. of Rome Tor Vergata / CNIT
+       email: "stefano.salsano@uniroma2.it"
+     - name: "Hesham ElBakoury"
+       ins: "H. ElBakoury"
+       organization: Consultant
+       email: "helbakoury@gmail.com"
     date: 2022
     seriesInfo:
        Internet-Draft: draft-eip-headers-definitions
@@ -104,19 +109,17 @@ informative:
   onf-int:
     title: "Improving Network Monitoring and Management with Programmable Data Planes"
     author:
-     -
-        name: "P4.org"
+     - name: "P4.org"
     format:
        PDF: "https://opennetworking.org/news-and-events/blog/improving-network-monitoring-and-management-with-programmable-data-planes/"
     date: 2015
   int-spec:
     author:
-     -
-        name: "The P4.org Applications Working Group"
+     - name: "The P4.org Applications Working Group"
     title: "In-band Network Telemetry (INT) Dataplane Specification, version 2.1"
     format:
-      PDF: "https://p4.org/p4-spec/docs/INT\_v2\_1.pdf"
-      date: 2022
+      PDF: "https://p4.org/p4-spec/docs/INT_v2_1.pdf"
+    date: 2022
   detnet-wg:
     title: "Deterministic Networking (DetNet) IETF Working Group"
     author:
@@ -202,19 +205,19 @@ There are reasons why it is beneficial to define a common EIP header that suppor
 4. Efficient mechanism for the processing of the EIP header (both in software and in hardware) can be defined when the different EIP Information Elements are carried inside the same EIP header.
 
 {: #review}
-# Review of standardized and proposed evolutions of IPv6
+## Review of standardized and proposed evolutions of IPv6
 
-In the last few years, we have witnessed important innovations in IPv6 networking, centered around the emergence of Segment Routing for IPv6 (SRv6) {{RFC8754}} and of the SRv6 "Network Programming model" {{RFC8986}}. With SRv6 it is possible to insert a *Network program*, i.e. a sequence of instructions (called *segments*), in a header of the IPv6 protocol, called Segment Routing Header (SRH).
+In the last few years, we have witnessed important innovations in IPv6 networking, centered around the emergence of Segment Routing for IPv6 (SRv6) {{RFC8754}} and of the SRv6 "Network Programming model" {{RFC8986}}. With SRv6 it is possible to insert a *Network program*, i.e. a sequence of instructions (called *segments*), in a header of the IPv6 protocol, called Segment Routing Header (SRH). Recent updates (see {{RFC9800}}) introduced compression mechanisms for segment lists, improving scalability for long segment chains.
 
-Another recent activity that proposed to extend the networking layer to support more complex functions, concerns the network monitoring. The concept of INT "In-band Network Telemetry" has been proposed since 2015 {{onf-int}} in the context of the definition of use cases for P4 based data plane programmability. The latest version of INT specifications dates November 2020 {{int-spec}}. {{int-spec}} specifies the format of headers that carry monitoring instructions and monitoring information along with data plane packets. The specific location for INT Headers is intentionally not specified: an INT Header can be inserted as an option or payload of any encapsulation type. The In-band Telemetry concept has been adopted by the IPPM IETF Working Group, renaming it "In-situ Operations, Administration, and Maintenance" (IOAM). {{RFC9197}} discusses the data fields and associated data types for IOAM. The in-situ OAM data fields can be encapsulated in a variety of protocols, including IPv6. The specification details for carrying IOAM data inside IPv6 headers are provided in {{RFC9486}}. In particular, IOAM data fields can be encapsulated in IPv6 using either Hop-by-Hop Options header or Destination options header.
+Another recent activity that proposed to extend the networking layer to support more complex functions concerns network monitoring. The concept of INT "In-band Network Telemetry" has been proposed since 2015 {{onf-int}} in the context of the definition of use cases for P4 based data plane programmability. The latest version of INT specifications dates November 2020 {{int-spec}}. {{int-spec}} specifies the format of headers that carry monitoring instructions and monitoring information along with data plane packets. The specific location for INT Headers is intentionally not specified: an INT Header can be inserted as an option or payload of any encapsulation type. The In-band Telemetry concept has been adopted by the IPPM IETF Working Group, renaming it "In-situ Operations, Administration, and Maintenance" (IOAM). {{RFC9197}} discusses the data fields and associated data types for IOAM. The in-situ OAM data fields can be encapsulated in a variety of protocols, including IPv6. The specification details for carrying IOAM data inside IPv6 headers are provided in {{RFC9486}}. In particular, IOAM data fields can be encapsulated in IPv6 using either Hop-by-Hop Options header or Destination options header. A Direct Export variant has been defined in {{RFC9326}}, enabling nodes to export telemetry data directly without per-hop accumulation.
 
 Another example of extensions to IPv6 for network monitoring is specified in {{RFC8250}}, which defines an IPv6 Destination Options header called Performance and Diagnostic Metrics (PDM). The PDM option header provides sequence numbers and timing information as a basis for measurements.
 
 The "Alternate Marking Method" is a recently proposed performance measurement approach described in {{RFC8321}}. {{RFC9343}} defines a new Hop-by-Hop Option to support this approach.
 
-"Path Tracing" {{I-D.draft-filsfils-ippm-path-tracing}} proposes an efficient solution for recording the route taken by a packet (including timestamps and load information taken at each hop along the route). This solution needs a new Hop-by-Hop Option to be defined.
+"Path Tracing" {{I-D.draft-filsfils-ippm-path-tracing}} proposes an efficient solution for recording the route taken by a packet (including timestamps and load information taken at each hop along the route). This solution needs a new Hop-by-Hop Option to be defined. The IPPM WG has also proposed a new lightweight telemetry mechanism in {{I-D.draft-ietf-ippm-transit-measurement-option}}, which accumulates end-to-end delay and congestion flags in a fixed-size structure.
 
-{{RFC8558}} analyses the evolution of transport protocols. It recommends that explicit signals should be used when the endpoints desire that network elements along the path become aware of events related to trasport protocol. Among the solutions, {{RFC8558}} considers the use of explicit signals at the network layer, and in particular it mentions that IPv6 hop-by-hop headers might suit this purpose.
+{{RFC8558}} analyses the evolution of transport protocols. It recommends that explicit signals should be used when the endpoints desire that network elements along the path become aware of events related to transport protocol. Among the solutions, {{RFC8558}} considers the use of explicit signals at the network layer, and in particular it mentions that IPv6 hop-by-hop headers might suit this purpose.
 
 {{RFC9268}} specifies a new IPv6 Hop-by-Hop option that is used to record the minimum Path MTU between a source and a destination.
 
@@ -224,26 +227,33 @@ The Internet Draft {{I-D.draft-ietf-6man-vpn-dest-opt-01}} proposes an experimen
 
 The Internet-Draft {{I-D.draft-guan-6man-ipv6-id-authentication}} proposes an IPv6 based address label terminal identity authentication mechanism, which uses a new Hop-by-Hop option, called Address Label Extension (ALE).
 
-The Internet-Draft {{I-D.draft-herbert-fast}} (currenlty expired) proposed the Firewalls and Service Tickets (FAST) protocol. This is a generic and extensible protocol for hosts to signal network nodes to request services or to gain admission into a network. Tickets are sent in IPv6 Hop-by-Hop options.
+The Internet-Draft {{I-D.draft-herbert-fast}} (currently expired) proposed the Firewalls and Service Tickets (FAST) protocol. This is a generic and extensible protocol for hosts to signal network nodes to request services or to gain admission into a network. Tickets are sent in IPv6 Hop-by-Hop options.
 
-The Internet-Draft {{I-D.draft-eckert-6man-qos-exthdr-discuss}} (currenlty expired) provided considerations for common QoS IPv6 extension header, in the context of the functionality under definition in the Deterministic Networking (detnet) IETF Working Group {{detnet-wg}}.
+The Internet-Draft {{I-D.draft-eckert-6man-qos-exthdr-discuss}} (currently expired) provided considerations for common QoS IPv6 extension header, in the context of the functionality under definition in the Deterministic Networking (detnet) IETF Working Group {{detnet-wg}}.
 
-The Internet-Draft {{I-D.draft-li-6man-topology-id}} (currenlty expired) proposed a new Hop-by-Hop option of IPv6 extension header to carry the topology identifier, which is used to identify the forwarding table instance created by the Multi Topology Routing or Flexible Algorithm.
+The Internet-Draft {{I-D.draft-li-6man-topology-id}} (currently expired) proposed a new Hop-by-Hop option of IPv6 extension header to carry the topology identifier, which is used to identify the forwarding table instance created by the Multi Topology Routing or Flexible Algorithm.
 
-The Internet-Draft {{I-D.draft-iurman-6man-carry-identifier}} (currenlty expired) discussed the need of having a generic approach for carrying identifiers in IPv6 Destination Options and Hop-by-Hop Options. The EIP proposal can be seen as a superset and a further generalization of the proposal of {{I-D.draft-iurman-6man-carry-identifier}}.
+The Internet-Draft {{I-D.draft-iurman-6man-carry-identifier}} (currently expired) discussed the need of having a generic approach for carrying identifiers in IPv6 Destination Options and Hop-by-Hop Options. The EIP proposal can be seen as a superset and a further generalization of the proposal of {{I-D.draft-iurman-6man-carry-identifier}}.
+
+## Additional relevant activities
+
+The IETF has shown interest in carrying application or service-level metadata in IPv6. The Application-aware Networking (APN) BoF discussed embedding such metadata, leading to proposals like APN6. The recently chartered CATS (Compute-Aware Traffic Steering) WG explores approaches where traffic is steered based on in-packet compute-related information. The GREEN WG (Getting Ready for Energy-Efficient Networking), formed in 2024, investigates telemetry for carbon-aware routing. The COIN IRTF RG has discussed in-network processing requirements that also point to in-band metadata handling.
+
+Outside the IETF, the P4.org community continues its efforts on programmable dataplanes and has proposed updated INT mechanisms. Recent research includes the use of in-band headers for on-path inference and service-specific packet handling, showing increasing interest in general, extensible frameworks like EIP.
+
 
 ## Consideration on Hop-by-hop Options allocation
 
 We have listed several proposals or already standardized solutions that use the IPv6 Hop-by-Hop Options. These Options are represented with a 8 bits code. The first two bits represent the action to be taken if the Options is unknown to a node that receives it, the third bit is used to specify if the content of the Options can be changed in flight. In particular the Option Types that start with 001 should be ignored if unknown and can be changed in flight, which is the most common combination. The current IANA allocation for Option Types starting with 001 is
-   (see https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml)
+(see [https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml](https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml))
 
-~~~
+```
    32 possible Option Types starting with 001
-   5 allocated by RFCs
+   5 allocated by RFCs (including IOAM and AltMark)
    27 not allocated
-~~~
+```
 
-We observe that there is a potential scarcity of the code points, as there are many scenarios that could require the definition of a new Hop-by-hop option. We also observe that having only 1 code point allocated for experiments is a very restrictive limitation.
+We observe that there is a potential scarcity of the code points, as there are many scenarios that could require the definition of a new Hop-by-Hop option. We also observe that having only 1 code point allocated for experiments is a very restrictive limitation.
 
 # Conventions and Definitions
 
