@@ -1365,9 +1365,13 @@ appear in all capitals, as shown here.<a href="#section-4-1" class="pilcrow">¶<
       <h2 id="name-iana-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-6-1">The definition of the EIP header as an Option for IPv6 Hop-by-hop Extension header requires the allocation of a codepoint from the "Destination Options and Hop-by-Hop Options" registry in the "Internet Protocol Version 6 (IPv6) Parameters" (https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml).<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">The definition of the EIP header as a TLV in the Segment Routing Header requires the allocation of a codepoint from the "Segment Routing Header TLVs" registry in the "Internet Protocol Version 6 (IPv6) Parameters" (https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml).<a href="#section-6-2" class="pilcrow">¶</a></p>
-<p id="section-6-3">The definition of EIP Information Elements in the EIP header will require the definition of a IANA registry.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-1">The definition of the EIP header as an Option for the IPv6 Hop-by-Hop Extension header requires the allocation of a codepoint from the "Destination Options and Hop-by-Hop Options" registry in the "Internet Protocol Version 6 (IPv6) Parameters":
+https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">The definition of the EIP header as a TLV in the Segment Routing Header requires the allocation of a codepoint from the "Segment Routing Header TLVs" registry in the "Internet Protocol Version 6 (IPv6) Parameters":
+https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">The definition of EIP Information Elements in the EIP header will require the creation of a new IANA registry to manage EIP Information Element type values.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-4">In the case that EIP is integrated into the IOAM framework as a new Data-Field-Type, an additional allocation will be required from the "IOAM Data Field Types" registry:
+https://www.iana.org/assignments/ioam/ioam.xhtml#data-field-types<a href="#section-6-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -1456,7 +1460,7 @@ appear in all capitals, as shown here.<a href="#section-4-1" class="pilcrow">¶<
 <dd class="break"></dd>
 <dt id="int-spec">[int-spec]</dt>
         <dd>
-<span class="refAuthor">Group, T. P. A. W.</span>, <span class="refTitle">"In-band Network Telemetry (INT) Dataplane Specification, version 2.1"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://p4.org/p4-spec/docs/INT_v2_1.pdf">https://p4.org/p4-spec/docs/INT_v2_1.pdf</a>&gt;</span>. </dd>
+<span class="refAuthor">Group, T. P. A. W.</span>, <span class="refTitle">"In-band Network Telemetry (INT) Dataplane Specification, version 2.1"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://p4.org/p4-spec/docs/INT%C2%A0v2%C2%A01.pdf">https://p4.org/p4-spec/docs/INT v2 1.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="onf-int">[onf-int]</dt>
         <dd>
