@@ -136,6 +136,12 @@ informative:
     date: 2025
     format:
       HTML: "https://datatracker.ietf.org/meeting/123/materials/bofdraft-fantel-00"
+  IANA-ioam-types:
+    title: "IOAM Data Field Types"
+    author:
+      - name: "IANA"
+    format:
+      HTML: "https://www.iana.org/assignments/ioam/ioam.xhtml#data-field-types"
 
 
 --- abstract
