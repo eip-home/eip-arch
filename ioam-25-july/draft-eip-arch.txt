@@ -5,10 +5,10 @@
 WG Working Group                                              S. Salsano
 Internet-Draft                          Univ. of Rome Tor Vergata / CNIT
 Intended status: Informational                              H. ElBakoury
-Expires: 24 January 2026                                      Consultant
+Expires: 25 January 2026                                      Consultant
                                                                 D. Lopez
                                                          Telefonica, I+D
-                                                            23 July 2025
+                                                            24 July 2025
 
 
      Extensible In-band Processing (EIP) Architecture and Framework
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 January 2026.
+   This Internet-Draft will expire on 25 January 2026.
 
 Copyright Notice
 
@@ -71,15 +71,18 @@ Table of Contents
    1.  Introduction
    2.  Basic principles for EIP
    3.  Benefits of a common EIP header for multiple use cases.
-     3.1.  Review of standardized and proposed evolutions of IPv6
-     3.2.  Additional relevant activities
-     3.3.  Consideration on Hop-by-hop Options allocation
-   4.  Conventions and Definitions
-   5.  Security Considerations
-   6.  IANA Considerations
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+     3.1.  Considerations on Hop-by-hop Options allocation
+   4.  Review of recent activities that propose to extend the IP
+           networking layer
+     4.1.  Standardized and proposed evolutions of IPv6
+     4.2.  Additional relevant activities
+   5.  Integration of EIP into the IOAM Framework
+   6.  Conventions and Definitions
+   7.  Security Considerations
+   8.  IANA Considerations
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -117,7 +120,7 @@ Table of Contents
    implement "complex" functionalities and they can be controlled by a
    "network program" that is embedded in IPv6 packet headers.  Another
    example is the INT (IN band Telemetry) solution for monitoring.
-   These (and other) examples are further discussed in Section 3.1.
+   These (and other) examples are further discussed in Section 4.
 
    The EIP solution is aligned with this trend, which will ensure a
    future proof evolution of networking architectures.  EIP supports a
@@ -137,6 +140,11 @@ Table of Contents
    wide support of the new header for its introduction.  Moreover, there
    can be usage scenarios in which legacy nodes can simply ignore the
    EIP header and provide transit to packets containing the EIP header.
+
+   The EIP header could be carried in different ways inside the IPv6
+   Header: 1) EIP Option for Hop-by-Hop Extension Header; 2) EIP TLV for
+   Segment Routing Header; 3) EIP as a new IOAM-Data-Field-Type within
+   the IOAM framework (discussed in Section 5).
 
    An important usage scenario considers the transport of user packets
    over a provider network.  In this scenario, we consider the network
@@ -191,20 +199,20 @@ Table of Contents
 
    The EIP header will carry different EIP Information Elements that are
    defined to support the different use cases.  There are reasons why it
-   is beneficial to define a common EIP header that supports multiple
-   use cases.
+   is beneficial to define a single common EIP header that supports
+   multiple use cases using the EIP Information Elements.
 
-   1.  The number of available Option Types in HBH header is limited,
-       likewise the number of available TLVs in the Segment Routing
-       Header (SRH) is limited.  Defining multiple Option Types or SRH
-       TLVs for multiple use case is not scalable and puts pressure on
-       the allocation of such codepoints.  This aspect is further
-       discussed in Section 3.1.
+   1.  The number of available Option Types in HBH header is limited
+       (see Section 3.1).  Likewise the number of available TLVs in the
+       Segment Routing Header (SRH) and the number of IOAM-Data-Field-
+       Type are limited.  Defining multiple Option Types (or SRH TLVs or
+       IOAM-Data-Field-Type) for multiple use case is not scalable and
+       puts pressure on the allocation of such codepoints.
 
    2.  The definition and standardization of specific EIP Information
        Elements for the different use cases will be simplified, compared
        to the need of requiring the definition of a new Option Type or
-       SRH TLVs.
+       SRH TLVs or IOAM-Data-Field-Type.
 
    3.  Different use cases may share a subset of common EIP Information
        Elements.
@@ -213,7 +221,33 @@ Table of Contents
        software and in hardware) can be defined when the different EIP
        Information Elements are carried inside the same EIP header.
 
-3.1.  Review of standardized and proposed evolutions of IPv6
+3.1.  Considerations on Hop-by-hop Options allocation
+
+   Several proposals and already standardized solutions use the IPv6
+   Hop-by-Hop Options, as discussed below in Section 4.  The Hop-by-Hop
+   Options are represented with a 8 bits code.  The first two bits
+   represent the action to be taken if the Options is unknown to a node
+   that receives it, the third bit is used to specify if the content of
+   the Options can be changed in flight.  In particular the Option Types
+   that start with 001 should be ignored if unknown and can be changed
+   in flight, which is the most common combination.  The current IANA
+   allocation for Option Types starting with 001 is (see
+   https://www.iana.org/assignments/ipv6-parameters/
+   ipv6-parameters.xhtml (https://www.iana.org/assignments/ipv6-
+   parameters/ipv6-parameters.xhtml))
+
+   32 possible Option Types starting with 001 5 allocated by RFCs
+   (including IOAM and AltMark) 27 not allocated
+
+   We observe that there is a potential scarcity of the code points, as
+   there are many scenarios that could require the definition of a new
+   Hop-by-Hop option.  We also observe that having only 1 code point
+   allocated for experiments is a very restrictive limitation.
+
+4.  Review of recent activities that propose to extend the IP networking
+    layer
+
+4.1.  Standardized and proposed evolutions of IPv6
 
    In the last few years, we have witnessed important innovations in
    IPv6 networking, centered around the emergence of Segment Routing for
@@ -260,10 +294,9 @@ Table of Contents
    efficient solution for recording the route taken by a packet
    (including timestamps and load information taken at each hop along
    the route).  This solution needs a new Hop-by-Hop Option to be
-   defined.  The IPPM WG has also proposed a new lightweight telemetry
-   mechanism in [I-D.draft-ietf-ippm-transit-measurement-option], which
-   accumulates end-to-end delay and congestion flags in a fixed-size
-   structure.
+   defined.  A new lightweight telemetry mechanism has been proposed in
+   [I-D.draft-mzbc-ippm-transit-measurement-option], which accumulates
+   end-to-end delay and congestion flags in a fixed-size structure.
 
    [RFC8558] analyses the evolution of transport protocols.  It
    recommends that explicit signals should be used when the endpoints
@@ -317,7 +350,7 @@ Table of Contents
    generalization of the proposal of
    [I-D.draft-iurman-6man-carry-identifier].
 
-3.2.  Additional relevant activities
+4.2.  Additional relevant activities
 
    The IETF has shown interest in carrying application or service-level
    metadata in IPv6.  The Application-aware Networking (APN) BoF
@@ -346,29 +379,45 @@ Table of Contents
    inference and service-specific packet handling, showing increasing
    interest in general, extensible frameworks like EIP.
 
-3.3.  Consideration on Hop-by-hop Options allocation
+5.  Integration of EIP into the IOAM Framework
 
-   We have listed several proposals or already standardized solutions
-   that use the IPv6 Hop-by-Hop Options.  These Options are represented
-   with a 8 bits code.  The first two bits represent the action to be
-   taken if the Options is unknown to a node that receives it, the third
-   bit is used to specify if the content of the Options can be changed
-   in flight.  In particular the Option Types that start with 001 should
-   be ignored if unknown and can be changed in flight, which is the most
-   common combination.  The current IANA allocation for Option Types
-   starting with 001 is (see https://www.iana.org/assignments/ipv6-
-   parameters/ipv6-parameters.xhtml (https://www.iana.org/assignments/
-   ipv6-parameters/ipv6-parameters.xhtml))
+   The IOAM (In-situ Operations, Administration, and Maintenance)
+   framework [RFC9197] defines a set of data fields and associated
+   semantics for recording telemetry and operational information within
+   packets as they traverse a network.  The IOAM data can be
+   encapsulated in IPv6 via Hop-by-Hop or Destination Options headers,
+   as specified in [RFC9486], and can be processed by IOAM-capable nodes
+   along the path.
 
-   32 possible Option Types starting with 001 5 allocated by RFCs
-   (including IOAM and AltMark) 27 not allocated
+   While the EIP architecture has primarily been conceived as a
+   standalone extensible header format, an additional integration
+   possibility is to define EIP as a new IOAM-Data-Field-Type within the
+   IOAM framework.  In this scenario, EIP would become one of the
+   possible information elements that can be included in IOAM data
+   fields, extending the telemetry model to support richer and more
+   general-purpose in-band processing capabilities.
 
-   We observe that there is a potential scarcity of the code points, as
-   there are many scenarios that could require the definition of a new
-   Hop-by-Hop option.  We also observe that having only 1 code point
-   allocated for experiments is a very restrictive limitation.
+   This approach offers the following advantages:
 
-4.  Conventions and Definitions
+   1.  It enables the reuse of the existing IOAM encapsulation and
+       processing pipeline.
+
+   2.  It allows EIP-aware nodes to operate within IOAM-enabled networks
+       without introducing separate Hop-by-Hop options.
+
+   3.  It leverages the existing IOAM data export and analytics tooling
+       to interpret EIP-related metadata.
+
+   Integrating EIP as a new IOAM data type would require defining a
+   specific EIP Data-Field-Type value in the IOAM registry
+   [IANA-ioam-types] and specifying how EIP Information Elements are
+   encoded and parsed within the IOAM format.  This integration path is
+   not mutually exclusive with the standalone deployment of EIP as an
+   independent IPv6 extension header but rather represents an additional
+   deployment possibility for network operators already adopting the
+   IOAM framework.
+
+6.  Conventions and Definitions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -376,11 +425,11 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-5.  Security Considerations
+7.  Security Considerations
 
    TODO Security
 
-6.  IANA Considerations
+8.  IANA Considerations
 
    The definition of the EIP header as an Option for the IPv6 Hop-by-Hop
    Extension header requires the allocation of a codepoint from the
@@ -404,9 +453,9 @@ Table of Contents
    "IOAM Data Field Types" registry:
    https://www.iana.org/assignments/ioam/ioam.xhtml#data-field-types
 
-7.  References
+9.  References
 
-7.1.  Normative References
+9.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -417,7 +466,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-7.2.  Informative References
+9.2.  Informative References
 
    [detnet-wg]
               IETF, "Deterministic Networking (DetNet) IETF Working
@@ -469,9 +518,6 @@ Table of Contents
               8 November 2024, <https://datatracker.ietf.org/doc/html/
               draft-ietf-6man-vpn-dest-opt-01>.
 
-   [I-D.draft-ietf-ippm-transit-measurement-option]
-              "*** BROKEN REFERENCE ***".
-
    [I-D.draft-iurman-6man-carry-identifier]
               Iurman, J., "Carrying an Identifier in IPv6 packets", Work
               in Progress, Internet-Draft, draft-iurman-6man-carry-
@@ -485,6 +531,18 @@ Table of Contents
               draft-li-6man-topology-id-00, 20 March 2022,
               <https://datatracker.ietf.org/doc/html/draft-li-6man-
               topology-id-00>.
+
+   [I-D.draft-mzbc-ippm-transit-measurement-option]
+              Mizrahi, T., Zhou, T., Belkar, S., and R. Cohen, "The
+              Transit Measurement Option", Work in Progress, Internet-
+              Draft, draft-mzbc-ippm-transit-measurement-option-06, 2
+              July 2025, <https://datatracker.ietf.org/doc/html/draft-
+              mzbc-ippm-transit-measurement-option-06>.
+
+   [IANA-ioam-types]
+              IANA, "IOAM Data Field Types", n.d.,
+              <https://www.iana.org/assignments/ioam/ioam.xhtml#data-
+              field-types>.
 
    [IANA-ipv6-parameters]
               IANA, "Internet Protocol Version 6 (IPv6) Parameters",
