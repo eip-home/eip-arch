@@ -212,7 +212,7 @@ As shown in {{fig:eip-framework}}, an EIP domain can communicate with other doma
 The EIP header will carry different EIP Information Elements that are defined to support the different use cases.
 There are reasons why it is beneficial to define a single common EIP header that supports multiple use cases using the EIP Information Elements.
 
-1. The number of available Option Types in HBH header is limited (see {{considerations-hopbyhop}}). Likewise the number of available TLVs in the Segment Routing Header (SRH) and the number of IOAM-Data-Field-Type are limited. Defining multiple Option Types (or SRH TLVs or IOAM-Data-Field-Type) for multiple use case is not scalable and puts pressure on the allocation of such codepoints. 
+1. The number of available Option Types in HBH header is limited (see {{considerations-hopbyhop}}). Likewise the number of available TLVs in the Segment Routing Header (SRH) and the number of IOAM-Data-Field-Type are limited. Defining multiple Option Types (or SRH TLVs or IOAM-Data-Field-Type) for multiple use case is not scalable and puts pressure on the allocation of such codepoints.
 
 2. The definition and standardization of specific EIP Information Elements for the different use cases will be simplified, compared to the need of requiring the definition of a new Option Type or SRH TLVs or IOAM-Data-Field-Type.
 
