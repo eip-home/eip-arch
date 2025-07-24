@@ -67,7 +67,7 @@ informative:
   I-D.draft-eckert-6man-qos-exthdr-discuss:
   I-D.draft-li-6man-topology-id:
   I-D.draft-iurman-6man-carry-identifier:
-  I-D.draft-ietf-ippm-transit-measurement-option:
+  I-D.draft-mzbc-ippm-transit-measurement-option:
   IANA-ipv6-parameters:
     title: "Internet Protocol Version 6 (IPv6) Parameters"
     author:
@@ -241,7 +241,7 @@ Another example of extensions to IPv6 for network monitoring is specified in {{R
 
 The "Alternate Marking Method" is a recently proposed performance measurement approach described in {{RFC8321}}. {{RFC9343}} defines a new Hop-by-Hop Option to support this approach.
 
-"Path Tracing" {{I-D.draft-filsfils-ippm-path-tracing}} proposes an efficient solution for recording the route taken by a packet (including timestamps and load information taken at each hop along the route). This solution needs a new Hop-by-Hop Option to be defined. The IPPM WG has also proposed a new lightweight telemetry mechanism in {{I-D.draft-ietf-ippm-transit-measurement-option}}, which accumulates end-to-end delay and congestion flags in a fixed-size structure.
+"Path Tracing" {{I-D.draft-filsfils-ippm-path-tracing}} proposes an efficient solution for recording the route taken by a packet (including timestamps and load information taken at each hop along the route). This solution needs a new Hop-by-Hop Option to be defined. A new lightweight telemetry mechanism has been proposed in {{I-D.draft-mzbc-ippm-transit-measurement-option}}, which accumulates end-to-end delay and congestion flags in a fixed-size structure.
 
 {{RFC8558}} analyses the evolution of transport protocols. It recommends that explicit signals should be used when the endpoints desire that network elements along the path become aware of events related to transport protocol. Among the solutions, {{RFC8558}} considers the use of explicit signals at the network layer, and in particular it mentions that IPv6 hop-by-hop headers might suit this purpose.
 
