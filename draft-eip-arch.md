@@ -51,7 +51,7 @@ informative:
   RFC8986:
   RFC8799:
   RFC8250:
-  RFC8321:
+  RFC9341:
   RFC8558:
   RFC9197:
   RFC9268:
@@ -62,7 +62,7 @@ informative:
   I-D.draft-filsfils-ippm-path-tracing:
   I-D.draft-ietf-6man-enhanced-vpn-vtn-id:
   I-D.draft-guan-6man-ipv6-id-authentication:
-  I-D.draft-ietf-6man-vpn-dest-opt-01:
+  I-D.draft-ietf-6man-vpn-dest-opt:
   I-D.draft-herbert-fast:
   I-D.draft-eckert-6man-qos-exthdr-discuss:
   I-D.draft-li-6man-topology-id:
@@ -245,7 +245,7 @@ Another recent activity that proposed to extend the networking layer to support 
 
 Another example of extensions to IPv6 for network monitoring is specified in {{RFC8250}}, which defines an IPv6 Destination Options header called Performance and Diagnostic Metrics (PDM). The PDM option header provides sequence numbers and timing information as a basis for measurements.
 
-The "Alternate Marking Method" is a recently proposed performance measurement approach described in {{RFC8321}}. {{RFC9343}} defines a new Hop-by-Hop Option to support this approach.
+The "Alternate Marking Method" is a recently proposed performance measurement approach described in {{RFC9341}}. {{RFC9343}} defines a new Hop-by-Hop Option to support this approach.
 
 "Path Tracing" {{I-D.draft-filsfils-ippm-path-tracing}} proposes an efficient solution for recording the route taken by a packet (including timestamps and load information taken at each hop along the route). This solution needs a new Hop-by-Hop Option to be defined. A new lightweight telemetry mechanism has been proposed in {{I-D.draft-mzbc-ippm-transit-measurement-option}}, which accumulates end-to-end delay and congestion flags in a fixed-size structure.
 
@@ -302,17 +302,13 @@ TODO Security
 
 # IANA Considerations
 
-The definition of the EIP header as an Option for the IPv6 Hop-by-Hop Extension header requires the allocation of a codepoint from the "Destination Options and Hop-by-Hop Options" registry in the "Internet Protocol Version 6 (IPv6) Parameters":
-https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml
+The definition of the EIP header as an Option for the IPv6 Hop-by-Hop Extension header requires the allocation of a codepoint from the "Destination Options and Hop-by-Hop Options" registry in the "Internet Protocol Version 6 (IPv6) Parameters" {{IANA-ipv6-parameters}}.
 
-The definition of the EIP header as a TLV in the Segment Routing Header requires the allocation of a codepoint from the "Segment Routing Header TLVs" registry in the "Internet Protocol Version 6 (IPv6) Parameters":
-https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml
+The definition of the EIP header as a TLV in the Segment Routing Header requires the allocation of a codepoint from the "Segment Routing Header TLVs" registry in the "Internet Protocol Version 6 (IPv6) Parameters" {{IANA-ipv6-parameters}}.
 
 The definition of EIP Information Elements in the EIP header will require the creation of a new IANA registry to manage EIP Information Element type values.
 
-In the case that EIP is integrated into the IOAM framework as a new Data-Field-Type, an additional allocation will be required from the "IOAM Data Field Types" registry:
-https://www.iana.org/assignments/ioam/ioam.xhtml#data-field-types
-
+In the case that EIP is integrated into the IOAM framework as a new Data-Field-Type, an additional allocation will be required from the "IOAM Data Field Types" registry {{IANA-ioam-types}}.
 
 
 --- back
