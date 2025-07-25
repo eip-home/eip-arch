@@ -1054,7 +1054,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salsano, et al.</td>
-<td class="center">Expires 25 January 2026</td>
+<td class="center">Expires 26 January 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-eip-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-07-24" class="published">24 July 2025</time>
+<time datetime="2025-07-25" class="published">25 July 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-01-25">25 January 2026</time></dd>
+<dd class="expires"><time datetime="2026-01-26">26 January 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1132,7 +1132,7 @@ the protocol specifications of EIP.<a href="#section-abstract-1" class="pilcrow"
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1332,12 +1332,12 @@ There are reasons why it is beneficial to define a single common EIP header that
 <p id="section-4.1-1">In the last few years, we have witnessed important innovations in IPv6 networking, centered around the emergence of Segment Routing for IPv6 (SRv6) <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> and of the SRv6 "Network Programming model" <span>[<a href="#RFC8986" class="cite xref">RFC8986</a>]</span>. With SRv6 it is possible to insert a <em>Network program</em>, i.e. a sequence of instructions (called <em>segments</em>), in a header of the IPv6 protocol, called Segment Routing Header (SRH). Recent updates (see <span>[<a href="#RFC9800" class="cite xref">RFC9800</a>]</span>) introduced compression mechanisms for segment lists, improving scalability for long segment chains.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2">Another recent activity that proposed to extend the networking layer to support more complex functions concerns network monitoring. The concept of INT "In-band Network Telemetry" has been proposed since 2015 <span>[<a href="#onf-int" class="cite xref">onf-int</a>]</span> in the context of the definition of use cases for P4 based data plane programmability. The latest version of INT specifications dates November 2020 <span>[<a href="#int-spec" class="cite xref">int-spec</a>]</span>. <span>[<a href="#int-spec" class="cite xref">int-spec</a>]</span> specifies the format of headers that carry monitoring instructions and monitoring information along with data plane packets. The specific location for INT Headers is intentionally not specified: an INT Header can be inserted as an option or payload of any encapsulation type. The In-band Telemetry concept has been adopted by the IPPM IETF Working Group, renaming it "In-situ Operations, Administration, and Maintenance" (IOAM). <span>[<a href="#RFC9197" class="cite xref">RFC9197</a>]</span> discusses the data fields and associated data types for IOAM. The in-situ OAM data fields can be encapsulated in a variety of protocols, including IPv6. The specification details for carrying IOAM data inside IPv6 headers are provided in <span>[<a href="#RFC9486" class="cite xref">RFC9486</a>]</span>. In particular, IOAM data fields can be encapsulated in IPv6 using either Hop-by-Hop Options header or Destination options header. A Direct Export variant has been defined in <span>[<a href="#RFC9326" class="cite xref">RFC9326</a>]</span>, enabling nodes to export telemetry data directly without per-hop accumulation.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1-3">Another example of extensions to IPv6 for network monitoring is specified in <span>[<a href="#RFC8250" class="cite xref">RFC8250</a>]</span>, which defines an IPv6 Destination Options header called Performance and Diagnostic Metrics (PDM). The PDM option header provides sequence numbers and timing information as a basis for measurements.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.1-4">The "Alternate Marking Method" is a recently proposed performance measurement approach described in <span>[<a href="#RFC8321" class="cite xref">RFC8321</a>]</span>. <span>[<a href="#RFC9343" class="cite xref">RFC9343</a>]</span> defines a new Hop-by-Hop Option to support this approach.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.1-4">The "Alternate Marking Method" is a recently proposed performance measurement approach described in <span>[<a href="#RFC9341" class="cite xref">RFC9341</a>]</span>. <span>[<a href="#RFC9343" class="cite xref">RFC9343</a>]</span> defines a new Hop-by-Hop Option to support this approach.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
 <p id="section-4.1-5">"Path Tracing" <span>[<a href="#I-D.draft-filsfils-ippm-path-tracing" class="cite xref">I-D.draft-filsfils-ippm-path-tracing</a>]</span> proposes an efficient solution for recording the route taken by a packet (including timestamps and load information taken at each hop along the route). This solution needs a new Hop-by-Hop Option to be defined. A new lightweight telemetry mechanism has been proposed in <span>[<a href="#I-D.draft-mzbc-ippm-transit-measurement-option" class="cite xref">I-D.draft-mzbc-ippm-transit-measurement-option</a>]</span>, which accumulates end-to-end delay and congestion flags in a fixed-size structure.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
 <p id="section-4.1-6"><span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span> analyses the evolution of transport protocols. It recommends that explicit signals should be used when the endpoints desire that network elements along the path become aware of events related to transport protocol. Among the solutions, <span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span> considers the use of explicit signals at the network layer, and in particular it mentions that IPv6 hop-by-hop headers might suit this purpose.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
 <p id="section-4.1-7"><span>[<a href="#RFC9268" class="cite xref">RFC9268</a>]</span> specifies a new IPv6 Hop-by-Hop option that is used to record the minimum Path MTU between a source and a destination.<a href="#section-4.1-7" class="pilcrow">¶</a></p>
 <p id="section-4.1-8">The Internet Draft <span>[<a href="#I-D.draft-ietf-6man-enhanced-vpn-vtn-id" class="cite xref">I-D.draft-ietf-6man-enhanced-vpn-vtn-id</a>]</span> proposes a new Hop-by-Hop option of IPv6 extension header to carry the Network Resource Partition (NRP) information, which could be used to identify the NRP-specific processing to be performed on the packets by each network node along a network path in the NRP.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
-<p id="section-4.1-9">The Internet Draft <span>[<a href="#I-D.draft-ietf-6man-vpn-dest-opt-01" class="cite xref">I-D.draft-ietf-6man-vpn-dest-opt-01</a>]</span> proposes an experiment in which VPN service information for both layer 2 and layer 3 VPNs is encoded in a new IPv6 Destination Option. The new IPv6 Destination Option is called the VPN Service Option.<a href="#section-4.1-9" class="pilcrow">¶</a></p>
+<p id="section-4.1-9">The Internet Draft <span>[<a href="#I-D.draft-ietf-6man-vpn-dest-opt" class="cite xref">I-D.draft-ietf-6man-vpn-dest-opt</a>]</span> proposes an experiment in which VPN service information for both layer 2 and layer 3 VPNs is encoded in a new IPv6 Destination Option. The new IPv6 Destination Option is called the VPN Service Option.<a href="#section-4.1-9" class="pilcrow">¶</a></p>
 <p id="section-4.1-10">The Internet-Draft <span>[<a href="#I-D.draft-guan-6man-ipv6-id-authentication" class="cite xref">I-D.draft-guan-6man-ipv6-id-authentication</a>]</span> proposes an IPv6 based address label terminal identity authentication mechanism, which uses a new Hop-by-Hop option, called Address Label Extension (ALE).<a href="#section-4.1-10" class="pilcrow">¶</a></p>
 <p id="section-4.1-11">The Internet-Draft <span>[<a href="#I-D.draft-herbert-fast" class="cite xref">I-D.draft-herbert-fast</a>]</span> (currently expired) proposed the Firewalls and Service Tickets (FAST) protocol. This is a generic and extensible protocol for hosts to signal network nodes to request services or to gain admission into a network. Tickets are sent in IPv6 Hop-by-Hop options.<a href="#section-4.1-11" class="pilcrow">¶</a></p>
 <p id="section-4.1-12">The Internet-Draft <span>[<a href="#I-D.draft-eckert-6man-qos-exthdr-discuss" class="cite xref">I-D.draft-eckert-6man-qos-exthdr-discuss</a>]</span> (currently expired) provided considerations for common QoS IPv6 extension header, in the context of the functionality under definition in the Deterministic Networking (detnet) IETF Working Group <span>[<a href="#detnet-wg" class="cite xref">detnet-wg</a>]</span>.<a href="#section-4.1-12" class="pilcrow">¶</a></p>
@@ -1403,13 +1403,10 @@ appear in all capitals, as shown here.<a href="#section-6-1" class="pilcrow">¶<
       <h2 id="name-iana-considerations">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-8-1">The definition of the EIP header as an Option for the IPv6 Hop-by-Hop Extension header requires the allocation of a codepoint from the "Destination Options and Hop-by-Hop Options" registry in the "Internet Protocol Version 6 (IPv6) Parameters":
-https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2">The definition of the EIP header as a TLV in the Segment Routing Header requires the allocation of a codepoint from the "Segment Routing Header TLVs" registry in the "Internet Protocol Version 6 (IPv6) Parameters":
-https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-1">The definition of the EIP header as an Option for the IPv6 Hop-by-Hop Extension header requires the allocation of a codepoint from the "Destination Options and Hop-by-Hop Options" registry in the "Internet Protocol Version 6 (IPv6) Parameters" <span>[<a href="#IANA-ipv6-parameters" class="cite xref">IANA-ipv6-parameters</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">The definition of the EIP header as a TLV in the Segment Routing Header requires the allocation of a codepoint from the "Segment Routing Header TLVs" registry in the "Internet Protocol Version 6 (IPv6) Parameters" <span>[<a href="#IANA-ipv6-parameters" class="cite xref">IANA-ipv6-parameters</a>]</span>.<a href="#section-8-2" class="pilcrow">¶</a></p>
 <p id="section-8-3">The definition of EIP Information Elements in the EIP header will require the creation of a new IANA registry to manage EIP Information Element type values.<a href="#section-8-3" class="pilcrow">¶</a></p>
-<p id="section-8-4">In the case that EIP is integrated into the IOAM framework as a new Data-Field-Type, an additional allocation will be required from the "IOAM Data Field Types" registry:
-https://www.iana.org/assignments/ioam/ioam.xhtml#data-field-types<a href="#section-8-4" class="pilcrow">¶</a></p>
+<p id="section-8-4">In the case that EIP is integrated into the IOAM framework as a new Data-Field-Type, an additional allocation will be required from the "IOAM Data Field Types" registry <span>[<a href="#IANA-ioam-types" class="cite xref">IANA-ioam-types</a>]</span>.<a href="#section-8-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -1464,9 +1461,9 @@ https://www.iana.org/assignments/ioam/ioam.xhtml#data-field-types<a href="#secti
         <dd>
 <span class="refAuthor">Dong, J.</span>, <span class="refAuthor">Li, Z.</span>, <span class="refAuthor">Xie, C.</span>, <span class="refAuthor">Ma, C.</span>, and <span class="refAuthor">G. S. Mishra</span>, <span class="refTitle">"Carrying Network Resource (NR) related Information in IPv6 Extension Header"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-6man-enhanced-vpn-vtn-id-12</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-6man-enhanced-vpn-vtn-id-12">https://datatracker.ietf.org/doc/html/draft-ietf-6man-enhanced-vpn-vtn-id-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.draft-ietf-6man-vpn-dest-opt-01">[I-D.draft-ietf-6man-vpn-dest-opt-01]</dt>
+<dt id="I-D.draft-ietf-6man-vpn-dest-opt">[I-D.draft-ietf-6man-vpn-dest-opt]</dt>
         <dd>
-<span class="refAuthor">Bonica, R.</span>, <span class="refAuthor">Li, X.</span>, <span class="refAuthor">Farrel, A.</span>, <span class="refAuthor">Kamite, Y.</span>, and <span class="refAuthor">L. Jalil</span>, <span class="refTitle">"The IPv6 VPN Service Destination Option"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-6man-vpn-dest-opt-01</span>, <time datetime="2024-11-08" class="refDate">8 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-6man-vpn-dest-opt-01">https://datatracker.ietf.org/doc/html/draft-ietf-6man-vpn-dest-opt-01</a>&gt;</span>. </dd>
+<span class="refAuthor">Bonica, R.</span>, <span class="refAuthor">Li, X.</span>, <span class="refAuthor">Farrel, A.</span>, <span class="refAuthor">Kamite, Y.</span>, and <span class="refAuthor">L. Jalil</span>, <span class="refTitle">"The IPv6 VPN Service Destination Option"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-6man-vpn-dest-opt-11</span>, <time datetime="2025-05-14" class="refDate">14 May 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-6man-vpn-dest-opt-11">https://datatracker.ietf.org/doc/html/draft-ietf-6man-vpn-dest-opt-11</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.draft-iurman-6man-carry-identifier">[I-D.draft-iurman-6man-carry-identifier]</dt>
         <dd>
@@ -1512,10 +1509,6 @@ https://www.iana.org/assignments/ioam/ioam.xhtml#data-field-types<a href="#secti
         <dd>
 <span class="refAuthor">Elkins, N.</span>, <span class="refAuthor">Hamilton, R.</span>, and <span class="refAuthor">M. Ackermann</span>, <span class="refTitle">"IPv6 Performance and Diagnostic Metrics (PDM) Destination Option"</span>, <span class="seriesInfo">RFC 8250</span>, <span class="seriesInfo">DOI 10.17487/RFC8250</span>, <time datetime="2017-09" class="refDate">September 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8250">https://www.rfc-editor.org/rfc/rfc8250</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC8321">[RFC8321]</dt>
-        <dd>
-<span class="refAuthor">Fioccola, G., Ed.</span>, <span class="refAuthor">Capello, A.</span>, <span class="refAuthor">Cociglio, M.</span>, <span class="refAuthor">Castaldelli, L.</span>, <span class="refAuthor">Chen, M.</span>, <span class="refAuthor">Zheng, L.</span>, <span class="refAuthor">Mirsky, G.</span>, and <span class="refAuthor">T. Mizrahi</span>, <span class="refTitle">"Alternate-Marking Method for Passive and Hybrid Performance Monitoring"</span>, <span class="seriesInfo">RFC 8321</span>, <span class="seriesInfo">DOI 10.17487/RFC8321</span>, <time datetime="2018-01" class="refDate">January 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8321">https://www.rfc-editor.org/rfc/rfc8321</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC8558">[RFC8558]</dt>
         <dd>
 <span class="refAuthor">Hardie, T., Ed.</span>, <span class="refTitle">"Transport Protocol Path Signals"</span>, <span class="seriesInfo">RFC 8558</span>, <span class="seriesInfo">DOI 10.17487/RFC8558</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8558">https://www.rfc-editor.org/rfc/rfc8558</a>&gt;</span>. </dd>
@@ -1543,6 +1536,10 @@ https://www.iana.org/assignments/ioam/ioam.xhtml#data-field-types<a href="#secti
 <dt id="RFC9326">[RFC9326]</dt>
         <dd>
 <span class="refAuthor">Song, H.</span>, <span class="refAuthor">Gafni, B.</span>, <span class="refAuthor">Brockners, F.</span>, <span class="refAuthor">Bhandari, S.</span>, and <span class="refAuthor">T. Mizrahi</span>, <span class="refTitle">"In Situ Operations, Administration, and Maintenance (IOAM) Direct Exporting"</span>, <span class="seriesInfo">RFC 9326</span>, <span class="seriesInfo">DOI 10.17487/RFC9326</span>, <time datetime="2022-11" class="refDate">November 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9326">https://www.rfc-editor.org/rfc/rfc9326</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9341">[RFC9341]</dt>
+        <dd>
+<span class="refAuthor">Fioccola, G., Ed.</span>, <span class="refAuthor">Cociglio, M.</span>, <span class="refAuthor">Mirsky, G.</span>, <span class="refAuthor">Mizrahi, T.</span>, and <span class="refAuthor">T. Zhou</span>, <span class="refTitle">"Alternate-Marking Method"</span>, <span class="seriesInfo">RFC 9341</span>, <span class="seriesInfo">DOI 10.17487/RFC9341</span>, <time datetime="2022-12" class="refDate">December 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9341">https://www.rfc-editor.org/rfc/rfc9341</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9343">[RFC9343]</dt>
         <dd>

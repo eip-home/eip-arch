@@ -5,10 +5,10 @@
 WG Working Group                                              S. Salsano
 Internet-Draft                          Univ. of Rome Tor Vergata / CNIT
 Intended status: Informational                              H. ElBakoury
-Expires: 25 January 2026                                      Consultant
+Expires: 26 January 2026                                      Consultant
                                                                 D. Lopez
                                                          Telefonica, I+D
-                                                            24 July 2025
+                                                            25 July 2025
 
 
      Extensible In-band Processing (EIP) Architecture and Framework
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 January 2026.
+   This Internet-Draft will expire on 26 January 2026.
 
 Copyright Notice
 
@@ -287,7 +287,7 @@ Table of Contents
    basis for measurements.
 
    The "Alternate Marking Method" is a recently proposed performance
-   measurement approach described in [RFC8321].  [RFC9343] defines a new
+   measurement approach described in [RFC9341].  [RFC9343] defines a new
    Hop-by-Hop Option to support this approach.
 
    "Path Tracing" [I-D.draft-filsfils-ippm-path-tracing] proposes an
@@ -315,7 +315,7 @@ Table of Contents
    the NRP-specific processing to be performed on the packets by each
    network node along a network path in the NRP.
 
-   The Internet Draft [I-D.draft-ietf-6man-vpn-dest-opt-01] proposes an
+   The Internet Draft [I-D.draft-ietf-6man-vpn-dest-opt] proposes an
    experiment in which VPN service information for both layer 2 and
    layer 3 VPNs is encoded in a new IPv6 Destination Option.  The new
    IPv6 Destination Option is called the VPN Service Option.
@@ -434,15 +434,13 @@ Table of Contents
    The definition of the EIP header as an Option for the IPv6 Hop-by-Hop
    Extension header requires the allocation of a codepoint from the
    "Destination Options and Hop-by-Hop Options" registry in the
-   "Internet Protocol Version 6 (IPv6) Parameters":
-   https://www.iana.org/assignments/ipv6-parameters/
-   ipv6-parameters.xhtml
+   "Internet Protocol Version 6 (IPv6) Parameters"
+   [IANA-ipv6-parameters].
 
    The definition of the EIP header as a TLV in the Segment Routing
    Header requires the allocation of a codepoint from the "Segment
    Routing Header TLVs" registry in the "Internet Protocol Version 6
-   (IPv6) Parameters": https://www.iana.org/assignments/ipv6-parameters/
-   ipv6-parameters.xhtml
+   (IPv6) Parameters" [IANA-ipv6-parameters].
 
    The definition of EIP Information Elements in the EIP header will
    require the creation of a new IANA registry to manage EIP Information
@@ -450,8 +448,7 @@ Table of Contents
 
    In the case that EIP is integrated into the IOAM framework as a new
    Data-Field-Type, an additional allocation will be required from the
-   "IOAM Data Field Types" registry:
-   https://www.iana.org/assignments/ioam/ioam.xhtml#data-field-types
+   "IOAM Data Field Types" registry [IANA-ioam-types].
 
 9.  References
 
@@ -511,12 +508,12 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-6man-
               enhanced-vpn-vtn-id-12>.
 
-   [I-D.draft-ietf-6man-vpn-dest-opt-01]
+   [I-D.draft-ietf-6man-vpn-dest-opt]
               Bonica, R., Li, X., Farrel, A., Kamite, Y., and L. Jalil,
               "The IPv6 VPN Service Destination Option", Work in
-              Progress, Internet-Draft, draft-ietf-6man-vpn-dest-opt-01,
-              8 November 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-6man-vpn-dest-opt-01>.
+              Progress, Internet-Draft, draft-ietf-6man-vpn-dest-opt-11,
+              14 May 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-6man-vpn-dest-opt-11>.
 
    [I-D.draft-iurman-6man-carry-identifier]
               Iurman, J., "Carrying an Identifier in IPv6 packets", Work
@@ -581,12 +578,6 @@ Table of Contents
               Option", RFC 8250, DOI 10.17487/RFC8250, September 2017,
               <https://www.rfc-editor.org/rfc/rfc8250>.
 
-   [RFC8321]  Fioccola, G., Ed., Capello, A., Cociglio, M., Castaldelli,
-              L., Chen, M., Zheng, L., Mirsky, G., and T. Mizrahi,
-              "Alternate-Marking Method for Passive and Hybrid
-              Performance Monitoring", RFC 8321, DOI 10.17487/RFC8321,
-              January 2018, <https://www.rfc-editor.org/rfc/rfc8321>.
-
    [RFC8558]  Hardie, T., Ed., "Transport Protocol Path Signals",
               RFC 8558, DOI 10.17487/RFC8558, April 2019,
               <https://www.rfc-editor.org/rfc/rfc8558>.
@@ -620,6 +611,11 @@ Table of Contents
               Maintenance (IOAM) Direct Exporting", RFC 9326,
               DOI 10.17487/RFC9326, November 2022,
               <https://www.rfc-editor.org/rfc/rfc9326>.
+
+   [RFC9341]  Fioccola, G., Ed., Cociglio, M., Mirsky, G., Mizrahi, T.,
+              and T. Zhou, "Alternate-Marking Method", RFC 9341,
+              DOI 10.17487/RFC9341, December 2022,
+              <https://www.rfc-editor.org/rfc/rfc9341>.
 
    [RFC9343]  Fioccola, G., Zhou, T., Cociglio, M., Qin, F., and R.
               Pang, "IPv6 Application of the Alternate-Marking Method",
