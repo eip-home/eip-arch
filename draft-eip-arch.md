@@ -255,7 +255,7 @@ The "Alternate Marking Method" is a recently proposed performance measurement ap
 
 The Internet Draft {{I-D.draft-ietf-6man-enhanced-vpn-vtn-id}} proposes a new Hop-by-Hop option of IPv6 extension header to carry the Network Resource Partition (NRP) information, which could be used to identify the NRP-specific processing to be performed on the packets by each network node along a network path in the NRP.
 
-The Internet Draft {{I-D.draft-ietf-6man-vpn-dest-opt-01}} proposes an experiment in which VPN service information for both layer 2 and layer 3 VPNs is encoded in a new IPv6 Destination Option. The new IPv6 Destination Option is called the VPN Service Option.
+The Internet Draft {{I-D.draft-ietf-6man-vpn-dest-opt}} proposes an experiment in which VPN service information for both layer 2 and layer 3 VPNs is encoded in a new IPv6 Destination Option. The new IPv6 Destination Option is called the VPN Service Option.
 
 The Internet-Draft {{I-D.draft-guan-6man-ipv6-id-authentication}} proposes an IPv6 based address label terminal identity authentication mechanism, which uses a new Hop-by-Hop option, called Address Label Extension (ALE).
 
