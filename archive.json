@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-24T01:46:55.307124+00:00",
+  "timestamp": "2025-07-27T01:55:05.283995+00:00",
   "repo": "eip-home/eip-arch",
   "labels": [
     {
@@ -50,5 +50,34 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOHT6aHc6giV5R",
+      "title": "Ioam 25 july",
+      "url": "https://github.com/eip-home/eip-arch/pull/1",
+      "state": "MERGED",
+      "author": "StefanoSalsano",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-07-24T22:08:53Z",
+      "updatedAt": "2025-07-24T22:11:13Z",
+      "baseRepository": "eip-home/eip-arch",
+      "baseRefName": "main",
+      "baseRefOid": "3ed60884201f2a886ee3a45274a3f74c18ac51f9",
+      "headRepository": "eip-home/eip-arch",
+      "headRefName": "ioam-25-july",
+      "headRefOid": "69c8d9996ca369ca78d811f01a46abd94fc19f82",
+      "closedAt": "2025-07-24T22:10:54Z",
+      "mergedAt": "2025-07-24T22:10:54Z",
+      "mergedBy": "StefanoSalsano",
+      "mergeCommit": {
+        "oid": "a8de99da0d8f0d2a636cbc998832070ebcaeee4a"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
