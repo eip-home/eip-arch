@@ -142,7 +142,7 @@ informative:
         ins: "IANA"
     format:
       HTML: "https://www.iana.org/assignments/ioam/ioam.xhtml#data-field-types"
-  salsano25-eipioam:
+  salsano25-cscn:
     title: "Integrating Extensible In-Band Processing (EIP) into the IOAM Framework: A Unified Approach to In-Packet Telemetry and Metadata"
     author:
       - name: "Stefano Salsano"
@@ -311,7 +311,7 @@ Outside the IETF, the P4.org community continues its efforts on programmable dat
 
 The IOAM (In-situ Operations, Administration, and Maintenance) framework {{RFC9197}} defines a set of data fields and associated semantics for recording telemetry and operational information within packets as they traverse a network. The IOAM data can be encapsulated in IPv6 via Hop-by-Hop or Destination Options headers, as specified in {{RFC9486}}, and can be processed by IOAM-capable nodes along the path.
 
-An earlier integration direction for EIP within IOAM was explored in {{salsano25-eipioam}}, where EIP was modeled as a new IOAM Data-Field-Type carried within the existing IOAM data-field structure. That approach showed that EIP Information Elements could be embedded into the IOAM processing pipeline, enabling reuse of the existing IOAM encapsulation and processing model without introducing separate Hop-by-Hop options.
+An earlier integration direction for EIP within IOAM was explored in {{salsano25-cscn}}, where EIP was modeled as a new IOAM Data-Field-Type carried within the existing IOAM data-field structure. That approach showed that EIP Information Elements could be embedded into the IOAM processing pipeline, enabling reuse of the existing IOAM encapsulation and processing model without introducing separate Hop-by-Hop options.
 
 The current integration direction adopts a different approach based on the Global Opaque Block (GOB) of the IOAM Pre-allocated Trace Option, as specified in {{id-gob-ioam}}. In this model, EIP Information Elements can be carried inside a reusable, pre-allocated global metadata region that is distinct from the per-node Trace data and can support schema-driven formats and controlled in-band updates.
 
@@ -336,7 +336,7 @@ The definition of the EIP header as a TLV in the Segment Routing Header requires
 
 The definition of EIP Information Elements in the EIP header will require the creation of a new IANA registry to manage EIP Information Element type values.
 
-An earlier integration of EIP into IOAM as a new Data-Field-Type was explored in {{salsano25-eipioam}}, which would have required an allocation from the "IOAM Data Field Types" registry {{IANA-ioam-types}}. The currently preferred IOAM integration for EIP is instead based on the Global Opaque Block (GOB), whose protocol format and any related codepoint requirements are specified in {{id-gob-ioam}}.
+An earlier integration of EIP into IOAM as a new Data-Field-Type was explored in {{salsano25-cscn}}, which would have required an allocation from the "IOAM Data Field Types" registry {{IANA-ioam-types}}. The currently preferred IOAM integration for EIP is instead based on the Global Opaque Block (GOB), whose protocol format and any related codepoint requirements are specified in {{id-gob-ioam}}.
 
 
 --- back
