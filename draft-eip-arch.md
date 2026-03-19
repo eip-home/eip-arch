@@ -59,10 +59,10 @@ informative:
   RFC9486:
   RFC9326:
   RFC9800:
+  RFC9837:
   I-D.draft-filsfils-ippm-path-tracing:
   I-D.draft-ietf-6man-enhanced-vpn-vtn-id:
   I-D.draft-guan-6man-ipv6-id-authentication:
-  I-D.draft-ietf-6man-vpn-dest-opt:
   I-D.draft-herbert-fast:
   I-D.draft-eckert-6man-qos-exthdr-discuss:
   I-D.draft-li-6man-topology-id:
@@ -86,8 +86,6 @@ informative:
        organization: Consultant
        email: "helbakoury@gmail.com"
     date: 2022
-    seriesInfo:
-       Internet-Draft: draft-eip-use-cases
     format:
        TXT: "https://eip-home.github.io/use-cases/draft-eip-use-cases.txt"
   id-eip-headers:
@@ -102,20 +100,20 @@ informative:
        organization: Consultant
        email: "helbakoury@gmail.com"
     date: 2022
-    seriesInfo:
-       Internet-Draft: draft-eip-headers-definitions
     format:
        TXT: "https://eip-home.github.io/eip-headers/draft-eip-headers-definitions.txt"
   onf-int:
     title: "Improving Network Monitoring and Management with Programmable Data Planes"
     author:
      - name: "P4.org"
+       ins: "P4.org"
     format:
        PDF: "https://opennetworking.org/news-and-events/blog/improving-network-monitoring-and-management-with-programmable-data-planes/"
     date: 2015
   int-spec:
     author:
      - name: "The P4.org Applications Working Group"
+       ins: "The P4.org Applications Working Group"
     title: "In-band Network Telemetry (INT) Dataplane Specification, version 2.1"
     format:
       PDF: "https://p4.org/p4-spec/docs/INT\_v2\_1.pdf"
@@ -133,6 +131,7 @@ informative:
     title: "Fast Notification for Traffic Engineering and Load Balancing (FANTEL) BoF"
     author:
       - name: "IETF"
+        ins: "IETF"
     date: 2025
     format:
       HTML: "https://datatracker.ietf.org/meeting/123/materials/bofdraft-fantel-00"
@@ -140,16 +139,44 @@ informative:
     title: "IOAM Data Field Types"
     author:
       - name: "IANA"
+        ins: "IANA"
     format:
       HTML: "https://www.iana.org/assignments/ioam/ioam.xhtml#data-field-types"
+  salsano25-eipioam:
+    title: "Integrating Extensible In-Band Processing (EIP) into the IOAM Framework: A Unified Approach to In-Packet Telemetry and Metadata"
+    author:
+      - name: "Stefano Salsano"
+      - name: "Andrea Mayer"
+      - name: "Giulio Sidoretti"
+      - name: "Pierpaolo Loreti"
+      - name: "Lorenzo Bracciale"
+      - name: "Hesham ElBakoury"
+        organization: Consultant
+        email: "helbakoury@gmail.com"
+      - name: "Diego R. Lopez"
+        ins: "D. Lopez"
+        organization: "Telefonica, I+D"
+        email: "diego.r.lopez@telefonica.com"
+    date: 2025
+    refcontent: "IEEE CSCN 2025 Conference"
+  id-gob-ioam:
+    title: "Global Opaque Block for IOAM Pre-allocated Trace Option"
+    author:
+      - name: "Andrea Mayer"
+        ins: "A. Mayer"
+      - name: "Stefano Salsano"
+        ins: "S. Salsano"
+        organization: Univ. of Rome Tor Vergata / CNIT
+        email: "stefano.salsano@uniroma2.it"
+    date: 2026
+    refcontent: "Internet-Draft draft-mayer-ioam-gob"
+    format:
+      HTML: "https://datatracker.ietf.org/doc/draft-mayer-ioam-gob/"
 
 
 --- abstract
 
-Extensible In-band Processing (EIP) extends the functionality of the IPv6 protocol considering
-the needs of future Internet services / 6G networks. This document discusses the architecture and
-framework of EIP. Two separate documents respectively analyze a number of use cases for EIP and provide
-the protocol specifications of EIP.
+Extensible In-band Processing (EIP) extends the functionality of the IPv6 protocol considering the needs of future Internet services and advanced in-band metadata processing. This document discusses the architecture and framework of EIP. Separate documents respectively analyze a number of use cases for EIP, provide protocol specifications for EIP, and describe the integration of EIP within the IOAM framework through the Global Opaque Block (GOB) of the IOAM Pre-allocated Trace Option.
 
 --- middle
 
@@ -159,12 +186,12 @@ Networking architectures need to evolve to support the needs of future Internet 
 The networking research and standardization communities have considered different approaches for this evolution, that can be broadly classified in 3 different categories:
 
 1. Clean slate and "revolutionary" solutions. Throw away the legacy IP networking layer.
-2. Solutions above the layer 3. Do not touch the legacy networking layer (IP).
+2. Solutions above Layer 3. Do not touch the legacy networking layer (IP).
 3. Evolutionary solutions. Improve the IP layer (and try to preserve backward compatibility).
 
-The proposed EIP (Extensible In-band Processing) solution belongs to the third category, it extends the current IPv6 architecture without requiring a clean-slate revolution.
+The proposed EIP (Extensible In-band Processing) solution belongs to the third category; it extends the current IPv6 architecture without requiring a clean-slate revolution.
 
-The use cases for EIP are discussed in [id-eip-use-cases]. The specification of the EIP header format is provided in [id-eip-headers].
+The use cases for EIP are discussed in {{id-eip-use-cases}}. The specification of the EIP header format is provided in {{id-eip-headers}}.
 
 # Basic principles for EIP
 
@@ -173,11 +200,11 @@ of the SRv6 "network programming" model. With the SRv6 network programming model
 the routers can implement "complex" functionalities and they can be controlled
 by a "network program" that is embedded in IPv6 packet headers. Another example is the INT (IN band Telemetry) solution for monitoring. These (and other) examples are further discussed in {{review}}.
 
-The EIP solution is aligned with this trend, which will ensure a future proof evolution of networking architectures. EIP supports a feature-rich and extensible IPv6 networking layer, in which complex dataplane functions can be executed by end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and more efficient  way.
+The EIP solution is aligned with this trend, which will ensure a future proof evolution of networking architectures. EIP supports a feature-rich and extensible IPv6 networking layer, in which complex dataplane functions can be executed by end-hosts, routers, virtual functions, servers in datacenters so that services can be implemented in the smartest and most efficient way.
 
-The EIP solution foresees the introduction of an EIP header in the IPv6 packet header. The proposed EIP header is extensible and it is meant to support a number of different use cases. In general, both end-hosts and transit routers can read and write the content of this header. Depending of the specific use-case, only specific nodes will be capable and interested in reading or writing the EIP header. The use of the EIP header can be confined to a single domain or to a set of cooperating domains, so there is no need of a global, Internet-wide support of the new header for its introduction. Moreover, there can be usage scenarios in which legacy nodes can simply ignore the EIP header and provide transit to packets containing the EIP header.
+The EIP solution introduces an EIP header in the IPv6 packet header. The proposed EIP header is extensible and it is meant to support a number of different use cases. In general, both end-hosts and transit routers can read and write the content of this header. Depending on the specific use case, only specific nodes will be capable and interested in reading or writing the EIP header. The use of the EIP header can be confined to a single domain or to a set of cooperating domains, so there is no need of a global, Internet-wide support of the new header for its introduction. Moreover, there can be usage scenarios in which legacy nodes can simply ignore the EIP header and provide transit to packets containing the EIP header.
 
-The EIP header could be carried in different ways inside the IPv6 Header: 1) EIP Option for Hop-by-Hop Extension Header; 2) EIP TLV for Segment Routing Header; 3) EIP as a new IOAM-Data-Field-Type within the IOAM framework (discussed in {{integration-eip-ioam}}).
+The EIP header could be carried in different ways inside the IPv6 header: 1) as an EIP Option in the Hop-by-Hop Extension Header; 2) as an EIP TLV in the Segment Routing Header; 3) within the IOAM framework through the Global Opaque Block (GOB) of the IOAM Pre-allocated Trace Option, as specified in {{id-gob-ioam}} and discussed in {{integration-eip-ioam}}.
 
 An important usage scenario considers the transport of user packets over a provider network. In this scenario, we consider the network portion from the provider ingress edge node to the provider egress edge node. The ingress edge node can encapsulate the user packet coming from an access network into an outer packet. The outer packet travels in the provider network until the egress edge node, which will decapsulate the inner packet and deliver it to the destination access network or to another transit network, depending on the specific topology and service. Assuming that the IPv6/SRv6 dataplane is used in the provider network, the ingress edge node will be the source of an outer IPv6 packet in which it is possible to add the EIP header. The outer IPv6 packet (containing the EIP header) will be processed inside the "limited domain" (see {{RFC8799}}) of the provider network, so that the operator can make sure that all the transit routers either are EIP aware or at least they can forward packets containing the EIP header. In this usage scenario, the EIP framework operates "edge-to-edge" and the end-user packets are "tunneled" over the EIP domain.
 
@@ -202,34 +229,37 @@ The architectural framework for EIP is depicted in {{fig:eip-framework}}. We ref
                       EIP domain                       EIP domain
 
 ~~~
-{: #fig:eip-framework title="EIP framwork"}
+{: #fig:eip-framework title="EIP framework"}
 
 As shown in {{fig:eip-framework}}, an EIP domain can communicate with other domains, which can be legacy domains or EIP capable domains.
 
 
-# Benefits of a common EIP header for multiple use cases.
+# Benefits of a common EIP header for multiple use cases
 
 The EIP header will carry different EIP Information Elements that are defined to support the different use cases.
 There are reasons why it is beneficial to define a single common EIP header that supports multiple use cases using the EIP Information Elements.
 
-1. The number of available Option Types in HBH header is limited (see {{considerations-hopbyhop}}). Likewise the number of available TLVs in the Segment Routing Header (SRH) and the number of IOAM-Data-Field-Type are limited. Defining multiple Option Types (or SRH TLVs or IOAM-Data-Field-Type) for multiple use case is not scalable and puts pressure on the allocation of such codepoints.
+1. The number of available Option Types in HBH header is limited (see {{considerations-hopbyhop}}). Likewise the number of available TLVs in the Segment Routing Header (SRH) and the number of IOAM-Data-Field-Type are limited. Defining multiple Option Types (or SRH TLVs or IOAM-Data-Field-Type) for multiple use cases is not scalable and puts pressure on the allocation of such codepoints.
 
 2. The definition and standardization of specific EIP Information Elements for the different use cases will be simplified, compared to the need of requiring the definition of a new Option Type or SRH TLVs or IOAM-Data-Field-Type.
 
 3. Different use cases may share a subset of common EIP Information Elements.
 
-4. Efficient mechanism for the processing of the EIP header (both in software and in hardware) can be defined when the different EIP Information Elements are carried inside the same EIP header.
+4. Efficient mechanisms for the processing of the EIP header (both in software and in hardware) can be defined when the different EIP Information Elements are carried inside the same EIP header.
 
 {: #considerations-hopbyhop}
-## Considerations on Hop-by-hop Options allocation
+## Considerations on Hop-by-Hop Options allocation
 
-Several proposals and already standardized solutions use the IPv6 Hop-by-Hop Options, as discussed below in {{review}}. The Hop-by-Hop Options are represented with a 8 bits code. The first two bits represent the action to be taken if the Options is unknown to a node that receives it, the third bit is used to specify if the content of the Options can be changed in flight. In particular the Option Types that start with 001 should be ignored if unknown and can be changed in flight, which is the most common combination. The current IANA allocation for Option Types starting with 001 is
-(see [https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml](https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml))
+Several proposals and already standardized solutions use the IPv6 Hop-by-Hop Options, as discussed below in {{review}}. The Hop-by-Hop Options are represented with an 8-bit code. The first two bits represent the action to be taken if the option is unknown to a node that receives it, while the third bit specifies whether the content of the option can be changed in flight. In particular, Option Types that start with 000 should be ignored if unknown and cannot be changed in flight, whereas Option Types that start with 001 should be ignored if unknown and can be changed in flight. The current IANA allocation for Option Types starting with 000 and 001 is as follows (see {{IANA-ipv6-parameters}}):
 
 ```
+   32 possible Option Types starting with 000
+   7 assigned values in the current IANA registry (including IOAM and AltMark)
+   25 unassigned
+
    32 possible Option Types starting with 001
-   5 allocated by RFCs (including IOAM and AltMark)
-   27 not allocated
+   6 assigned values in the current IANA registry (including IOAM)
+   26 unassigned
 ```
 
 We observe that there is a potential scarcity of the code points, as there are many scenarios that could require the definition of a new Hop-by-Hop option. We also observe that having only 1 code point allocated for experiments is a very restrictive limitation.
@@ -253,9 +283,9 @@ The "Alternate Marking Method" is a recently proposed performance measurement ap
 
 {{RFC9268}} specifies a new IPv6 Hop-by-Hop option that is used to record the minimum Path MTU between a source and a destination.
 
-The Internet Draft {{I-D.draft-ietf-6man-enhanced-vpn-vtn-id}} proposes a new Hop-by-Hop option of IPv6 extension header to carry the Network Resource Partition (NRP) information, which could be used to identify the NRP-specific processing to be performed on the packets by each network node along a network path in the NRP.
+{{RFC9837}} describes an experiment in which VPN service information for both Layer 2 and Layer 3 VPNs is encoded in an IPv6 Destination Option. This experimental IPv6 Destination Option is called the VPN Service Option.
 
-The Internet Draft {{I-D.draft-ietf-6man-vpn-dest-opt}} proposes an experiment in which VPN service information for both layer 2 and layer 3 VPNs is encoded in a new IPv6 Destination Option. The new IPv6 Destination Option is called the VPN Service Option.
+The Internet-Draft {{I-D.draft-ietf-6man-enhanced-vpn-vtn-id}} proposes a new Hop-by-Hop option of IPv6 extension header to carry the Network Resource Partition (NRP) information, which could be used to identify the NRP-specific processing to be performed on the packets by each network node along a network path in the NRP.
 
 The Internet-Draft {{I-D.draft-guan-6man-ipv6-id-authentication}} proposes an IPv6 based address label terminal identity authentication mechanism, which uses a new Hop-by-Hop option, called Address Label Extension (ALE).
 
@@ -275,21 +305,19 @@ The FANTEL BoF (IETF 123, Madrid, 2025) discussed the Fast Notification for Traf
 
 Outside the IETF, the P4.org community continues its efforts on programmable dataplanes and has proposed updated INT mechanisms. Recent research includes the use of in-band headers for on-path inference and service-specific packet handling, showing increasing interest in general, extensible frameworks like EIP.
 
+
 {: #integration-eip-ioam}
 # Integration of EIP into the IOAM Framework
 
 The IOAM (In-situ Operations, Administration, and Maintenance) framework {{RFC9197}} defines a set of data fields and associated semantics for recording telemetry and operational information within packets as they traverse a network. The IOAM data can be encapsulated in IPv6 via Hop-by-Hop or Destination Options headers, as specified in {{RFC9486}}, and can be processed by IOAM-capable nodes along the path.
 
-While the EIP architecture has primarily been conceived as a standalone extensible header format, an additional integration possibility is to define EIP as a new IOAM-Data-Field-Type within the IOAM framework. In this scenario, EIP would become one of the possible information elements that can be included in IOAM data fields, extending the telemetry model to support richer and more general-purpose in-band processing capabilities.
+An earlier integration direction for EIP within IOAM was explored in {{salsano25-eipioam}}, where EIP was modeled as a new IOAM Data-Field-Type carried within the existing IOAM data-field structure. That approach showed that EIP Information Elements could be embedded into the IOAM processing pipeline, enabling reuse of the existing IOAM encapsulation and processing model without introducing separate Hop-by-Hop options.
 
-This approach offers the following advantages:
+The current integration direction adopts a different approach based on the Global Opaque Block (GOB) of the IOAM Pre-allocated Trace Option, as specified in {{id-gob-ioam}}. In this model, EIP Information Elements can be carried inside a reusable, pre-allocated global metadata region that is distinct from the per-node Trace data and can support schema-driven formats and controlled in-band updates.
 
-1. It enables the reuse of the existing IOAM encapsulation and processing pipeline.
-2. It allows EIP-aware nodes to operate within IOAM-enabled networks without introducing separate Hop-by-Hop options.
-3. It leverages the existing IOAM data export and analytics tooling to interpret EIP-related metadata.
+Compared to the earlier Data-Field-Type approach, the GOB-based integration provides a more general and implementation-friendly solution for structured global metadata within IOAM. It preserves compatibility with the IOAM encapsulation model while avoiding the need to map EIP semantics onto the existing per-node data-field abstraction.
 
-Integrating EIP as a new IOAM data type would require defining a specific EIP Data-Field-Type value in the IOAM registry {{IANA-ioam-types}} and specifying how EIP Information Elements are encoded and parsed within the IOAM format. This integration path is not mutually exclusive with the standalone deployment of EIP as an independent IPv6 extension header but rather represents an additional deployment possibility for network operators already adopting the IOAM framework.
-
+The IOAM-based integration of EIP is not mutually exclusive with the standalone deployment of EIP as an independent IPv6 extension header. However, for integration with IOAM, the GOB-based approach is considered the preferred solution.
 
 # Conventions and Definitions
 
@@ -298,7 +326,7 @@ Integrating EIP as a new IOAM data type would require defining a specific EIP Da
 
 # Security Considerations
 
-TODO Security
+EIP introduces in-band metadata that may be read or modified by on-path nodes. Unauthorized access or modification can affect telemetry, service behavior, or policy enforcement. Therefore, deployments should be limited to controlled domains and should rely on existing IPv6/IOAM security mechanisms and domain trust assumptions.
 
 # IANA Considerations
 
@@ -308,7 +336,7 @@ The definition of the EIP header as a TLV in the Segment Routing Header requires
 
 The definition of EIP Information Elements in the EIP header will require the creation of a new IANA registry to manage EIP Information Element type values.
 
-In the case that EIP is integrated into the IOAM framework as a new Data-Field-Type, an additional allocation will be required from the "IOAM Data Field Types" registry {{IANA-ioam-types}}.
+An earlier integration of EIP into IOAM as a new Data-Field-Type was explored in {{salsano25-eipioam}}, which would have required an allocation from the "IOAM Data Field Types" registry {{IANA-ioam-types}}. The currently preferred IOAM integration for EIP is instead based on the Global Opaque Block (GOB), whose protocol format and any related codepoint requirements are specified in {{id-gob-ioam}}.
 
 
 --- back
@@ -316,4 +344,4 @@ In the case that EIP is integrated into the IOAM framework as a new Data-Field-T
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+TODO acknowledgements.
