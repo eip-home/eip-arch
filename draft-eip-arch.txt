@@ -397,10 +397,10 @@ Table of Contents
    along the path.
 
    An earlier integration direction for EIP within IOAM was explored in
-   [salsano25-eipioam], where EIP was modeled as a new IOAM Data-Field-
-   Type carried within the existing IOAM data-field structure.  That
-   approach showed that EIP Information Elements could be embedded into
-   the IOAM processing pipeline, enabling reuse of the existing IOAM
+   [salsano25-cscn], where EIP was modeled as a new IOAM Data-Field-Type
+   carried within the existing IOAM data-field structure.  That approach
+   showed that EIP Information Elements could be embedded into the IOAM
+   processing pipeline, enabling reuse of the existing IOAM
    encapsulation and processing model without introducing separate Hop-
    by-Hop options.
 
@@ -458,12 +458,11 @@ Table of Contents
    Element type values.
 
    An earlier integration of EIP into IOAM as a new Data-Field-Type was
-   explored in [salsano25-eipioam], which would have required an
-   allocation from the "IOAM Data Field Types" registry
-   [IANA-ioam-types].  The currently preferred IOAM integration for EIP
-   is instead based on the Global Opaque Block (GOB), whose protocol
-   format and any related codepoint requirements are specified in
-   [id-gob-ioam].
+   explored in [salsano25-cscn], which would have required an allocation
+   from the "IOAM Data Field Types" registry [IANA-ioam-types].  The
+   currently preferred IOAM integration for EIP is instead based on the
+   Global Opaque Block (GOB), whose protocol format and any related
+   codepoint requirements are specified in [id-gob-ioam].
 
 9.  References
 
@@ -651,7 +650,7 @@ Table of Contents
               DOI 10.17487/RFC9837, August 2025,
               <https://www.rfc-editor.org/rfc/rfc9837>.
 
-   [salsano25-eipioam]
+   [salsano25-cscn]
               Salsano, S., Mayer, A., Sidoretti, G., Loreti, P.,
               Bracciale, L., ElBakoury, H., and D. Lopez, "Integrating
               Extensible In-Band Processing (EIP) into the IOAM
