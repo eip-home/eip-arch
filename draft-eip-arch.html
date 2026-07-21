@@ -11,23 +11,24 @@
 <meta content="
        Extensible In-band Processing (EIP) extends the functionality of the IPv6 protocol considering the needs of future Internet services and advanced in-band metadata processing. This document discusses the architecture and framework of EIP. Separate documents respectively analyze a number of use cases for EIP, provide protocol specifications for EIP, and describe the integration of EIP within the IOAM framework through the Global Opaque Block (GOB) of the IOAM Pre-allocated Trace Option. 
     " name="description">
-<meta content="xml2rfc 3.32.0" name="generator">
+<meta content="xml2rfc 3.34.0" name="generator">
 <meta content="IPv6" name="keyword">
 <meta content="Extension Headers" name="keyword">
 <meta content="draft-eip-arch-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.32.0
-    Python 3.12.12
-    ConfigArgParse 1.7
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 6.0.2
-    platformdirs 4.9.4
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.1
     pycountry 24.6.1
     PyYAML 6.0.3
-    requests 2.32.5
-    wcwidth 0.6.0
+    requests 2.33.1
+    wcwidth 0.8.2
 -->
 <link href="draft-eip-arch.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -294,16 +295,19 @@ h1, h2, h3, h4, h5, h6 {
   font-size-adjust: 0.5;
   color: var(--title-color);
 }
-h1#title {
-  font-size: 32px;
-  line-height: 40px;
-  clear: both;
-}
-h1#title, h1#rfcnum {
-  margin: 1.5em 0 0.2em;
-}
-h1#rfcnum + h1#title {
-  margin: 0.2em 0;
+h1 {
+  &#title {
+    font-size: 32px;
+    line-height: 40px;
+    clear: both;
+    margin: 1.5em 0 0.2em;
+  }
+  &#rfcnum {
+    margin: 1.5em 0 0.2em;
+    & + h1#title {
+      margin: 0.2em 0;
+    }
+  }
 }
 
 h1, h2, h3 {
@@ -323,10 +327,10 @@ h4, h5, h6 {
 #abstract+p {
   font-size: 18px;
   line-height: 24px;
-}
-#abstract+p code, #abstract+p samp, #abstract+p tt {
-  font-size: 16px;
-  line-height: 0;
+  & code, & samp, & tt {
+    font-size: 16px;
+    line-height: 0;
+  }
 }
 
 p {
@@ -337,59 +341,59 @@ p {
 div {
   margin: 0;
 }
-.alignRight.art-text {
-  background-color: var(--highlight-color);
-  border: 1px solid var(--line-color);
-  border-radius: 3px;
-  padding: 0.5em 1em 0;
-  margin-bottom: 0.5em;
-}
-.alignRight.art-text pre {
-  padding: 0;
-  width: auto;
-}
 .alignRight {
   margin: 1em 0;
-}
-.alignRight > *:first-child {
-  border: none;
-  margin: 0;
-  float: right;
-  clear: both;
-}
-.alignRight > *:nth-child(2) {
-  clear: both;
-  display: block;
-  border: none;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    margin: 0;
+    float: right;
+    clear: both;
+  }
+  & > *:nth-child(2) {
+    clear: both;
+    display: block;
+    border: none;
+  }
 }
 svg {
   display: block;
-}
-/* font-family isn't space-separated, but =~ will have to do */
-svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
-  font-family: var(--font-mono);
-}
-.alignCenter.art-text {
-  background-color: var(--highlight-color);
-  border: 1px solid var(--line-color);
-  border-radius: 3px;
-  padding: 0.5em 1em 0;
-  margin-bottom: 0.5em;
-}
-.alignCenter.art-text pre {
-  padding: 0;
-  width: auto;
+  /* font-family isn't space-separated, but =~ will have to do */
+  &[font-family~="monospace" i], & [font-family~="monospace" i] {
+    font-family: var(--font-mono);
+  }
 }
 .alignCenter {
   margin: 1em 0;
-}
-.alignCenter > *:first-child {
-  border: none;
-  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
-     support flexbox yet.
-  */
-  display: table;
-  margin: 0 auto;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+       support flexbox yet.
+    */
+    display: table;
+    margin: 0 auto;
+  }
 }
 
 /* lists */
@@ -427,26 +431,25 @@ dl {
     --indent: 5ch;
     & > dt {
       min-width: calc(var(--indent) - 2ch);
+      float: none;
     }
-  }
-  &.olPercent > dt {
-    float: none;
   }
 
   dl > dd > & {
     margin-top: 0.5em;
     margin-bottom: 0;
   }
-}
-dl:not(.dlNewline) > dt {
-  float: left;
-  margin-right: 2ch;
-  min-width: 8ch;
-}
-dl > dd {
-  margin-bottom: .8em;
-  margin-left: var(--indent) !important; /* stupid element overrides */
-  min-height: 2ex;
+
+  &:not(.dlNewline) > dt {
+    float: left;
+    margin-right: 2ch;
+    min-width: 8ch;
+  }
+  & > dd {
+    margin-bottom: .8em;
+    margin-left: var(--indent) !important; /* stupid element overrides */
+    min-height: 2ex;
+  }
 }
 :is(dl.compact, .dlCompact) > dd {
   margin-bottom: 0;
@@ -462,20 +465,22 @@ dl > dd {
 }
 
 /* links */
-a, a[href].selfRef:hover {
+a {
   text-decoration: none;
+  &[href] {
+    color: var(--link-color);
+    &:hover { text-decoration: underline; }
+    &.selfRef {
+      color: var(--text-color);
+      &:hover {
+        text-decoration: none;
+        background-color: var(--highlight-color);
+      }
+    }
+  }
 }
-a[href] {
-  color: var(--link-color);
-}
-a[href].selfRef, .iref + a[href].internal {
+.iref + a[href].internal {
   color: var(--text-color);
-}
-a[href]:hover {
-  text-decoration: underline;
-}
-a[href].selfRef:hover {
-  background-color: var(--highlight-color);
 }
 a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
   white-space: nowrap;
@@ -511,9 +516,9 @@ img {
 figure {
   margin: 0.5em 0;
   padding: 0;
-}
-figure blockquote {
-  margin: 0.8em 0.4em 0.4em;
+  & blockquote {
+    margin: 0.8em 0.4em 0.4em;
+  }
 }
 figcaption, caption {
   font-style: italic;
@@ -523,17 +528,19 @@ figcaption, caption {
 }
 @media screen {
   /* Auto-collapse boilerplate. */
-  :is(#status-of-memo, #copyright) p {
-    margin: -2px 0;
-    max-height: 0;
-    transition: max-height 2s ease, margin 0.5s ease 0.5s;
-    overflow: hidden;
-  }
-  :is(#status-of-memo, #copyright):hover p,
-  :is(#status-of-memo, #copyright) h2:target ~ p {
-    margin: 0.5em 0;
-    max-height: 500px;
-    overflow: auto;
+  :is(#status-of-memo, #copyright) {
+    & p {
+      margin: -2px 0;
+      max-height: 0;
+      transition: max-height 2s ease, margin 0.5s ease 0.5s;
+      overflow: hidden;
+    }
+    &:hover p,
+    & h2:target ~ p {
+      margin: 0.5em 0;
+      max-height: 500px;
+      overflow: auto;
+    }
   }
   pre, svg {
     display: inline-block;
@@ -583,25 +590,17 @@ table {
   max-width: 100%;
   margin: 0 0 1em;
   border-collapse: collapse;
-}
-table.right {
-  margin-left: auto;
-}
-table.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-table.left {
-  margin-right: auto;
-}
-table .text-left {
-  text-align: left;
-}
-table .text-center {
-  text-align: center;
-}
-table .text-right {
-  text-align: right;
+  &.right { margin-left: auto; }
+  &.center { margin-left: auto; margin-right: auto; }
+  &.left { margin-right: auto; }
+  & .text-left { text-align: left; }
+  & .text-center { text-align: center; }
+  & .text-right { text-align: right; }
+  & caption {
+    margin: 0;
+    padding: 3px 0 3px 1em;
+  }
+  & p { margin: 0; }
 }
 
 thead, tbody {
@@ -621,13 +620,6 @@ th {
 :is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
   background-color: var(--highlight-color);
 }
-table caption {
-  margin: 0;
-  padding: 3px 0 3px 1em;
-}
-table p {
-  margin: 0;
-}
 
 /* pilcrow */
 a.pilcrow {
@@ -638,18 +630,16 @@ a.pilcrow {
     color: var(--pilcrow-weak);
     &:hover { text-decoration: none; }
   }
-}
-@media not print {
-  :hover > a.pilcrow, a.pilcrow:focus {
-    opacity: 1;
+  @media not print {
+    :hover > &, &:focus {
+      opacity: 1;
+    }
+    &[href]:hover {
+      color: var(--pilcrow-strong);
+      background-color: transparent;
+    }
   }
-  a.pilcrow[href]:hover {
-    color: var(--pilcrow-strong);
-    background-color: transparent;
-  }
-}
-@media print {
-  a.pilcrow {
+  @media print {
     display: none;
   }
 }
@@ -708,9 +698,9 @@ sub, sup {
   font-size: 0.9em;
   font-style: italic;
   margin-top: 2em;
-}
-.docInfo .prepared {
-  float: right;
+  & .prepared {
+    float: right;
+  }
 }
 
 /* table of contents */
@@ -800,23 +790,27 @@ hr.addr {
   max-width: calc(100% - 16px);
 }
 @media (min-width: 500px) {
-  #authors-addresses > section {
-    column-count: 2;
-    column-gap: 20px;
-  }
-  #authors-addresses > section > h2 {
-    column-span: all;
-  }
-  /* hack for break-inside: avoid-column */
-  #authors-addresses address {
-    display: inline-block;
-    break-inside: avoid-column;
+  #authors-addresses {
+    & > section {
+      column-count: 2;
+      column-gap: 20px;
+    }
+    & > section > h2 {
+      column-span: all;
+    }
+    /* hack for break-inside: avoid-column */
+    & address {
+      display: inline-block;
+      break-inside: avoid-column;
+    }
   }
 }
 
 /* Comments */
-.rfcEditorRemove p:first-of-type {
-  font-style: italic;
+.rfcEditorRemove {
+  & p:first-of-type {
+    font-style: italic;
+  }
 }
 .cref {
   background-color: rgba(249, 232, 105, 0.3);
@@ -827,19 +821,21 @@ hr.addr {
 }
 
 @media screen {
-  #toc nav {
-    font-family: var(--font-title);
-    font-weight: 360;
-    & > ul { margin-bottom: 2em; }
-    & ul {
-      margin: 0 0 0 4px;
-      & :is(p, li) {
-        margin: 2px 0;
+  #toc {
+    & nav {
+      font-family: var(--font-title);
+      font-weight: 360;
+      & > ul { margin-bottom: 2em; }
+      & ul {
+        margin: 0 0 0 4px;
+        & :is(p, li) {
+          margin: 2px 0;
+        }
       }
     }
-  }
-  #toc a.toplink {
-    float: right;
+    & a.toplink {
+      float: right;
+    }
   }
 }
 @media not screen {
@@ -860,54 +856,54 @@ hr.addr {
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
-  }
-  #toc h2 {
-    margin: 0;
-    padding: 2px 0 2px 6px;
-    padding-right: 1em;
-    font-size: 18px;
-    line-height: 24px;
-    min-width: 190px;
-    text-align: right;
-    background-color: #444;
-    color: white;
-    cursor: pointer;
-    &::before { /* css hamburger */
-      float: right;
-      position: relative;
-      width: 1em;
-      height: 1px;
-      left: -164px;
-      margin: 8px 0 0 0;
-      background: white none repeat scroll 0 0;
-      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
-      content: "";
+    & h2 {
+      margin: 0;
+      padding: 2px 0 2px 6px;
+      padding-right: 1em;
+      font-size: 18px;
+      line-height: 24px;
+      min-width: 190px;
+      text-align: right;
+      background-color: #444;
+      color: white;
+      cursor: pointer;
+      &::before { /* css hamburger */
+        float: right;
+        position: relative;
+        width: 1em;
+        height: 1px;
+        left: -164px;
+        margin: 8px 0 0 0;
+        background: white none repeat scroll 0 0;
+        box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+        content: "";
+      }
     }
-  }
-  #toc nav {
-    display: none;
-    background-color: var(--background-color);
-    padding: 0.5em 1em 1em;
-    overflow: auto;
-    overscroll-behavior: contain;
-    height: calc(100vh - 48px);
-    border-left: 1px solid #ddd;
-  }
-  #toc.active {
-    opacity: 1;
-    & nav { display: block; }
-  }
-  /* Make the collapsed ToC header render white on gray also when it's a link */
-  #toc h2 a,
-  #toc h2 a:is(:link, :focus, :hover),
-  #toc a.toplink,
-  #toc a.toplink:hover {
-    color: white;
-    background-color: #444;
-    text-decoration: none;
-  }
-  #toc a.toplink {
-    margin: 2px 0.5em 0;
+    & nav {
+      display: none;
+      background-color: var(--background-color);
+      padding: 0.5em 1em 1em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      height: calc(100vh - 48px);
+      border-left: 1px solid #ddd;
+    }
+    &.active {
+      opacity: 1;
+      & nav { display: block; }
+    }
+    /* Make the collapsed ToC header render white on gray also when it's a link */
+    & h2 a,
+    & h2 a:is(:link, :focus, :hover),
+    & a.toplink,
+    & a.toplink:hover {
+      color: white;
+      background-color: #444;
+      text-decoration: none;
+    }
+    & a.toplink {
+      margin: 2px 0.5em 0;
+    }
   }
 }
 
@@ -926,26 +922,26 @@ hr.addr {
     margin: 0;
     padding: 0;
     z-index: 1;
-  }
-  #toc h2 {
-    margin: 0;
-    padding: 0.25em 1em 1em 0;
-  }
-  #toc nav {
-    display: block;
-    height: calc(90vh - 84px);
-    bottom: 0;
-    padding: 0.5em 0 2em;
-    overflow: auto;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
+    & h2 {
+      margin: 0;
+      padding: 0.25em 1em 1em 0;
+    }
+    & nav {
+      display: block;
+      height: calc(90vh - 84px);
+      bottom: 0;
+      padding: 0.5em 0 2em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }
+    & a.toplink {
+      margin: 8px 0.5em 0;
+    }
   }
   img { /* future proofing */
     max-width: 100%;
     height: auto;
-  }
-  #toc a.toplink {
-    margin: 8px 0.5em 0;
   }
 }
 
@@ -961,12 +957,13 @@ hr.addr {
   #n-copyright-notice {
     border-bottom: none;
   }
-  #toc, #n-introduction {
-    page-break-before: always;
-  }
   #toc {
+    page-break-before: always;
     border-top: none;
     padding-top: 0;
+  }
+  #n-introduction {
+    page-break-before: always;
   }
   figure, pre, .vcard {
     page-break-inside: avoid;
@@ -1028,17 +1025,19 @@ hr.addr {
 }
 
 /* SVG Trick: a prefix match works because only black and white are allowed */
-svg :is([stroke="black"], [stroke^="#000"]) {
-  stroke: var(--text-color);
-}
-svg :is([stroke="white"], [stroke^="#fff"]) {
-  stroke: var(--background-color);
-}
-svg :is([fill="black"], [fill^="#000"], :not([fill])) {
-  fill: var(--text-color);
-}
-svg :is([fill="white"], [fill^="#fff"]) {
-  fill: var(--background-color);
+svg {
+  & :is([stroke="black"], [stroke^="#000"]) {
+    stroke: var(--text-color);
+  }
+  & :is([stroke="white"], [stroke^="#fff"]) {
+    stroke: var(--background-color);
+  }
+  & :is([fill="black"], [fill^="#000"], :not([fill])) {
+    fill: var(--text-color);
+  }
+  & :is([fill="white"], [fill^="#fff"]) {
+    fill: var(--background-color);
+  }
 }
 </style>
 
@@ -1048,11 +1047,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">EIP Architecture</td>
-<td class="right">March 2026</td>
+<td class="right">July 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salsano, et al.</td>
-<td class="center">Expires 20 September 2026</td>
+<td class="center">Expires 22 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-eip-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-03-19" class="published">19 March 2026</time>
+<time datetime="2026-07-21" class="published">21 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-09-20">20 September 2026</time></dd>
+<dd class="expires"><time datetime="2027-01-22">22 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1127,7 +1126,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1328,18 +1327,19 @@ There are reasons why it is beneficial to define a single common EIP header that
         </h3>
 <p id="section-4.1-1">In the last few years, we have witnessed important innovations in IPv6 networking, centered around the emergence of Segment Routing for IPv6 (SRv6) <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> and of the SRv6 "Network Programming model" <span>[<a href="#RFC8986" class="cite xref">RFC8986</a>]</span>. With SRv6 it is possible to insert a <em>Network program</em>, i.e. a sequence of instructions (called <em>segments</em>), in a header of the IPv6 protocol, called Segment Routing Header (SRH). Recent updates (see <span>[<a href="#RFC9800" class="cite xref">RFC9800</a>]</span>) introduced compression mechanisms for segment lists, improving scalability for long segment chains.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2">Another recent activity that proposed to extend the networking layer to support more complex functions concerns network monitoring. The concept of INT "In-band Network Telemetry" has been proposed since 2015 <span>[<a href="#onf-int" class="cite xref">onf-int</a>]</span> in the context of the definition of use cases for P4 based data plane programmability. The latest version of INT specifications dates November 2020 <span>[<a href="#int-spec" class="cite xref">int-spec</a>]</span>. <span>[<a href="#int-spec" class="cite xref">int-spec</a>]</span> specifies the format of headers that carry monitoring instructions and monitoring information along with data plane packets. The specific location for INT Headers is intentionally not specified: an INT Header can be inserted as an option or payload of any encapsulation type. The In-band Telemetry concept has been adopted by the IPPM IETF Working Group, renaming it "In-situ Operations, Administration, and Maintenance" (IOAM). <span>[<a href="#RFC9197" class="cite xref">RFC9197</a>]</span> discusses the data fields and associated data types for IOAM. The in-situ OAM data fields can be encapsulated in a variety of protocols, including IPv6. The specification details for carrying IOAM data inside IPv6 headers are provided in <span>[<a href="#RFC9486" class="cite xref">RFC9486</a>]</span>. In particular, IOAM data fields can be encapsulated in IPv6 using either Hop-by-Hop Options header or Destination options header. A Direct Export variant has been defined in <span>[<a href="#RFC9326" class="cite xref">RFC9326</a>]</span>, enabling nodes to export telemetry data directly without per-hop accumulation.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
-<p id="section-4.1-3">Another example of extensions to IPv6 for network monitoring is specified in <span>[<a href="#RFC8250" class="cite xref">RFC8250</a>]</span>, which defines an IPv6 Destination Options header called Performance and Diagnostic Metrics (PDM). The PDM option header provides sequence numbers and timing information as a basis for measurements.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
-<p id="section-4.1-4">The "Alternate Marking Method" is a recently proposed performance measurement approach described in <span>[<a href="#RFC9341" class="cite xref">RFC9341</a>]</span>. <span>[<a href="#RFC9343" class="cite xref">RFC9343</a>]</span> defines a new Hop-by-Hop Option to support this approach.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
-<p id="section-4.1-5">"Path Tracing" <span>[<a href="#I-D.draft-filsfils-ippm-path-tracing" class="cite xref">I-D.draft-filsfils-ippm-path-tracing</a>]</span> proposes an efficient solution for recording the route taken by a packet (including timestamps and load information taken at each hop along the route). This solution needs a new Hop-by-Hop Option to be defined. A new lightweight telemetry mechanism has been proposed in <span>[<a href="#I-D.draft-mzbc-ippm-transit-measurement-option" class="cite xref">I-D.draft-mzbc-ippm-transit-measurement-option</a>]</span>, which accumulates end-to-end delay and congestion flags in a fixed-size structure.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
-<p id="section-4.1-6"><span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span> analyses the evolution of transport protocols. It recommends that explicit signals should be used when the endpoints desire that network elements along the path become aware of events related to transport protocol. Among the solutions, <span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span> considers the use of explicit signals at the network layer, and in particular it mentions that IPv6 hop-by-hop headers might suit this purpose.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
-<p id="section-4.1-7"><span>[<a href="#RFC9268" class="cite xref">RFC9268</a>]</span> specifies a new IPv6 Hop-by-Hop option that is used to record the minimum Path MTU between a source and a destination.<a href="#section-4.1-7" class="pilcrow">¶</a></p>
-<p id="section-4.1-8"><span>[<a href="#RFC9837" class="cite xref">RFC9837</a>]</span> describes an experiment in which VPN service information for both Layer 2 and Layer 3 VPNs is encoded in an IPv6 Destination Option. This experimental IPv6 Destination Option is called the VPN Service Option.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
-<p id="section-4.1-9">The Internet-Draft <span>[<a href="#I-D.draft-ietf-6man-enhanced-vpn-vtn-id" class="cite xref">I-D.draft-ietf-6man-enhanced-vpn-vtn-id</a>]</span> proposes a new Hop-by-Hop option of IPv6 extension header to carry the Network Resource Partition (NRP) information, which could be used to identify the NRP-specific processing to be performed on the packets by each network node along a network path in the NRP.<a href="#section-4.1-9" class="pilcrow">¶</a></p>
-<p id="section-4.1-10">The Internet-Draft <span>[<a href="#I-D.draft-guan-6man-ipv6-id-authentication" class="cite xref">I-D.draft-guan-6man-ipv6-id-authentication</a>]</span> proposes an IPv6 based address label terminal identity authentication mechanism, which uses a new Hop-by-Hop option, called Address Label Extension (ALE).<a href="#section-4.1-10" class="pilcrow">¶</a></p>
-<p id="section-4.1-11">The Internet-Draft <span>[<a href="#I-D.draft-herbert-fast" class="cite xref">I-D.draft-herbert-fast</a>]</span> (currently expired) proposed the Firewalls and Service Tickets (FAST) protocol. This is a generic and extensible protocol for hosts to signal network nodes to request services or to gain admission into a network. Tickets are sent in IPv6 Hop-by-Hop options.<a href="#section-4.1-11" class="pilcrow">¶</a></p>
-<p id="section-4.1-12">The Internet-Draft <span>[<a href="#I-D.draft-eckert-6man-qos-exthdr-discuss" class="cite xref">I-D.draft-eckert-6man-qos-exthdr-discuss</a>]</span> (currently expired) provided considerations for common QoS IPv6 extension header, in the context of the functionality under definition in the Deterministic Networking (detnet) IETF Working Group <span>[<a href="#detnet-wg" class="cite xref">detnet-wg</a>]</span>.<a href="#section-4.1-12" class="pilcrow">¶</a></p>
-<p id="section-4.1-13">The Internet-Draft <span>[<a href="#I-D.draft-li-6man-topology-id" class="cite xref">I-D.draft-li-6man-topology-id</a>]</span> (currently expired) proposed a new Hop-by-Hop option of IPv6 extension header to carry the topology identifier, which is used to identify the forwarding table instance created by the Multi Topology Routing or Flexible Algorithm.<a href="#section-4.1-13" class="pilcrow">¶</a></p>
-<p id="section-4.1-14">The Internet-Draft <span>[<a href="#I-D.draft-iurman-6man-carry-identifier" class="cite xref">I-D.draft-iurman-6man-carry-identifier</a>]</span> (currently expired) discussed the need of having a generic approach for carrying identifiers in IPv6 Destination Options and Hop-by-Hop Options. The EIP proposal can be seen as a superset and a further generalization of the proposal of <span>[<a href="#I-D.draft-iurman-6man-carry-identifier" class="cite xref">I-D.draft-iurman-6man-carry-identifier</a>]</span>.<a href="#section-4.1-14" class="pilcrow">¶</a></p>
+<p id="section-4.1-3">More recently, the IOAM Template Option-Type <span>[<a href="#I-D.draft-mbci-ippm-ioam-template-option" class="cite xref">I-D.draft-mbci-ippm-ioam-template-option</a>]</span> has been proposed to describe per-hop records through a compact, configurable template, and the IOAM Aggregation Trace Option <span>[<a href="#I-D.draft-cxx-ippm-ioamaggr" class="cite xref">I-D.draft-cxx-ippm-ioamaggr</a>]</span> defines the in-flight aggregation of a metric across the nodes of a path (e.g., minimum, maximum, sum and count) instead of recording one entry per hop. These proposals are complementary to the EIP integration into IOAM discussed in <a href="#integration-eip-ioam" class="auto internal xref">Section 5</a>.<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<p id="section-4.1-4">Another example of extensions to IPv6 for network monitoring is specified in <span>[<a href="#RFC8250" class="cite xref">RFC8250</a>]</span>, which defines an IPv6 Destination Options header called Performance and Diagnostic Metrics (PDM). The PDM option header provides sequence numbers and timing information as a basis for measurements.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.1-5">The "Alternate Marking Method" is a recently proposed performance measurement approach described in <span>[<a href="#RFC9341" class="cite xref">RFC9341</a>]</span>. <span>[<a href="#RFC9343" class="cite xref">RFC9343</a>]</span> defines a new Hop-by-Hop Option to support this approach.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.1-6">"Path Tracing" <span>[<a href="#I-D.draft-filsfils-ippm-path-tracing" class="cite xref">I-D.draft-filsfils-ippm-path-tracing</a>]</span> proposes an efficient solution for recording the route taken by a packet (including timestamps and load information taken at each hop along the route). This solution needs a new Hop-by-Hop Option to be defined. A new lightweight telemetry mechanism has been proposed in <span>[<a href="#I-D.draft-mzbc-ippm-transit-measurement-option" class="cite xref">I-D.draft-mzbc-ippm-transit-measurement-option</a>]</span>, which accumulates end-to-end delay and congestion flags in a fixed-size structure.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
+<p id="section-4.1-7"><span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span> analyses the evolution of transport protocols. It recommends that explicit signals should be used when the endpoints desire that network elements along the path become aware of events related to transport protocol. Among the solutions, <span>[<a href="#RFC8558" class="cite xref">RFC8558</a>]</span> considers the use of explicit signals at the network layer, and in particular it mentions that IPv6 hop-by-hop headers might suit this purpose.<a href="#section-4.1-7" class="pilcrow">¶</a></p>
+<p id="section-4.1-8"><span>[<a href="#RFC9268" class="cite xref">RFC9268</a>]</span> specifies a new IPv6 Hop-by-Hop option that is used to record the minimum Path MTU between a source and a destination.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
+<p id="section-4.1-9"><span>[<a href="#RFC9837" class="cite xref">RFC9837</a>]</span> describes an experiment in which VPN service information for both Layer 2 and Layer 3 VPNs is encoded in an IPv6 Destination Option. This experimental IPv6 Destination Option is called the VPN Service Option.<a href="#section-4.1-9" class="pilcrow">¶</a></p>
+<p id="section-4.1-10">The Internet-Draft <span>[<a href="#I-D.draft-ietf-6man-enhanced-vpn-vtn-id" class="cite xref">I-D.draft-ietf-6man-enhanced-vpn-vtn-id</a>]</span> proposes a new Hop-by-Hop option of IPv6 extension header to carry the Network Resource Partition (NRP) information, which could be used to identify the NRP-specific processing to be performed on the packets by each network node along a network path in the NRP.<a href="#section-4.1-10" class="pilcrow">¶</a></p>
+<p id="section-4.1-11">The Internet-Draft <span>[<a href="#I-D.draft-guan-6man-ipv6-id-authentication" class="cite xref">I-D.draft-guan-6man-ipv6-id-authentication</a>]</span> proposes an IPv6 based address label terminal identity authentication mechanism, which uses a new Hop-by-Hop option, called Address Label Extension (ALE).<a href="#section-4.1-11" class="pilcrow">¶</a></p>
+<p id="section-4.1-12">The Internet-Draft <span>[<a href="#I-D.draft-herbert-fast" class="cite xref">I-D.draft-herbert-fast</a>]</span> (currently expired) proposed the Firewalls and Service Tickets (FAST) protocol. This is a generic and extensible protocol for hosts to signal network nodes to request services or to gain admission into a network. Tickets are sent in IPv6 Hop-by-Hop options.<a href="#section-4.1-12" class="pilcrow">¶</a></p>
+<p id="section-4.1-13">The Internet-Draft <span>[<a href="#I-D.draft-eckert-6man-qos-exthdr-discuss" class="cite xref">I-D.draft-eckert-6man-qos-exthdr-discuss</a>]</span> (currently expired) provided considerations for common QoS IPv6 extension header, in the context of the functionality under definition in the Deterministic Networking (detnet) IETF Working Group <span>[<a href="#detnet-wg" class="cite xref">detnet-wg</a>]</span>.<a href="#section-4.1-13" class="pilcrow">¶</a></p>
+<p id="section-4.1-14">The Internet-Draft <span>[<a href="#I-D.draft-li-6man-topology-id" class="cite xref">I-D.draft-li-6man-topology-id</a>]</span> (currently expired) proposed a new Hop-by-Hop option of IPv6 extension header to carry the topology identifier, which is used to identify the forwarding table instance created by the Multi Topology Routing or Flexible Algorithm.<a href="#section-4.1-14" class="pilcrow">¶</a></p>
+<p id="section-4.1-15">The Internet-Draft <span>[<a href="#I-D.draft-iurman-6man-carry-identifier" class="cite xref">I-D.draft-iurman-6man-carry-identifier</a>]</span> (currently expired) discussed the need of having a generic approach for carrying identifiers in IPv6 Destination Options and Hop-by-Hop Options. The EIP proposal can be seen as a superset and a further generalization of the proposal of <span>[<a href="#I-D.draft-iurman-6man-carry-identifier" class="cite xref">I-D.draft-iurman-6man-carry-identifier</a>]</span>.<a href="#section-4.1-15" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="additional-relevant-activities">
@@ -1363,7 +1363,11 @@ There are reasons why it is beneficial to define a single common EIP header that
 <p id="section-5-2">An earlier integration direction for EIP within IOAM was explored in <span>[<a href="#salsano25-cscn" class="cite xref">salsano25-cscn</a>]</span>, where EIP was modeled as a new IOAM Data-Field-Type carried within the existing IOAM data-field structure. That approach showed that EIP Information Elements could be embedded into the IOAM processing pipeline, enabling reuse of the existing IOAM encapsulation and processing model without introducing separate Hop-by-Hop options.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">The current integration direction adopts a different approach based on the Global Opaque Block (GOB) of the IOAM Pre-allocated Trace Option, as specified in <span>[<a href="#id-gob-ioam" class="cite xref">id-gob-ioam</a>]</span>. In this model, EIP Information Elements can be carried inside a reusable, pre-allocated global metadata region that is distinct from the per-node Trace data and can support schema-driven formats and controlled in-band updates.<a href="#section-5-3" class="pilcrow">¶</a></p>
 <p id="section-5-4">Compared to the earlier Data-Field-Type approach, the GOB-based integration provides a more general and implementation-friendly solution for structured global metadata within IOAM. It preserves compatibility with the IOAM encapsulation model while avoiding the need to map EIP semantics onto the existing per-node data-field abstraction.<a href="#section-5-4" class="pilcrow">¶</a></p>
-<p id="section-5-5">The IOAM-based integration of EIP is not mutually exclusive with the standalone deployment of EIP as an independent IPv6 extension header. However, for integration with IOAM, the GOB-based approach is considered the preferred solution.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-5">The GOB is placed at the tail of the Pre-allocated Trace Option, after the pre-allocated node data space and therefore outside the region that the RemainingLen field makes addressable to IOAM nodes. As a consequence, the GOB is transparent to legacy IOAM transit nodes by construction: such nodes record their per-node trace data according to <span>[<a href="#RFC9197" class="cite xref">RFC9197</a>]</span> and can never reach the GOB, while only the decapsulating node or the collector needs to be GOB-aware. This property is particularly relevant for the evolutionary approach followed by EIP, as it allows EIP metadata to traverse a mixed population of upgraded and legacy IOAM nodes within the same option.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">In the GOB-based integration, the identification of EIP Information Elements is layered. The carrier is identified by the IOAM Option-Type codepoint (and by the G bit signaling the presence of the GOB); the GOB Schema field identifies the payload format, e.g., a sequence of EIP Information Elements; the individual Information Elements are then identified by their EIP IE type values (see <span>[<a href="#id-eip-headers" class="cite xref">id-eip-headers</a>]</span> and <a href="#iana" class="auto internal xref">Section 8</a>). The GOB Schema value space is divided by <span>[<a href="#id-gob-ioam" class="cite xref">id-gob-ioam</a>]</span> into an operator-assigned range and an IANA-assigned range, following the model of the IOAM Namespace-ID. This enables an incremental deployment path: EIP Information Elements can be carried immediately within a limited domain using an operator-assigned Schema value, and can later migrate to a globally registered "EIP Information Element sequence" schema from the IANA-assigned range.<a href="#section-5-6" class="pilcrow">¶</a></p>
+<p id="section-5-7">The GOB Schema is interpreted within the context of the IOAM-Namespace carried by the option. The GOB-based integration therefore inherits the IOAM-Namespace machinery of <span>[<a href="#RFC9197" class="cite xref">RFC9197</a>]</span>: an EIP deployment can map an EIP domain to an IOAM Namespace-ID from the operator-assigned range, obtaining namespace-based processing gating (nodes that are not configured for the namespace do not modify the option), disambiguation when multiple IOAM options are present due to overlapping or layered domains, and removal of the option at domain boundaries. Note that the standalone EIP carriers (Hop-by-Hop Option and SRH TLV) do not currently define an equivalent in-packet domain identifier; whether to introduce one, e.g., as an EIP Information Element, is an open architectural question.<a href="#section-5-7" class="pilcrow">¶</a></p>
+<p id="section-5-8">The GOB-based integration is also complementary to the IOAM Template Option <span>[<a href="#I-D.draft-mbci-ippm-ioam-template-option" class="cite xref">I-D.draft-mbci-ippm-ioam-template-option</a>]</span> and IOAM Aggregation <span>[<a href="#I-D.draft-cxx-ippm-ioamaggr" class="cite xref">I-D.draft-cxx-ippm-ioamaggr</a>]</span> proposals: these define structured records and aggregation semantics, while the GOB provides an alternative carrier for the same records, over a shared record identifier space. As an example, an aggregated metric record (such as an accumulated delay expressed as minimum, maximum, sum and count) can be transported interchangeably by the Template/Aggregation options or within the GOB.<a href="#section-5-8" class="pilcrow">¶</a></p>
+<p id="section-5-9">The IOAM-based integration of EIP is not mutually exclusive with the standalone deployment of EIP as an independent IPv6 extension header. However, for integration with IOAM, the GOB-based approach is considered the preferred solution.<a href="#section-5-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1383,9 +1387,10 @@ appear in all capitals, as shown here.<a href="#section-6-1" class="pilcrow">¶<
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-7-1">EIP introduces in-band metadata that may be read or modified by on-path nodes. Unauthorized access or modification can affect telemetry, service behavior, or policy enforcement. Therefore, deployments should be limited to controlled domains and should rely on existing IPv6/IOAM security mechanisms and domain trust assumptions.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">When EIP is integrated into IOAM through the GOB, the security considerations of <span>[<a href="#id-gob-ioam" class="cite xref">id-gob-ioam</a>]</span> also apply, including the absence of integrity protection for the GOB fields and the reliance on namespace- and schema-based configuration within the trusted domain.<a href="#section-7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="iana-considerations">
+<div id="iana">
 <section id="section-8">
       <h2 id="name-iana-considerations">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
@@ -1393,7 +1398,7 @@ appear in all capitals, as shown here.<a href="#section-6-1" class="pilcrow">¶<
 <p id="section-8-1">The definition of the EIP header as an Option for the IPv6 Hop-by-Hop Extension header requires the allocation of a codepoint from the "Destination Options and Hop-by-Hop Options" registry in the "Internet Protocol Version 6 (IPv6) Parameters" <span>[<a href="#IANA-ipv6-parameters" class="cite xref">IANA-ipv6-parameters</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <p id="section-8-2">The definition of the EIP header as a TLV in the Segment Routing Header requires the allocation of a codepoint from the "Segment Routing Header TLVs" registry in the "Internet Protocol Version 6 (IPv6) Parameters" <span>[<a href="#IANA-ipv6-parameters" class="cite xref">IANA-ipv6-parameters</a>]</span>.<a href="#section-8-2" class="pilcrow">¶</a></p>
 <p id="section-8-3">The definition of EIP Information Elements in the EIP header will require the creation of a new IANA registry to manage EIP Information Element type values.<a href="#section-8-3" class="pilcrow">¶</a></p>
-<p id="section-8-4">An earlier integration of EIP into IOAM as a new Data-Field-Type was explored in <span>[<a href="#salsano25-cscn" class="cite xref">salsano25-cscn</a>]</span>, which would have required an allocation from the "IOAM Data Field Types" registry <span>[<a href="#IANA-ioam-types" class="cite xref">IANA-ioam-types</a>]</span>. The currently preferred IOAM integration for EIP is instead based on the Global Opaque Block (GOB), whose protocol format and any related codepoint requirements are specified in <span>[<a href="#id-gob-ioam" class="cite xref">id-gob-ioam</a>]</span>.<a href="#section-8-4" class="pilcrow">¶</a></p>
+<p id="section-8-4">An earlier integration of EIP into IOAM as a new Data-Field-Type was explored in <span>[<a href="#salsano25-cscn" class="cite xref">salsano25-cscn</a>]</span>, which would have required an allocation from the "IOAM Data Field Types" registry <span>[<a href="#IANA-ioam-types" class="cite xref">IANA-ioam-types</a>]</span>. The currently preferred IOAM integration for EIP is instead based on the Global Opaque Block (GOB), whose protocol format and any related codepoint requirements are specified in <span>[<a href="#id-gob-ioam" class="cite xref">id-gob-ioam</a>]</span>. In the GOB-based integration, no EIP-specific IOAM codepoint is required: the EIP Information Element payload format is identified by the GOB Schema field, and a globally registered schema value for EIP is expected to be allocated from the IANA-assigned range of the GOB Schema space defined in <span>[<a href="#id-gob-ioam" class="cite xref">id-gob-ioam</a>]</span>.<a href="#section-8-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -1428,13 +1433,17 @@ appear in all capitals, as shown here.<a href="#section-6-1" class="pilcrow">¶<
         <dd>
 <span class="refAuthor">IETF</span>, <span class="refTitle">"Deterministic Networking (DetNet) IETF Working Group"</span>, <time datetime="2025" class="refDate">2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/wg/detnet/about/">https://datatracker.ietf.org/wg/detnet/about/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.draft-cxx-ippm-ioamaggr">[I-D.draft-cxx-ippm-ioamaggr]</dt>
+        <dd>
+<span class="refAuthor">Clemm, A.</span>, <span class="refAuthor">Metzger</span>, <span class="refAuthor">Bister, R.</span>, and <span class="refAuthor">S. Dellsperger</span>, <span class="refTitle">"Aggregation Trace Option for In-situ Operations, Administration, and Maintenance (IOAM)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-cxx-ippm-ioamaggr-06</span>, <time datetime="2026-07-21" class="refDate">21 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-cxx-ippm-ioamaggr-06">https://datatracker.ietf.org/doc/html/draft-cxx-ippm-ioamaggr-06</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.draft-eckert-6man-qos-exthdr-discuss">[I-D.draft-eckert-6man-qos-exthdr-discuss]</dt>
         <dd>
 <span class="refAuthor">Eckert, T. T.</span>, <span class="refAuthor">Joung, J.</span>, <span class="refAuthor">Peng, S.</span>, and <span class="refAuthor">X. Geng</span>, <span class="refTitle">"Considerations for common QoS IPv6 extension header(s)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-eckert-6man-qos-exthdr-discuss-00</span>, <time datetime="2024-03-04" class="refDate">4 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-eckert-6man-qos-exthdr-discuss-00">https://datatracker.ietf.org/doc/html/draft-eckert-6man-qos-exthdr-discuss-00</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.draft-filsfils-ippm-path-tracing">[I-D.draft-filsfils-ippm-path-tracing]</dt>
         <dd>
-<span class="refAuthor">Filsfils, C.</span>, <span class="refAuthor">Abdelsalam, A.</span>, <span class="refAuthor">Camarillo, P.</span>, <span class="refAuthor">Yufit, M.</span>, <span class="refAuthor">Su, Y.</span>, <span class="refAuthor">Matsushima, S.</span>, <span class="refAuthor">Valentine, M.</span>, and <span class="refAuthor">Dhamija</span>, <span class="refTitle">"Path Tracing in SRv6 networks"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-filsfils-ippm-path-tracing-05</span>, <time datetime="2026-01-04" class="refDate">4 January 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-filsfils-ippm-path-tracing-05">https://datatracker.ietf.org/doc/html/draft-filsfils-ippm-path-tracing-05</a>&gt;</span>. </dd>
+<span class="refAuthor">Filsfils, C.</span>, <span class="refAuthor">Abdelsalam, A.</span>, <span class="refAuthor">Camarillo, P.</span>, <span class="refAuthor">Yufit, M.</span>, <span class="refAuthor">Su, Y.</span>, <span class="refAuthor">Matsushima, S.</span>, <span class="refAuthor">Valentine, M.</span>, and <span class="refAuthor">Dhamija</span>, <span class="refTitle">"Path Tracing in SRv6 networks"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-filsfils-ippm-path-tracing-06</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-filsfils-ippm-path-tracing-06">https://datatracker.ietf.org/doc/html/draft-filsfils-ippm-path-tracing-06</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.draft-guan-6man-ipv6-id-authentication">[I-D.draft-guan-6man-ipv6-id-authentication]</dt>
         <dd>
@@ -1446,7 +1455,7 @@ appear in all capitals, as shown here.<a href="#section-6-1" class="pilcrow">¶<
 <dd class="break"></dd>
 <dt id="I-D.draft-ietf-6man-enhanced-vpn-vtn-id">[I-D.draft-ietf-6man-enhanced-vpn-vtn-id]</dt>
         <dd>
-<span class="refAuthor">Dong, J.</span>, <span class="refAuthor">Li, Z.</span>, <span class="refAuthor">Xie, C.</span>, <span class="refAuthor">Ma, C.</span>, and <span class="refAuthor">G. S. Mishra</span>, <span class="refTitle">"Carrying Network Resource (NR) related Information in IPv6 Extension Header"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-6man-enhanced-vpn-vtn-id-14</span>, <time datetime="2026-02-11" class="refDate">11 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-6man-enhanced-vpn-vtn-id-14">https://datatracker.ietf.org/doc/html/draft-ietf-6man-enhanced-vpn-vtn-id-14</a>&gt;</span>. </dd>
+<span class="refAuthor">Dong, J.</span>, <span class="refAuthor">Li, Z.</span>, <span class="refAuthor">Xie, C.</span>, <span class="refAuthor">Ma, C.</span>, and <span class="refAuthor">G. S. Mishra</span>, <span class="refTitle">"Carrying Network Resource (NR) related Information in IPv6 Extension Headers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-6man-enhanced-vpn-vtn-id-16</span>, <time datetime="2026-06-10" class="refDate">10 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-6man-enhanced-vpn-vtn-id-16">https://datatracker.ietf.org/doc/html/draft-ietf-6man-enhanced-vpn-vtn-id-16</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.draft-iurman-6man-carry-identifier">[I-D.draft-iurman-6man-carry-identifier]</dt>
         <dd>
@@ -1456,9 +1465,13 @@ appear in all capitals, as shown here.<a href="#section-6-1" class="pilcrow">¶<
         <dd>
 <span class="refAuthor">Li, Z.</span>, <span class="refAuthor">Hu, Z.</span>, and <span class="refAuthor">J. Dong</span>, <span class="refTitle">"Topology Identifier in IPv6 Extension Header"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-li-6man-topology-id-00</span>, <time datetime="2022-03-20" class="refDate">20 March 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-li-6man-topology-id-00">https://datatracker.ietf.org/doc/html/draft-li-6man-topology-id-00</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="I-D.draft-mbci-ippm-ioam-template-option">[I-D.draft-mbci-ippm-ioam-template-option]</dt>
+        <dd>
+<span class="refAuthor">Mizrahi, T.</span>, <span class="refAuthor">Brockners, F.</span>, <span class="refAuthor">Clemm, A.</span>, <span class="refAuthor">Iurman, J.</span>, <span class="refAuthor">Bhandari, S.</span>, <span class="refAuthor">Zhou, T.</span>, and <span class="refAuthor">R. Bister</span>, <span class="refTitle">"In Situ Operations, Administration, and Maintenance (IOAM) Template Option"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mbci-ippm-ioam-template-option-03</span>, <time datetime="2026-07-21" class="refDate">21 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mbci-ippm-ioam-template-option-03">https://datatracker.ietf.org/doc/html/draft-mbci-ippm-ioam-template-option-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.draft-mzbc-ippm-transit-measurement-option">[I-D.draft-mzbc-ippm-transit-measurement-option]</dt>
         <dd>
-<span class="refAuthor">Mizrahi, T.</span>, <span class="refAuthor">Zhou, T.</span>, <span class="refAuthor">Belkar, S.</span>, and <span class="refAuthor">R. Cohen</span>, <span class="refTitle">"The Transit Measurement Option"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mzbc-ippm-transit-measurement-option-07</span>, <time datetime="2026-01-05" class="refDate">5 January 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mzbc-ippm-transit-measurement-option-07">https://datatracker.ietf.org/doc/html/draft-mzbc-ippm-transit-measurement-option-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Mizrahi, T.</span>, <span class="refAuthor">Zhou, T.</span>, <span class="refAuthor">Belkar, S.</span>, and <span class="refAuthor">R. Cohen</span>, <span class="refTitle">"The Transit Measurement Option"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mzbc-ippm-transit-measurement-option-08</span>, <time datetime="2026-06-30" class="refDate">30 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mzbc-ippm-transit-measurement-option-08">https://datatracker.ietf.org/doc/html/draft-mzbc-ippm-transit-measurement-option-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA-ioam-types">[IANA-ioam-types]</dt>
         <dd>
@@ -1478,7 +1491,7 @@ appear in all capitals, as shown here.<a href="#section-6-1" class="pilcrow">¶<
 <dd class="break"></dd>
 <dt id="id-gob-ioam">[id-gob-ioam]</dt>
         <dd>
-<span class="refAuthor">Mayer, A.</span> and <span class="refAuthor">S. Salsano</span>, <span class="refTitle">"Global Opaque Block for IOAM Pre-allocated Trace Option"</span>, <span class="refContent">Internet-Draft draft-mayer-ioam-gob</span>, <time datetime="2026" class="refDate">2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/draft-mayer-ioam-gob/">https://datatracker.ietf.org/doc/draft-mayer-ioam-gob/</a>&gt;</span>. </dd>
+<span class="refAuthor">Mayer, A.</span>, <span class="refAuthor">Salsano, S.</span>, <span class="refAuthor">Iurman, J.</span>, and <span class="refAuthor">D. R. Lopez</span>, <span class="refTitle">"Global Opaque Block for IOAM Pre-allocated Trace Option"</span>, <span class="refContent">Internet-Draft draft-mayer-ioam-gob</span>, <time datetime="2026" class="refDate">2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/draft-mayer-ioam-gob/">https://datatracker.ietf.org/doc/draft-mayer-ioam-gob/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="ietf-fantel">[ietf-fantel]</dt>
         <dd>
