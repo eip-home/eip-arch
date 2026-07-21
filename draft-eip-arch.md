@@ -68,6 +68,8 @@ informative:
   I-D.draft-li-6man-topology-id:
   I-D.draft-iurman-6man-carry-identifier:
   I-D.draft-mzbc-ippm-transit-measurement-option:
+  I-D.draft-mbci-ippm-ioam-template-option:
+  I-D.draft-cxx-ippm-ioamaggr:
   IANA-ipv6-parameters:
     title: "Internet Protocol Version 6 (IPv6) Parameters"
     author:
@@ -168,6 +170,14 @@ informative:
         ins: "S. Salsano"
         organization: Univ. of Rome Tor Vergata / CNIT
         email: "stefano.salsano@uniroma2.it"
+      - name: "Justin Iurman"
+        ins: "J. Iurman"
+        organization: University of Liege
+        email: "justin.iurman@uliege.be"
+      - name: "Diego R. Lopez"
+        ins: "D. R. Lopez"
+        organization: Telefonica
+        email: "diego.r.lopez@telefonica.com"
     date: 2026
     refcontent: "Internet-Draft draft-mayer-ioam-gob"
     format:
@@ -273,6 +283,8 @@ In the last few years, we have witnessed important innovations in IPv6 networkin
 
 Another recent activity that proposed to extend the networking layer to support more complex functions concerns network monitoring. The concept of INT "In-band Network Telemetry" has been proposed since 2015 {{onf-int}} in the context of the definition of use cases for P4 based data plane programmability. The latest version of INT specifications dates November 2020 {{int-spec}}. {{int-spec}} specifies the format of headers that carry monitoring instructions and monitoring information along with data plane packets. The specific location for INT Headers is intentionally not specified: an INT Header can be inserted as an option or payload of any encapsulation type. The In-band Telemetry concept has been adopted by the IPPM IETF Working Group, renaming it "In-situ Operations, Administration, and Maintenance" (IOAM). {{RFC9197}} discusses the data fields and associated data types for IOAM. The in-situ OAM data fields can be encapsulated in a variety of protocols, including IPv6. The specification details for carrying IOAM data inside IPv6 headers are provided in {{RFC9486}}. In particular, IOAM data fields can be encapsulated in IPv6 using either Hop-by-Hop Options header or Destination options header. A Direct Export variant has been defined in {{RFC9326}}, enabling nodes to export telemetry data directly without per-hop accumulation.
 
+More recently, the IOAM Template Option-Type {{I-D.draft-mbci-ippm-ioam-template-option}} has been proposed to describe per-hop records through a compact, configurable template, and the IOAM Aggregation Trace Option {{I-D.draft-cxx-ippm-ioamaggr}} defines the in-flight aggregation of a metric across the nodes of a path (e.g., minimum, maximum, sum and count) instead of recording one entry per hop. These proposals are complementary to the EIP integration into IOAM discussed in {{integration-eip-ioam}}.
+
 Another example of extensions to IPv6 for network monitoring is specified in {{RFC8250}}, which defines an IPv6 Destination Options header called Performance and Diagnostic Metrics (PDM). The PDM option header provides sequence numbers and timing information as a basis for measurements.
 
 The "Alternate Marking Method" is a recently proposed performance measurement approach described in {{RFC9341}}. {{RFC9343}} defines a new Hop-by-Hop Option to support this approach.
@@ -317,6 +329,14 @@ The current integration direction adopts a different approach based on the Globa
 
 Compared to the earlier Data-Field-Type approach, the GOB-based integration provides a more general and implementation-friendly solution for structured global metadata within IOAM. It preserves compatibility with the IOAM encapsulation model while avoiding the need to map EIP semantics onto the existing per-node data-field abstraction.
 
+The GOB is placed at the tail of the Pre-allocated Trace Option, after the pre-allocated node data space and therefore outside the region that the RemainingLen field makes addressable to IOAM nodes. As a consequence, the GOB is transparent to legacy IOAM transit nodes by construction: such nodes record their per-node trace data according to {{RFC9197}} and can never reach the GOB, while only the decapsulating node or the collector needs to be GOB-aware. This property is particularly relevant for the evolutionary approach followed by EIP, as it allows EIP metadata to traverse a mixed population of upgraded and legacy IOAM nodes within the same option.
+
+In the GOB-based integration, the identification of EIP Information Elements is layered. The carrier is identified by the IOAM Option-Type codepoint (and by the G bit signaling the presence of the GOB); the GOB Schema field identifies the payload format, e.g., a sequence of EIP Information Elements; the individual Information Elements are then identified by their EIP IE type values (see {{id-eip-headers}} and {{iana}}). The GOB Schema value space is divided by {{id-gob-ioam}} into an operator-assigned range and an IANA-assigned range, following the model of the IOAM Namespace-ID. This enables an incremental deployment path: EIP Information Elements can be carried immediately within a limited domain using an operator-assigned Schema value, and can later migrate to a globally registered "EIP Information Element sequence" schema from the IANA-assigned range.
+
+The GOB Schema is interpreted within the context of the IOAM-Namespace carried by the option. The GOB-based integration therefore inherits the IOAM-Namespace machinery of {{RFC9197}}: an EIP deployment can map an EIP domain to an IOAM Namespace-ID from the operator-assigned range, obtaining namespace-based processing gating (nodes that are not configured for the namespace do not modify the option), disambiguation when multiple IOAM options are present due to overlapping or layered domains, and removal of the option at domain boundaries. Note that the standalone EIP carriers (Hop-by-Hop Option and SRH TLV) do not currently define an equivalent in-packet domain identifier; whether to introduce one, e.g., as an EIP Information Element, is an open architectural question.
+
+The GOB-based integration is also complementary to the IOAM Template Option {{I-D.draft-mbci-ippm-ioam-template-option}} and IOAM Aggregation {{I-D.draft-cxx-ippm-ioamaggr}} proposals: these define structured records and aggregation semantics, while the GOB provides an alternative carrier for the same records, over a shared record identifier space. As an example, an aggregated metric record (such as an accumulated delay expressed as minimum, maximum, sum and count) can be transported interchangeably by the Template/Aggregation options or within the GOB.
+
 The IOAM-based integration of EIP is not mutually exclusive with the standalone deployment of EIP as an independent IPv6 extension header. However, for integration with IOAM, the GOB-based approach is considered the preferred solution.
 
 # Conventions and Definitions
@@ -328,7 +348,9 @@ The IOAM-based integration of EIP is not mutually exclusive with the standalone 
 
 EIP introduces in-band metadata that may be read or modified by on-path nodes. Unauthorized access or modification can affect telemetry, service behavior, or policy enforcement. Therefore, deployments should be limited to controlled domains and should rely on existing IPv6/IOAM security mechanisms and domain trust assumptions.
 
-# IANA Considerations
+When EIP is integrated into IOAM through the GOB, the security considerations of {{id-gob-ioam}} also apply, including the absence of integrity protection for the GOB fields and the reliance on namespace- and schema-based configuration within the trusted domain.
+
+# IANA Considerations {#iana}
 
 The definition of the EIP header as an Option for the IPv6 Hop-by-Hop Extension header requires the allocation of a codepoint from the "Destination Options and Hop-by-Hop Options" registry in the "Internet Protocol Version 6 (IPv6) Parameters" {{IANA-ipv6-parameters}}.
 
@@ -336,7 +358,7 @@ The definition of the EIP header as a TLV in the Segment Routing Header requires
 
 The definition of EIP Information Elements in the EIP header will require the creation of a new IANA registry to manage EIP Information Element type values.
 
-An earlier integration of EIP into IOAM as a new Data-Field-Type was explored in {{salsano25-cscn}}, which would have required an allocation from the "IOAM Data Field Types" registry {{IANA-ioam-types}}. The currently preferred IOAM integration for EIP is instead based on the Global Opaque Block (GOB), whose protocol format and any related codepoint requirements are specified in {{id-gob-ioam}}.
+An earlier integration of EIP into IOAM as a new Data-Field-Type was explored in {{salsano25-cscn}}, which would have required an allocation from the "IOAM Data Field Types" registry {{IANA-ioam-types}}. The currently preferred IOAM integration for EIP is instead based on the Global Opaque Block (GOB), whose protocol format and any related codepoint requirements are specified in {{id-gob-ioam}}. In the GOB-based integration, no EIP-specific IOAM codepoint is required: the EIP Information Element payload format is identified by the GOB Schema field, and a globally registered schema value for EIP is expected to be allocated from the IANA-assigned range of the GOB Schema space defined in {{id-gob-ioam}}.
 
 
 --- back
