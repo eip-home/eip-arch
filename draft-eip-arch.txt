@@ -5,10 +5,10 @@
 WG Working Group                                              S. Salsano
 Internet-Draft                          Univ. of Rome Tor Vergata / CNIT
 Intended status: Informational                              H. ElBakoury
-Expires: 22 January 2027                                      Consultant
+Expires: 23 January 2027                                      Consultant
                                                                 D. Lopez
                                                          Telefonica, I+D
-                                                            21 July 2026
+                                                            22 July 2026
 
 
      Extensible In-band Processing (EIP) Architecture and Framework
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 January 2027.
+   This Internet-Draft will expire on 23 January 2027.
 
 Copyright Notice
 
@@ -460,10 +460,18 @@ Table of Contents
    that are not configured for the namespace do not modify the option),
    disambiguation when multiple IOAM options are present due to
    overlapping or layered domains, and removal of the option at domain
-   boundaries.  Note that the standalone EIP carriers (Hop-by-Hop Option
-   and SRH TLV) do not currently define an equivalent in-packet domain
-   identifier; whether to introduce one, e.g., as an EIP Information
-   Element, is an open architectural question.
+   boundaries.  The standalone EIP carriers (Hop-by-Hop Option and SRH
+   TLV) do not define an in-packet domain identifier.  Instead, they
+   rely on the controlled domain model of [RFC8799]: the operator is
+   responsible for confining EIP options to the domain, or to the set of
+   cooperating domains, e.g., by filtering at domain boundaries or by
+   carrying EIP within an edge-to-edge encapsulation.  Within this
+   model, EIP Information Element codes from the IANA-assigned subranges
+   have global semantics and can be interpreted anywhere, while
+   operator-defined codes are meaningful only within the controlled
+   domain that configured them (see [id-eip-headers]).  The IOAM/GOB-
+   based carrier additionally provides the in-packet IOAM-Namespace
+   context described above.
 
    The GOB-based integration is also complementary to the IOAM Template
    Option [I-D.draft-mbci-ippm-ioam-template-option] and IOAM
